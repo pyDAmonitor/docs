@@ -31,8 +31,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['%%time ', '', '# autoload external python modules if they changed', '%load_ext autoreload', '%autoreload 2']
+['%%time', '', 'var_name = "theta"', 'uxdiff0 = uxds_a[var_name] - uxds_b[var_name]', '']
 ...
-['# hv.extension("matplotlib")', '', 'import geoviews as gv', 'import cartopy.crs as ccrs', 'import geopandas as gp']
+['# hv.Layout(plots).cols(1)', '', '# each plot has its own toolbar, which facilitates controlling each plot individually', 'for p in plots:', '   display(p)']
 -------------------
 
