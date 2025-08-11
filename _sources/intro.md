@@ -1,10 +1,11 @@
-# Welcome to the pyDAmonitor Book
+# Welcome to your Jupyter Book
 
-The book documents all pyDAmonitor use cases.   
-Jupyter Notebooks are rendered in an on-prem RDHPCS and the outputs sent to Github for online viewing.  
-Python command line scripts can be documented through a simple supplementary notebook.  
-MarkDown files can be used to put additional documentation.
+This is a small sample book to give you a feel for how book content is
+structured.
+It shows off a few of the major file types, as well as some sample content.
+It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
 
-# Table of Contents
+Check out the content pages bundled with this sample book to see more.
 
-- [mpas_plotting Notebook](_tmp/mpas_plotting)
+```{tableofcontents}
+```
