@@ -7,13 +7,4 @@ MarkDown files can be used to put additional documentation.
 
 # Table of Contents
 
-<details>
-<summary><strong>Preamble</strong></summary>
-
-- [Markdown Files](markdown)
-- [Content with notebooks](example)
-- [Notebooks with MyST Markdown](markdown-notebooks)
-
-</details>
-
 - [mpas_plotting Notebook](_tmp/mpas_plotting)
