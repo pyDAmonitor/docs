@@ -16,4 +16,4 @@ MarkDown files can be used to put additional documentation.
 
 </details>
 
-- [mpas_plotting Notebook](notebooks/mpas_plotting)
+- [mpas_plotting Notebook](_tmp/mpas_plotting)
