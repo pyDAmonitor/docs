@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebook_docs/obs_exploring';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Notebooks with MyST Markdown" href="../markdown-notebooks.html" />
+    <link rel="prev" title="mpas plotting" href="mpas_plotting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,6 +186,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DA monitor</span></p>
 <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mpas_plotting.html">mpas-jedi plotting</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">mpas-jedi plotting</a></li>
 </ul>
 
@@ -421,6 +422,7 @@ div.text_cell_render {
 <span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
 <span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
 <span class="n">pyDAmonitor_ROOT</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;pyDAmonitor_ROOT&quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">pyDAmonitor_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;</span><span class="p">)</span>
@@ -439,11 +441,11 @@ div.text_cell_render {
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">5</span>
-
-<span class="ne">NameError</span>: name &#39;os&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/autofs/ncrc-svm1_home2/Guoqing.Ge/pyDAmonitor
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 14.9 s, sys: 221 ms, total: 15.1 s
+Wall time: 901 ms
 </pre></div>
 </div>
 </div>
@@ -460,12 +462,28 @@ div.text_cell_render {
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">ioda_file</span> <span class="o">=</span> <span class="s2">&quot;../data/samples/mpasjedi/jdiag_aircar_t133.nc&quot;</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">obs_t133</span> <span class="o">=</span> <span class="n">obsSpace</span><span class="p">(</span><span class="n">ioda_file</span><span class="p">)</span>
 
-<span class="ne">NameError</span>: name &#39;obsSpace&#39; is not defined
+<span class="nn">File /autofs/ncrc-svm1_home2/Guoqing.Ge/pyDAmonitor/DAmonitor/obs/obsSpace.py:28,</span> in <span class="ni">obsSpace.__init__</span><span class="nt">(self, filepath)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span><span class="sd"> Initialize an obsSpace object and load the NetCDF file.</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span><span class="sd"> Parameters:</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span><span class="sd"> - filepath (str): Path to the NetCDF file.</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">27</span> <span class="bp">self</span><span class="o">.</span><span class="n">filepath</span> <span class="o">=</span> <span class="n">filepath</span>
+<span class="ne">---&gt; </span><span class="mi">28</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="c1"># Read the dimension</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlocs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">])</span>
+
+<span class="nn">File src/netCDF4/_netCDF4.pyx:2521,</span> in <span class="ni">netCDF4._netCDF4.Dataset.__init__</span><span class="nt">()</span>
+
+<span class="nn">File src/netCDF4/_netCDF4.pyx:2158,</span> in <span class="ni">netCDF4._netCDF4._ensure_nc_success</span><span class="nt">()</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../data/samples/mpasjedi/jdiag_aircar_t133.nc&#39;
 </pre></div>
 </div>
 </div>
@@ -629,12 +647,12 @@ div.text_cell_render {
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../markdown-notebooks.html"
+       href="mpas_plotting.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Notebooks with MyST Markdown</p>
+        <p class="prev-next-title">mpas plotting</p>
       </div>
     </a>
 </div>
