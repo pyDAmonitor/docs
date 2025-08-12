@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome! &#8212; pyDAmonitor Documentation</title>
+    <title>obs exploring &#8212; pyDAmonitor Documentation</title>
   
   
   
@@ -186,12 +186,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">DA monitor</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Welcome!</a></li>
-
-
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">mpas-jedi plotting</a></li>
 </ul>
 
     </div>
@@ -377,7 +372,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome!</h1>
+    <h1>obs exploring</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -387,19 +382,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome!</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#house-keeping-and-load-modules">House keeping and load modules</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ioda-data-ioda-obs-files-or-jedi-output-ioda-file-i-e-jdiag-files">load ioda data (ioda obs files, or jedi output ioda file (i.e. jdiag files) )</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examine-data-and-convert-to-dataframe">examine data and convert to dataframe</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">example 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">example 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">example 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#house-keeping-and-load-modules">House keeping and load modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ioda-data-ioda-obs-files-or-jedi-output-ioda-file-i-e-jdiag-files">load ioda data (ioda obs files, or jedi output ioda file (i.e. jdiag files) )</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examine-data-and-convert-to-dataframe">examine data and convert to dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">example 3</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-rate-and-plotting">fit rate and plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-rate-and-plotting">fit rate and plotting</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -410,17 +403,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="welcome">
-<h1>Welcome!<a class="headerlink" href="#welcome" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="obs-exploring">
+<h1>obs exploring<a class="headerlink" href="#obs-exploring" title="Link to this heading">#</a></h1>
 <style>
 div.text_cell_render {
     background-color: transparent !important;
     border: none !important;
     padding: 0px !important;
 }
-</style></section>
-<section id="house-keeping-and-load-modules">
-<h1>House keeping and load modules<a class="headerlink" href="#house-keeping-and-load-modules" title="Link to this heading">#</a></h1>
+</style><section id="house-keeping-and-load-modules">
+<h2>House keeping and load modules<a class="headerlink" href="#house-keeping-and-load-modules" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span> 
@@ -458,7 +450,7 @@ div.text_cell_render {
 </div>
 </section>
 <section id="load-ioda-data-ioda-obs-files-or-jedi-output-ioda-file-i-e-jdiag-files">
-<h1>load ioda data (ioda obs files, or jedi output ioda file (i.e. jdiag files) )<a class="headerlink" href="#load-ioda-data-ioda-obs-files-or-jedi-output-ioda-file-i-e-jdiag-files" title="Link to this heading">#</a></h1>
+<h2>load ioda data (ioda obs files, or jedi output ioda file (i.e. jdiag files) )<a class="headerlink" href="#load-ioda-data-ioda-obs-files-or-jedi-output-ioda-file-i-e-jdiag-files" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ioda_file</span> <span class="o">=</span> <span class="s2">&quot;../data/samples/mpasjedi/jdiag_aircar_t133.nc&quot;</span>
@@ -480,7 +472,7 @@ div.text_cell_render {
 </div>
 </section>
 <section id="examine-data-and-convert-to-dataframe">
-<h1>examine data and convert to dataframe<a class="headerlink" href="#examine-data-and-convert-to-dataframe" title="Link to this heading">#</a></h1>
+<h2>examine data and convert to dataframe<a class="headerlink" href="#examine-data-and-convert-to-dataframe" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#query_dataset(obs_t133.dataset)</span>
@@ -497,9 +489,9 @@ div.text_cell_render {
 </div>
 </section>
 <section id="histograms">
-<h1>Histograms<a class="headerlink" href="#histograms" title="Link to this heading">#</a></h1>
+<h2>Histograms<a class="headerlink" href="#histograms" title="Link to this heading">#</a></h2>
 <section id="example-1">
-<h2>example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h2>
+<h3>example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -516,7 +508,7 @@ div.text_cell_render {
 </div>
 </section>
 <section id="example-2">
-<h2>example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h2>
+<h3>example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Melt into long format</span>
@@ -533,7 +525,7 @@ div.text_cell_render {
 </div>
 </section>
 <section id="example-3">
-<h2>example 3<a class="headerlink" href="#example-3" title="Link to this heading">#</a></h2>
+<h3>example 3<a class="headerlink" href="#example-3" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -553,7 +545,7 @@ div.text_cell_render {
 </section>
 </section>
 <section id="fit-rate-and-plotting">
-<h1>fit rate and plotting<a class="headerlink" href="#fit-rate-and-plotting" title="Link to this heading">#</a></h1>
+<h2>fit rate and plotting<a class="headerlink" href="#fit-rate-and-plotting" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Filter valid data (both &#39;oman&#39; and &#39;ombg&#39; are not NaN)</span>
@@ -603,6 +595,7 @@ div.text_cell_render {
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -660,19 +653,17 @@ div.text_cell_render {
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Welcome!</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#house-keeping-and-load-modules">House keeping and load modules</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ioda-data-ioda-obs-files-or-jedi-output-ioda-file-i-e-jdiag-files">load ioda data (ioda obs files, or jedi output ioda file (i.e. jdiag files) )</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examine-data-and-convert-to-dataframe">examine data and convert to dataframe</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">example 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">example 2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">example 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#house-keeping-and-load-modules">House keeping and load modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-ioda-data-ioda-obs-files-or-jedi-output-ioda-file-i-e-jdiag-files">load ioda data (ioda obs files, or jedi output ioda file (i.e. jdiag files) )</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examine-data-and-convert-to-dataframe">examine data and convert to dataframe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms">Histograms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">example 3</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-rate-and-plotting">fit rate and plotting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-rate-and-plotting">fit rate and plotting</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
