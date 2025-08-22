@@ -1,0 +1,2610 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Work with obsSpace &#8212; pyDAmonitor Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebook_docs/obs_exploring';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="work with GSI diag files" href="gsi.html" />
+    <link rel="prev" title="mpas plotting" href="mpas_plotting.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="pyDAmonitor Documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="pyDAmonitor Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to pyDAmonitor!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">preamble</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">notebook example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DA monitor</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mpas_plotting.html">mpas-jedi plotting</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">obs exploring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gsi.html">work with GSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpas-vertical-cross-section-profile.html">plot MPAS analysis increment profile and vertical cross section</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/NOAA-GSL/pyDAmonitor" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/NOAA-GSL/pyDAmonitor/issues/new?title=Issue%20on%20page%20%2Fnotebook_docs/obs_exploring.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebook_docs/obs_exploring.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Work with obsSpace</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-packages-and-define-variables">import packages and define variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-netcdf4-to-read-jdiag-files">Use NetCDF4 to read jdiag files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-obsspace-class-to-read-jdiag-files">Use the <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code> class to read jdiag files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-to-pandas-dataframe">Convert to Pandas DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-hisgrams">Plot hisgrams</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">example 3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-fitting-rate">plot fitting rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-satellite-observations">plot satellite observations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-satellite-data-using-obsspace">load satellite data using <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assemble-target-obs-array">assemble target obs array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-coloar-map">prepare coloar map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-the-plot">make the plot</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="work-with-obsspace">
+<h1>Work with obsSpace<a class="headerlink" href="#work-with-obsspace" title="Link to this heading">#</a></h1>
+<p>JEDI or GSI generates observation space diagnostic files, which contains original observation information, hofx (H(x), i.e. model counter-parts at the observataion locations), OMB (observation minus background), OMA as well as other information.</p>
+<p>This notebook covers how to deal with JEDI diganostic files (which are also called output ioda files). We call them <code class="docutils literal notranslate"><span class="pre">jdiag</span></code> files.</p>
+<section id="import-packages-and-define-variables">
+<h2>import packages and define variables<a class="headerlink" href="#import-packages-and-define-variables" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span> 
+
+<span class="c1"># autoload external python modules if they changed</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">pyDAmonitor_ROOT</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;pyDAmonitor_ROOT&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">pyDAmonitor_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pyDAmonitor_ROOT=</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pyDAmonitor_ROOT</span><span class="p">)</span>
+    
+<span class="c1"># import modules</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uxarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ux</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>  <span class="c1"># seaborn handles NaN values automatically</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">DAmonitor</span><span class="w"> </span><span class="kn">import</span> <span class="n">query_dataset</span><span class="p">,</span> <span class="n">query_data</span><span class="p">,</span> <span class="n">query_obj</span><span class="p">,</span> <span class="n">to_dataframe</span>
+
+<span class="n">jdiag_file</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="s2">/data/samples/mpasjedi/jdiag_aircar_t133.nc&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/home/Guoqing.Ge/pyDAmonitor
+</pre></div>
+</div>
+<div class="output text_html"><script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
+
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+  const py_version = '3.7.3'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  const reloading = false;
+  const Bokeh = root.Bokeh;
+
+  // Set a timeout for this load but only if we are not already initializing
+  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, js_modules, js_exports, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
+
+    root._bokeh_onload_callbacks.push(callback);
+
+    if (root._bokeh_is_loading > 0) {
+      // Don't load bokeh if it is still initializing
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      // There is nothing to load
+      run_callbacks();
+      return null;
+    }
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
+
+    function on_error(e) {
+      const src_el = e.srcElement
+      console.error("failed to load " + (src_el.href || src_el.src));
+    }
+
+    const skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
+
+    const existing_stylesheets = []
+    const links = document.getElementsByTagName('link')
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i]
+      if (link.href != null) {
+        existing_stylesheets.push(link.href)
+      }
+    }
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const escaped = encodeURI(url)
+      if (existing_stylesheets.indexOf(escaped) !== -1) {
+        on_load()
+        continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    var existing_scripts = []
+    const scripts = document.getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+        existing_scripts.push(script.src)
+      }
+    }
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (let i = 0; i < js_modules.length; i++) {
+      const url = js_modules[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      const url = js_exports[name];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.holoviz.org/panel/1.7.5/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.7.3.min.js", "https://cdn.holoviz.org/panel/1.7.5/dist/panel.min.js"];
+  const js_modules = [];
+  const js_exports = {};
+  const css_urls = [];
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (let i = 0; i < inline_js.length; i++) {
+        try {
+          inline_js[i].call(root, root.Bokeh);
+        } catch(e) {
+          if (!reloading) {
+            throw e;
+          }
+        }
+      }
+      // Cache old bokeh versions
+      if (Bokeh != undefined && !reloading) {
+        var NewBokeh = root.Bokeh;
+        if (Bokeh.versions === undefined) {
+          Bokeh.versions = new Map();
+        }
+        if (NewBokeh.version !== Bokeh.version) {
+          Bokeh.versions.set(NewBokeh.version, NewBokeh)
+        }
+        root.Bokeh = Bokeh;
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false
+  }
+
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      // If the timeout and bokeh was not successfully loaded we reset
+      // everything and try loading again
+      root._bokeh_timeout = Date.now() + 5000;
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      root._bokeh_is_loading = 0
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      root._bokeh_is_initializing = true
+      root._bokeh_onload_callbacks = []
+      const bokeh_loaded = root.Bokeh != null && (root.Bokeh.version === py_version || (root.Bokeh.versions !== undefined && root.Bokeh.versions.has(py_version)));
+      if (!reloading && !bokeh_loaded) {
+        if (root.Bokeh) {
+          root.Bokeh = undefined;
+        }
+        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, function() {
+        console.debug("Bokeh: BokehJS plotting callback run at", now());
+        run_inline_js();
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        let retries = 0;
+        const open = () => {
+          if (comm.active) {
+            comm.open();
+          } else if (retries > 3) {
+            console.warn('Comm target never activated')
+          } else {
+            retries += 1
+            setTimeout(open, 500)
+          }
+        }
+        if (comm.active) {
+          comm.open();
+        } else {
+          setTimeout(open, 500)
+        }
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        })
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output text_html"><div id='9a91a53c-4c1f-4a67-a134-6eb93303a042'>
+  <div id="dd555635-aada-4cac-8efc-df2b4048d25d" data-root-id="9a91a53c-4c1f-4a67-a134-6eb93303a042" style="display: contents;"></div>
+</div>
+<script type="application/javascript">(function(root) {
+  var docs_json = {"6c9446ea-29f2-4d24-b709-624abfd26e1a":{"version":"3.7.3","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"9a91a53c-4c1f-4a67-a134-6eb93303a042"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"abdcabfd-8df2-4a3c-b942-0f7db8ecca22","attributes":{"plot_id":"9a91a53c-4c1f-4a67-a134-6eb93303a042","comm_id":"23b0f95ed4e04008819e28fcf849c0b9","client_comm_id":"ed14ec4ced4d4cdc8acff810ef58979c"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]},{"type":"model","name":"holoviews.plotting.bokeh.raster.HoverModel","properties":[{"name":"xy","kind":"Any","default":null},{"name":"data","kind":"Any","default":null}]}]}};
+  var render_items = [{"docid":"6c9446ea-29f2-4d24-b709-624abfd26e1a","roots":{"9a91a53c-4c1f-4a67-a134-6eb93303a042":"dd555635-aada-4cac-8efc-df2b4048d25d"},"root_ids":["9a91a53c-4c1f-4a67-a134-6eb93303a042"]}];
+  var docs = Object.values(docs_json)
+  if (!docs) {
+    return
+  }
+  const py_version = docs[0].version.replace('rc', '-rc.').replace('.dev', '-dev.')
+  async function embed_document(root) {
+    var Bokeh = get_bokeh(root)
+    await Bokeh.embed.embed_items_notebook(docs_json, render_items);
+    for (const render_item of render_items) {
+      for (const root_id of render_item.root_ids) {
+	const id_el = document.getElementById(root_id)
+	if (id_el.children.length && id_el.children[0].hasAttribute('data-root-id')) {
+	  const root_el = id_el.children[0]
+	  root_el.id = root_el.id + '-rendered'
+	  for (const child of root_el.children) {
+            // Ensure JupyterLab does not capture keyboard shortcuts
+            // see: https://jupyterlab.readthedocs.io/en/4.1.x/extension/notebook.html#keyboard-interaction-model
+	    child.setAttribute('data-lm-suppress-shortcuts', 'true')
+	  }
+	}
+      }
+    }
+  }
+  function get_bokeh(root) {
+    if (root.Bokeh === undefined) {
+      return null
+    } else if (root.Bokeh.version !== py_version) {
+      if (root.Bokeh.versions === undefined || !root.Bokeh.versions.has(py_version)) {
+	return null
+      }
+      return root.Bokeh.versions.get(py_version);
+    } else if (root.Bokeh.version === py_version) {
+      return root.Bokeh
+    }
+    return null
+  }
+  function is_loaded(root) {
+    var Bokeh = get_bokeh(root)
+    return (Bokeh != null && Bokeh.Panel !== undefined)
+  }
+  if (is_loaded(root)) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (is_loaded(root)) {
+        clearInterval(timer);
+        embed_document(root);
+      } else if (document.readyState == "complete") {
+        attempts++;
+        if (attempts > 200) {
+          clearInterval(timer);
+	  var Bokeh = get_bokeh(root)
+	  if (Bokeh == null || Bokeh.Panel == null) {
+            console.warn("Panel: ERROR: Unable to run Panel code because Bokeh or Panel library is missing");
+	  } else {
+	    console.warn("Panel: WARNING: Attempting to render but not all required libraries could be resolved.")
+	    embed_document(root)
+	  }
+        }
+      }
+    }, 25, root)
+  }
+})(window);</script></div><div class="output text_html"><script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
+
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = false;
+  const py_version = '3.7.3'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  const reloading = true;
+  const Bokeh = root.Bokeh;
+
+  // Set a timeout for this load but only if we are not already initializing
+  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, js_modules, js_exports, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
+
+    root._bokeh_onload_callbacks.push(callback);
+
+    if (root._bokeh_is_loading > 0) {
+      // Don't load bokeh if it is still initializing
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      // There is nothing to load
+      run_callbacks();
+      return null;
+    }
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
+
+    function on_error(e) {
+      const src_el = e.srcElement
+      console.error("failed to load " + (src_el.href || src_el.src));
+    }
+
+    const skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
+
+    const existing_stylesheets = []
+    const links = document.getElementsByTagName('link')
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i]
+      if (link.href != null) {
+        existing_stylesheets.push(link.href)
+      }
+    }
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const escaped = encodeURI(url)
+      if (existing_stylesheets.indexOf(escaped) !== -1) {
+        on_load()
+        continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    var existing_scripts = []
+    const scripts = document.getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+        existing_scripts.push(script.src)
+      }
+    }
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (let i = 0; i < js_modules.length; i++) {
+      const url = js_modules[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      const url = js_exports[name];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.holoviz.org/panel/1.7.5/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js"];
+  const js_modules = [];
+  const js_exports = {};
+  const css_urls = [];
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (let i = 0; i < inline_js.length; i++) {
+        try {
+          inline_js[i].call(root, root.Bokeh);
+        } catch(e) {
+          if (!reloading) {
+            throw e;
+          }
+        }
+      }
+      // Cache old bokeh versions
+      if (Bokeh != undefined && !reloading) {
+        var NewBokeh = root.Bokeh;
+        if (Bokeh.versions === undefined) {
+          Bokeh.versions = new Map();
+        }
+        if (NewBokeh.version !== Bokeh.version) {
+          Bokeh.versions.set(NewBokeh.version, NewBokeh)
+        }
+        root.Bokeh = Bokeh;
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false
+  }
+
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      // If the timeout and bokeh was not successfully loaded we reset
+      // everything and try loading again
+      root._bokeh_timeout = Date.now() + 5000;
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      root._bokeh_is_loading = 0
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      root._bokeh_is_initializing = true
+      root._bokeh_onload_callbacks = []
+      const bokeh_loaded = root.Bokeh != null && (root.Bokeh.version === py_version || (root.Bokeh.versions !== undefined && root.Bokeh.versions.has(py_version)));
+      if (!reloading && !bokeh_loaded) {
+        if (root.Bokeh) {
+          root.Bokeh = undefined;
+        }
+        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, function() {
+        console.debug("Bokeh: BokehJS plotting callback run at", now());
+        run_inline_js();
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        let retries = 0;
+        const open = () => {
+          if (comm.active) {
+            comm.open();
+          } else if (retries > 3) {
+            console.warn('Comm target never activated')
+          } else {
+            retries += 1
+            setTimeout(open, 500)
+          }
+        }
+        if (comm.active) {
+          comm.open();
+        } else {
+          setTimeout(open, 500)
+        }
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        })
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.18 s, sys: 1.42 s, total: 5.6 s
+Wall time: 6.93 s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="use-netcdf4-to-read-jdiag-files">
+<h2>Use NetCDF4 to read jdiag files<a class="headerlink" href="#use-netcdf4-to-read-jdiag-files" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">=</span><span class="n">Dataset</span><span class="p">(</span><span class="n">jdiag_file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">query_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EffectiveError0
+    airTemperature, 
+EffectiveError1
+    airTemperature, 
+EffectiveError2
+    airTemperature, 
+EffectiveQC0
+    airTemperature, 
+EffectiveQC1
+    airTemperature, 
+EffectiveQC2
+    airTemperature, 
+MetaData
+    stationIdentification, aircraftFlightPhase, timeOffset, prepbufrDataLvlCat, longitude, stationElevation, latitude, prepbufrReportType, pressure, longitude_latitude_pressure, dateTime, height, dumpReportType, aircraftFlightNumber, 
+ObsBias0
+    airTemperature, 
+ObsBias1
+    airTemperature, 
+ObsBias2
+    airTemperature, 
+ObsError
+    airTemperature, relativeHumidity, windEastward, pressure, windNorthward, 
+ObsType
+    specificHumidity, windEastward, airTemperature, windNorthward, 
+ObsValue
+    dewpointTemperature, specificHumidity, airTemperature, windEastward, windNorthward, 
+QualityMarker
+    airTemperature, pressure, windEastward, specificHumidity, height, windNorthward, 
+TempObsErrorData
+    airTemperature, 
+hofx0
+    airTemperature, 
+hofx1
+    airTemperature, 
+hofx2
+    airTemperature, 
+innov1
+    airTemperature, 
+oman
+    airTemperature, 
+ombg
+    airTemperature, 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we see that jdiag (or output ioda file) has the group/variable structure.</p>
+<p>This group/variable structure is not conveniet to use.<br />
+So we define a <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code> class under <code class="docutils literal notranslate"><span class="pre">DAmonitor</span></code> to help deal with jdiag file more easily.</p>
+</section>
+<section id="use-the-obsspace-class-to-read-jdiag-files">
+<h2>Use the <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code> class to read jdiag files<a class="headerlink" href="#use-the-obsspace-class-to-read-jdiag-files" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">DAmonitor</span><span class="w"> </span><span class="kn">import</span> <span class="n">obsSpace</span><span class="p">,</span> <span class="n">fit_rate</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a t133 object using the obsSpace class</span>
+<span class="n">t133</span><span class="o">=</span><span class="n">obsSpace</span><span class="p">(</span><span class="n">jdiag_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check the t133 object</span>
+<span class="n">query_obj</span><span class="p">(</span><span class="n">t133</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;bt&#39;,
+ &#39;dataset&#39;,
+ &#39;filepath&#39;,
+ &#39;groups&#39;,
+ &#39;locations&#39;,
+ &#39;metadata&#39;,
+ &#39;nlocs&#39;,
+ &#39;q&#39;,
+ &#39;t&#39;,
+ &#39;u&#39;,
+ &#39;v&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># play with some object attributes</span>
+<span class="p">(</span>
+<span class="n">t133</span><span class="o">.</span><span class="n">filepath</span><span class="p">,</span>
+<span class="n">t133</span><span class="o">.</span><span class="n">nlocs</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;/home/Guoqing.Ge/pyDAmonitor/data/samples/mpasjedi/jdiag_aircar_t133.nc&#39;,
+ 24791)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># query dataset</span>
+<span class="n">query_dataset</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">dataset</span><span class="p">)</span>  <span class="c1"># the original jdiag file dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EffectiveError0
+    airTemperature, 
+EffectiveError1
+    airTemperature, 
+EffectiveError2
+    airTemperature, 
+EffectiveQC0
+    airTemperature, 
+EffectiveQC1
+    airTemperature, 
+EffectiveQC2
+    airTemperature, 
+MetaData
+    stationIdentification, aircraftFlightPhase, timeOffset, prepbufrDataLvlCat, longitude, stationElevation, latitude, prepbufrReportType, pressure, longitude_latitude_pressure, dateTime, height, dumpReportType, aircraftFlightNumber, 
+ObsBias0
+    airTemperature, 
+ObsBias1
+    airTemperature, 
+ObsBias2
+    airTemperature, 
+ObsError
+    airTemperature, relativeHumidity, windEastward, pressure, windNorthward, 
+ObsType
+    specificHumidity, windEastward, airTemperature, windNorthward, 
+ObsValue
+    dewpointTemperature, specificHumidity, airTemperature, windEastward, windNorthward, 
+QualityMarker
+    airTemperature, pressure, windEastward, specificHumidity, height, windNorthward, 
+TempObsErrorData
+    airTemperature, 
+hofx0
+    airTemperature, 
+hofx1
+    airTemperature, 
+hofx2
+    airTemperature, 
+innov1
+    airTemperature, 
+oman
+    airTemperature, 
+ombg
+    airTemperature, 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># query data</span>
+<span class="n">query_data</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">q</span><span class="p">)</span>  <span class="c1"># since the t133 object does not contain q observations, so it will display meta information</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stationIdentification, aircraftFlightPhase, timeOffset, prepbufrDataLvlCat, longitude, stationElevation, latitude, prepbufrReportType, pressure, dateTime, height, dumpReportType, aircraftFlightNumber, ObsError, ObsType, ObsValue, QualityMarker, 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># query data</span>
+<span class="n">query_data</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EffectiveError0, EffectiveError1, EffectiveError2, EffectiveQC0, EffectiveQC1, EffectiveQC2, stationIdentification, aircraftFlightPhase, timeOffset, prepbufrDataLvlCat, longitude, stationElevation, latitude, prepbufrReportType, pressure, dateTime, height, dumpReportType, aircraftFlightNumber, ObsBias0, ObsBias1, ObsBias2, ObsError, ObsType, ObsValue, QualityMarker, TempObsErrorData, hofx0, hofx1, hofx2, innov1, oman, ombg, 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above output shows that we reorganize the data structure based on the observation variable, i.e. <code class="docutils literal notranslate"><span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">q</span></code>, <code class="docutils literal notranslate"><span class="pre">uv</span></code>, <code class="docutils literal notranslate"><span class="pre">bt</span></code><br />
+We can access values easily using popular Python class strucutre, i.e. <code class="docutils literal notranslate"><span class="pre">t133.t</span></code>, <code class="docutils literal notranslate"><span class="pre">t133.t.ObsValue</span></code>, etc</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print out array values</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span> <span class="c1"># don&#39;t print out all array values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ObsValue</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[218.15 223.15 250.45 ... 224.15 222.15 224.15]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this will geneate lots of output, so we comment out the following two line by default. Uncomment them to see the results</span>
+<span class="c1"># np.set_printoptions(threshold=np.inf)  # print out all array values</span>
+<span class="c1"># print(t133.t.longitude)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convert-to-pandas-dataframe">
+<h2>Convert to Pandas DataFrame<a class="headerlink" href="#convert-to-pandas-dataframe" title="Link to this heading">#</a></h2>
+<p>Converting jdiag data into Pandas DataFrame brings up lots of benefits and we can use utilize lots of mature DataFrames capabilities.<br />
+We can see this from the following cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">to_dataframe</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>EffectiveError0</th>
+      <th>EffectiveError1</th>
+      <th>EffectiveError2</th>
+      <th>EffectiveQC0</th>
+      <th>EffectiveQC1</th>
+      <th>EffectiveQC2</th>
+      <th>stationIdentification</th>
+      <th>aircraftFlightPhase</th>
+      <th>timeOffset</th>
+      <th>prepbufrDataLvlCat</th>
+      <th>...</th>
+      <th>ObsType</th>
+      <th>ObsValue</th>
+      <th>QualityMarker</th>
+      <th>TempObsErrorData</th>
+      <th>hofx0</th>
+      <th>hofx1</th>
+      <th>hofx2</th>
+      <th>innov1</th>
+      <th>oman</th>
+      <th>ombg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+      <td>EHDRETBA</td>
+      <td>3</td>
+      <td>-3576.996094</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>218.149994</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+      <td>01CBZMBA</td>
+      <td>5</td>
+      <td>-3538.007812</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>223.149994</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+      <td>HXAWUUZA</td>
+      <td>5</td>
+      <td>-3480.011963</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>250.449997</td>
+      <td>1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.898347</td>
+      <td>0.898347</td>
+      <td>0.898347</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3DERYTRA</td>
+      <td>5</td>
+      <td>-3321.000000</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>221.149994</td>
+      <td>1</td>
+      <td>0.898347</td>
+      <td>222.235840</td>
+      <td>222.114044</td>
+      <td>222.116272</td>
+      <td>-0.964054</td>
+      <td>-0.966278</td>
+      <td>-1.085845</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.771346</td>
+      <td>0.771346</td>
+      <td>0.771346</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2L3LZ2JA</td>
+      <td>6</td>
+      <td>-3600.000000</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>243.849991</td>
+      <td>1</td>
+      <td>0.771346</td>
+      <td>243.868774</td>
+      <td>243.840607</td>
+      <td>243.840988</td>
+      <td>0.009377</td>
+      <td>0.008997</td>
+      <td>-0.018776</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>24786</th>
+      <td>0.895735</td>
+      <td>0.895735</td>
+      <td>0.895735</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>AKCGXMRA</td>
+      <td>5</td>
+      <td>1019.987976</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>286.750000</td>
+      <td>1</td>
+      <td>0.895735</td>
+      <td>286.453949</td>
+      <td>286.552582</td>
+      <td>286.553101</td>
+      <td>0.197418</td>
+      <td>0.196910</td>
+      <td>0.296038</td>
+    </tr>
+    <tr>
+      <th>24787</th>
+      <td>0.893082</td>
+      <td>0.893082</td>
+      <td>0.893082</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>AKCGXMRA</td>
+      <td>5</td>
+      <td>1019.987976</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>286.250000</td>
+      <td>1</td>
+      <td>0.893082</td>
+      <td>286.191376</td>
+      <td>286.297882</td>
+      <td>286.298462</td>
+      <td>-0.047886</td>
+      <td>-0.048451</td>
+      <td>0.058616</td>
+    </tr>
+    <tr>
+      <th>24788</th>
+      <td>0.911898</td>
+      <td>0.911898</td>
+      <td>0.911898</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>CGCQOHZA</td>
+      <td>5</td>
+      <td>1041.011963</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>224.149994</td>
+      <td>1</td>
+      <td>0.911898</td>
+      <td>224.379501</td>
+      <td>224.313446</td>
+      <td>224.313843</td>
+      <td>-0.163460</td>
+      <td>-0.163844</td>
+      <td>-0.229515</td>
+    </tr>
+    <tr>
+      <th>24789</th>
+      <td>0.884290</td>
+      <td>0.884290</td>
+      <td>0.884290</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>ESL2MKBA</td>
+      <td>5</td>
+      <td>1155.996094</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>222.149994</td>
+      <td>1</td>
+      <td>0.884290</td>
+      <td>222.434891</td>
+      <td>222.327011</td>
+      <td>222.326950</td>
+      <td>-0.177012</td>
+      <td>-0.176951</td>
+      <td>-0.284893</td>
+    </tr>
+    <tr>
+      <th>24790</th>
+      <td>0.911898</td>
+      <td>0.911898</td>
+      <td>0.911898</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>CGCQOHZA</td>
+      <td>5</td>
+      <td>1199.988037</td>
+      <td>6</td>
+      <td>...</td>
+      <td>133</td>
+      <td>224.149994</td>
+      <td>1</td>
+      <td>0.911898</td>
+      <td>224.695724</td>
+      <td>224.631851</td>
+      <td>224.632080</td>
+      <td>-0.481862</td>
+      <td>-0.482081</td>
+      <td>-0.545737</td>
+    </tr>
+  </tbody>
+</table>
+<p>24791 rows × 33 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="plot-hisgrams">
+<h2>Plot hisgrams<a class="headerlink" href="#plot-hisgrams" title="Link to this heading">#</a></h2>
+<section id="example-1">
+<h3>example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1">#sns.histplot(df[&quot;oman&quot;], bins=50, kde=True, color=&quot;steelblue&quot;)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">oman</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of oman&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;oman values&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dde8c826a6fca515f181af7bb6ccfebc30d78e129408806f4bbb60b1b77031b4.png" src="../_images/dde8c826a6fca515f181af7bb6ccfebc30d78e129408806f4bbb60b1b77031b4.png" />
+</div>
+</div>
+</section>
+<section id="example-2">
+<h3>example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_long</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;oman&quot;</span><span class="p">,</span> <span class="s2">&quot;ombg&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">melt</span><span class="p">(</span><span class="n">var_name</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="n">value_name</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_long</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">element</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Overlayed Histogram: oman vs ombg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e19715ac050b305d9919dd8436db43308ac956d42bdb05346871b740e4a25525.png" src="../_images/e19715ac050b305d9919dd8436db43308ac956d42bdb05346871b740e4a25525.png" />
+</div>
+</div>
+</section>
+<section id="example-3">
+<h3>example 3<a class="headerlink" href="#example-3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;oman&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;oman&quot;</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;layer&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ombg&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ombg&quot;</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;layer&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Overlayed Histogram: oman vs ombg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Frequency&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b11fe3ff500439f7e710e4795c10f7213a460bd502b5f224d3436e5ebc1e6815.png" src="../_images/b11fe3ff500439f7e710e4795c10f7213a460bd502b5f224d3436e5ebc1e6815.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="plot-fitting-rate">
+<h2>plot fitting rate<a class="headerlink" href="#plot-fitting-rate" title="Link to this heading">#</a></h2>
+<p>The rate fitting to observtions is an important metric to evaluate data assimilation performance.<br />
+We don’t want a small fitting rate, which means very little observation impacts on the model forecast.<br />
+We don’t want a large fitting rate either, which means we fit too close to the obervations and the model forecast will crash.
+Ususally, a fitting rate of 20%~30% is expected.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter valid data (both &#39;oman&#39; and &#39;ombg&#39; are not NaN)</span>
+<span class="n">valid_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;oman&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ombg&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">valid_df</span> <span class="o">=</span> <span class="n">valid_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;height&quot;</span><span class="p">])</span>  <span class="c1"># removes any rows in valid_df where height is missing (NaN)</span>
+<span class="c1"># print(valid_df[valid_df[&quot;height&quot;] &lt; 0][&quot;height&quot;])   # negative height</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dz</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">fit_rate</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">dz</span><span class="o">=</span><span class="n">dz</span><span class="p">)</span>
+
+<span class="c1"># 5. Plot vertical profile of fit_rate vs height</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grouped</span><span class="p">[</span><span class="s2">&quot;fit_rate&quot;</span><span class="p">],</span> <span class="n">grouped</span><span class="p">[</span><span class="s2">&quot;height_bin&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="c1"># plt.axvline(x=0, color=&quot;gray&quot;, linestyle=&quot;--&quot;)  # ax vertical line</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fit Rate (%)&quot;</span><span class="p">)</span>  <span class="c1"># label change</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">))</span>  <span class="c1"># format as %</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Height Bin (m)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Vertical Profile of Fit Rate&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fine-tune ticks</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">))</span>  <span class="c1">#, fontsize=12)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13000</span><span class="p">,</span> <span class="n">dz</span><span class="p">))</span>  <span class="c1">#, , fontsize=12)</span>
+<span class="c1"># Add minor ticks</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMinorLocator</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_minor_locator</span><span class="p">(</span><span class="n">AutoMinorLocator</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_minor_locator</span><span class="p">(</span><span class="n">AutoMinorLocator</span><span class="p">())</span>
+<span class="c1"># plt.grid(which=&#39;both&#39;, linestyle=&#39;--&#39;, linewidth=0.5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13000</span><span class="p">)</span>  <span class="c1"># set y-axis from 0 (bottom) to 13,000 (top)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OMA: bias=0.1127 rms=0.9431
+OMB: bias=0.1390 rms=1.0462
+Overall fit_rate: 9.8576%
+0, -1000, 1.7179, 1.7704, 2.9680%
+1, 0, 1.3425, 1.4839, 9.5256%
+2, 1000, 0.8929, 0.9891, 9.7274%
+3, 2000, 0.9511, 1.0712, 11.2078%
+4, 3000, 0.8140, 0.9379, 13.2102%
+5, 4000, 0.7072, 0.8306, 14.8529%
+6, 5000, 0.7251, 0.8159, 11.1235%
+7, 6000, 0.7037, 0.7727, 8.9264%
+8, 7000, 0.7456, 0.8361, 10.8245%
+9, 8000, 0.7729, 0.8456, 8.5992%
+10, 9000, 0.7673, 0.8331, 7.9049%
+11, 10000, 0.8056, 0.8697, 7.3711%
+12, 11000, 1.1992, 1.3272, 9.6471%
+13, 12000, 1.3538, 1.4615, 7.3744%
+</pre></div>
+</div>
+<img alt="../_images/3a64bf15ce0ee9504e9a8fdba176a0aa3325f7cdf727510a4c26b1448234c58b.png" src="../_images/3a64bf15ce0ee9504e9a8fdba176a0aa3325f7cdf727510a4c26b1448234c58b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">grouped</span><span class="p">[</span><span class="s2">&quot;height_bin&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     -1000
+1         0
+2      1000
+3      2000
+4      3000
+5      4000
+6      5000
+7      6000
+8      7000
+9      8000
+10     9000
+11    10000
+12    11000
+13    12000
+Name: height_bin, dtype: int32
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-satellite-observations">
+<h2>plot satellite observations<a class="headerlink" href="#plot-satellite-observations" title="Link to this heading">#</a></h2>
+<section id="load-satellite-data-using-obsspace">
+<h3>load satellite data using <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code><a class="headerlink" href="#load-satellite-data-using-obsspace" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">cris_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="s2">/data/samples/mpasjedi/jdiag_cris-fsr_n20.nc&quot;</span>
+<span class="n">obsCris</span> <span class="o">=</span> <span class="n">obsSpace</span><span class="p">(</span><span class="n">cris_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3.2 s, sys: 6.38 s, total: 9.58 s
+Wall time: 31.2 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_data</span><span class="p">(</span><span class="n">obsCris</span><span class="o">.</span><span class="n">bt</span><span class="p">,</span> <span class="n">meta_exclude</span><span class="o">=</span><span class="s2">&quot;sensorCentralWavenumber_&quot;</span><span class="p">)</span> <span class="c1"># removing the meta_exclude paramter will output all sensorCentralWavenumber_* information</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DerivedObsError, DerivedObsValue, CloudDetectMinResidualIR, NearSSTRetCheckIR, ScanEdgeRemoval, GrossCheck, Thinning, UseflagCheck, EffectiveError0, EffectiveError1, EffectiveError2, EffectiveQC0, EffectiveQC1, EffectiveQC2, sensorZenithAngle, satelliteIdentifier, sensorScanPosition, instrumentIdentifier, longitude, latitude, sensorViewAngle, scanLineNumber, solarZenithAngle, sensorChannelNumber, sensorAzimuthAngle, fieldOfViewNumber, dateTime, solarAzimuthAngle, ObsBias0, ObsBias1, ObsBias2, constantPredictor, emissivityJacobianPredictor, hofx0, hofx1, hofx2, innov1, lapseRatePredictor, lapseRate_order_2Predictor, oman, ombg, sensorScanAnglePredictor, sensorScanAngle_order_2Predictor, sensorScanAngle_order_3Predictor, sensorScanAngle_order_4Predictor, 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">obsCris</span><span class="o">.</span><span class="n">bt</span><span class="o">.</span><span class="n">hofx0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-- -- -- ... -- -- --]
+ [222.63551330566406 224.9462127685547 222.70394897460938 ...
+  291.0711669921875 291.02618408203125 290.8084411621094]
+ [-- -- -- ... -- -- --]
+ ...
+ [-- -- -- ... -- -- --]
+ [-- -- -- ... -- -- --]
+ [-- -- -- ... -- -- --]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="assemble-target-obs-array">
+<h3>assemble target obs array<a class="headerlink" href="#assemble-target-obs-array" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ncount</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">idx2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ch</span><span class="o">=</span><span class="mi">61</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">obsCris</span><span class="o">.</span><span class="n">bt</span><span class="o">.</span><span class="n">ombg</span><span class="p">[:,</span><span class="n">ch</span><span class="p">])):</span>
+    <span class="c1">#if obsCris.bt.CloudDetectMinResidualIR[n,ch] == 1: </span>
+     <span class="k">if</span> <span class="n">obsCris</span><span class="o">.</span><span class="n">bt</span><span class="o">.</span><span class="n">ombg</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">ch</span><span class="p">]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">200</span> <span class="ow">and</span> <span class="n">obsCris</span><span class="o">.</span><span class="n">bt</span><span class="o">.</span><span class="n">ombg</span><span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="n">ch</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">200</span><span class="p">:</span>
+       <span class="n">idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+       <span class="n">ncount</span> <span class="o">=</span> <span class="n">ncount</span> <span class="o">+</span> <span class="mi">1</span> 
+
+<span class="n">lat</span><span class="o">=</span><span class="n">obsCris</span><span class="o">.</span><span class="n">bt</span><span class="o">.</span><span class="n">latitude</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<span class="n">lon</span><span class="o">=</span><span class="n">obsCris</span><span class="o">.</span><span class="n">bt</span><span class="o">.</span><span class="n">longitude</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+<span class="n">obarray</span><span class="o">=</span><span class="n">obsCris</span><span class="o">.</span><span class="n">bt</span><span class="o">.</span><span class="n">DerivedObsValue</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span><span class="n">ch</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">,</span><span class="n">obarray</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ncount</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-127.40092 -129.51625 -131.27661 ... -132.82477 -135.50513 -137.78625] [24.14625 24.23062 24.33297 ... 47.29415 47.29884 47.30563] [233.91612 235.93317 237.10016 ... 232.89937 233.92868 234.85745]
+9521
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="prepare-coloar-map">
+<h3>prepare coloar map<a class="headerlink" href="#prepare-coloar-map" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">datmi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">obarray</span><span class="p">)</span>  <span class="c1"># Min of the data</span>
+<span class="n">datma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">obarray</span><span class="p">)</span>  <span class="c1"># Max of the data</span>
+
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">obarray</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="n">cmax</span> <span class="o">=</span> <span class="n">datma</span>
+  <span class="n">cmin</span> <span class="o">=</span> <span class="n">datmi</span>
+  <span class="n">cmax</span><span class="o">=</span><span class="mi">310</span>
+  <span class="n">cmin</span><span class="o">=</span><span class="mi">200</span>
+  <span class="c1">#cmax=1.0</span>
+  <span class="c1">#cmin=-1.0</span>
+  <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;RdBu&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="c1">#cmax = omean+stdev</span>
+  <span class="c1">#cmin = np.maximum(omean-stdev, 0.0)</span>
+  <span class="n">cma</span> <span class="o">=</span> <span class="n">datma</span>
+  <span class="n">cmin</span> <span class="o">=</span> <span class="n">datmi</span>
+  <span class="n">cmax</span><span class="o">=</span><span class="mi">310</span>
+  <span class="n">cmin</span><span class="o">=</span><span class="mi">200</span>
+  <span class="c1">#cmax=1.0</span>
+  <span class="c1">#cmin=-1.0</span>
+  <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;RdBu&#39;</span>
+  <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span>
+  <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;jet&#39;</span>
+
+
+<span class="n">cmin</span> <span class="o">=</span> <span class="mf">200.</span>
+<span class="n">cmax</span> <span class="o">=</span> <span class="mf">310.</span>
+<span class="n">conus_12km</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">150</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">55</span><span class="p">]</span>
+
+<span class="n">color_map</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">reversed_color_map</span> <span class="o">=</span> <span class="n">color_map</span><span class="o">.</span><span class="n">reversed</span><span class="p">()</span>
+<span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;K&#39;</span>
+<span class="c1">#units = &#39;%&#39;</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2494403/1360930195.py:30: MatplotlibDeprecationWarning: The get_cmap function was deprecated in Matplotlib 3.7 and will be removed in 3.11. Use ``matplotlib.colormaps[name]`` or ``matplotlib.colormaps.get_cmap()`` or ``pyplot.get_cmap()`` instead.
+  color_map = plt.cm.get_cmap(cmap)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 1000x500 with 0 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="make-the-plot">
+<h3>make the plot<a class="headerlink" href="#make-the-plot" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mticker</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">colors</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="c1"># Plot grid lines</span>
+<span class="c1"># ----------------</span>
+<span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">draw_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">top_labels</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">xlabel_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">ylabel_style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;size&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">}</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">xlocator</span> <span class="o">=</span> <span class="n">mticker</span><span class="o">.</span><span class="n">FixedLocator</span><span class="p">(</span>
+   <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="o">-</span><span class="mi">135</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="o">-</span><span class="mi">45</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mf">179.9</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Latitude&quot;</span><span class="p">,</span>  <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Longitude&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="c1"># Get scatter data</span>
+<span class="c1"># ------------------</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span>
+                <span class="n">c</span><span class="o">=</span><span class="n">obarray</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">cmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="n">cmax</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">antialiased</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot colorbar</span>
+<span class="c1"># --------------</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span><span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">260</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">310</span><span class="p">])</span>
+<span class="c1">#cbar = plt.colorbar(sc, ax=ax, orientation=&quot;horizontal&quot;, pad=.1, fraction=0.06,ticks=[-3, -2.5, -2, -1.5, -1, -0.5, 0, 0.5, 1.0, 1.5, 2.0, 2.5, 3 ])</span>
+<span class="c1">#cbar = plt.colorbar(sc, ax=ax, orientation=&quot;horizontal&quot;, pad=.1, fraction=0.06,ticks=[0, 10, 20, 20, 40, 50, 60, 70, 80, 90, 100])</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Plot globally</span>
+<span class="c1"># --------------</span>
+<span class="c1">#ax.set_global()</span>
+<span class="c1">#ax.set_extent(conus)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">conus_12km</span><span class="p">)</span>
+
+<span class="c1"># Draw coastlines</span>
+<span class="c1"># ----------------</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;Longitude&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s1">&#39;Latitude&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+        <span class="n">rotation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+
+<span class="c1">#text = f&quot;Total Count:{datcont:0.0f}, Max/Min/Mean/Std: {datma:0.3f}/{datmi:0.3f}/{omean:0.3f}/{stdev:0.3f} {units}&quot;</span>
+<span class="c1">#print(text)</span>
+<span class="c1">#ax.text(0.67, -0.1, text, transform=ax.transAxes, va=&#39;bottom&#39;, fontsize=6.2)</span>
+
+<span class="n">dpi</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">top_labels</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># show plot</span>
+<span class="c1"># -----------</span>
+<span class="c1"># pname=&#39;test.png&#39;</span>
+<span class="c1"># plt.savefig(pname, dpi=dpi)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/396d4c6f3df23f837b3762144330f93a0438dd7b09142dd91411e23212fbd961.png" src="../_images/396d4c6f3df23f837b3762144330f93a0438dd7b09142dd91411e23212fbd961.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pydamonitor"
+        },
+        kernelOptions: {
+            name: "pydamonitor",
+            path: "./notebook_docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pydamonitor'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mpas_plotting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">mpas plotting</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gsi.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">work with GSI diag files</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-packages-and-define-variables">import packages and define variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-netcdf4-to-read-jdiag-files">Use NetCDF4 to read jdiag files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-obsspace-class-to-read-jdiag-files">Use the <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code> class to read jdiag files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-to-pandas-dataframe">Convert to Pandas DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-hisgrams">Plot hisgrams</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">example 3</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-fitting-rate">plot fitting rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-satellite-observations">plot satellite observations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#load-satellite-data-using-obsspace">load satellite data using <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assemble-target-obs-array">assemble target obs array</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-coloar-map">prepare coloar map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-the-plot">make the plot</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Guoqing Ge
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
