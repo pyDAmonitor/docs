@@ -192,6 +192,7 @@
 <li class="toctree-l1"><a class="reference internal" href="obs_exploring.html">obs exploring</a></li>
 <li class="toctree-l1"><a class="reference internal" href="gsi.html">work with GSI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="script-mpas-increments.html">script-MPAS analysis increment profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matplotlib-pyplot-demo.html">matplotlib-pyplot-demo</a></li>
 </ul>
 
     </div>
@@ -396,7 +397,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-ar3-5km-domain-terrain-plus-the-conus3km-domain-terrain">Plot the ar3.5km domain terrain plus the conus3km domain terrain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-south3-5km-terrrain">Plot the south3.5km terrrain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-west3km-terrain">Plot the west3km terrain</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-sijie-s-original-vairable-scatter-function-for-reference">Save Sijie’s original vairable_scatter function(..) for reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-sijie-s-original-variable-scatter-function-for-reference">Save Sijie’s original variable_scatter function(..) for reference</a></li>
 </ul>
             </nav>
         </div>
@@ -436,8 +437,8 @@ Adapted from Sijie Pan’s <code class="docutils literal notranslate"><span clas
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/home/Guoqing.Ge/pyDAmonitor
 
-CPU times: user 9 ms, sys: 55.2 ms, total: 64.2 ms
-Wall time: 103 ms
+CPU times: user 10.6 ms, sys: 56.8 ms, total: 67.3 ms
+Wall time: 106 ms
 </pre></div>
 </div>
 </div>
@@ -460,8 +461,8 @@ Wall time: 103 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 263 ms, sys: 99.5 ms, total: 362 ms
-Wall time: 444 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 258 ms, sys: 111 ms, total: 369 ms
+Wall time: 454 ms
 </pre></div>
 </div>
 </div>
@@ -547,7 +548,7 @@ Wall time: 444 ms
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/8705a543b7fd4a48920193030e7d708ffedbd8fb5bd799bad85616801f8c55dc.png" src="../_images/8705a543b7fd4a48920193030e7d708ffedbd8fb5bd799bad85616801f8c55dc.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 21.3 s, sys: 606 ms, total: 21.9 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 21.6 s, sys: 373 ms, total: 22 s
 Wall time: 22.1 s
 </pre></div>
 </div>
@@ -689,7 +690,7 @@ Wall time: 22.1 s
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/d32b4947f4934af30d30451f0dff71087d741790486a8df4e5483bedc2a90cba.png" src="../_images/d32b4947f4934af30d30451f0dff71087d741790486a8df4e5483bedc2a90cba.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 29.8 s, sys: 347 ms, total: 30.2 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 29.8 s, sys: 357 ms, total: 30.2 s
 Wall time: 30.3 s
 </pre></div>
 </div>
@@ -750,8 +751,8 @@ Wall time: 30.3 s
 </div>
 </div>
 </section>
-<section id="save-sijie-s-original-vairable-scatter-function-for-reference">
-<h2>Save Sijie’s original vairable_scatter function(..) for reference<a class="headerlink" href="#save-sijie-s-original-vairable-scatter-function-for-reference" title="Link to this heading">#</a></h2>
+<section id="save-sijie-s-original-variable-scatter-function-for-reference">
+<h2>Save Sijie’s original variable_scatter function(..) for reference<a class="headerlink" href="#save-sijie-s-original-variable-scatter-function-for-reference" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">variable_scatter</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">plotvar</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s2">&quot;terrain&quot;</span><span class="p">,</span> <span class="n">colornorm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
@@ -839,7 +840,7 @@ Wall time: 30.3 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 100 ms, sys: 3.92 ms, total: 104 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 101 ms, sys: 3 ms, total: 104 ms
 Wall time: 105 ms
 </pre></div>
 </div>
@@ -922,7 +923,7 @@ Wall time: 105 ms
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-ar3-5km-domain-terrain-plus-the-conus3km-domain-terrain">Plot the ar3.5km domain terrain plus the conus3km domain terrain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-south3-5km-terrrain">Plot the south3.5km terrrain</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-west3km-terrain">Plot the west3km terrain</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-sijie-s-original-vairable-scatter-function-for-reference">Save Sijie’s original vairable_scatter function(..) for reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-sijie-s-original-variable-scatter-function-for-reference">Save Sijie’s original variable_scatter function(..) for reference</a></li>
 </ul>
   </nav></div>
 
