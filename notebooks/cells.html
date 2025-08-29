@@ -1,0 +1,1001 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Check results and make plots on individual cells &#8212; pyDAmonitor Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/cells';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Plot the domain shape from grid.nc or domain terrain from static.nc" href="mpas_domain_shape_terrain.html" />
+    <link rel="prev" title="Notebooks with MyST Markdown" href="../markdown-notebooks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="pyDAmonitor Documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="pyDAmonitor Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to pyDAmonitor!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">preamble</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">notebook example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DA monitor</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Check results and make plots on individual cells</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="mpas_domain_shape_terrain.html">mpas domain shape and terrain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpas_plotting.html">mpas-jedi plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="obs_exploring.html">obs exploring</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gsi.html">work with GSI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="script-mpas-increments.html">script-MPAS analysis increment profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sat-qcfilters.html">work with satellite observations and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matplotlib-pyplot-demo.html">matplotlib-pyplot-demo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotly-demo.html">plotly-demo</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/NOAA-GSL/pyDAmonitor" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/NOAA-GSL/pyDAmonitor/issues/new?title=Issue%20on%20page%20%2Fnotebooks/cells.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/cells.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Check results and make plots on individual cells</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Check results and make plots on individual cells</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-pydamonitor-root-env-variable">get the <code class="docutils literal notranslate"><span class="pre">pyDAmonitor_ROOT</span></code> env variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">import modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-invariant-nc">read in <code class="docutils literal notranslate"><span class="pre">invariant.nc</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-indextocellid-attributes-dimensions-etc">check <code class="docutils literal notranslate"><span class="pre">indexToCellID</span></code>, attributes, dimensions, etc</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-zgrid-ter">check <code class="docutils literal notranslate"><span class="pre">zgrid</span></code>, <code class="docutils literal notranslate"><span class="pre">ter</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-a-new-zgrid-by-removing-the-terrain-height">compute a new zgrid by removing the terrain height</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">scatter all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-pressure-profile-in-the-atlantic-at-icell-1702401">Print pressure profile in the Atlantic at iCell=1702401</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-top-interface-level-pressure">Find the top interface level pressure</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-and-tlot-neighborhood-cells-around-a-given-lat-lon">Find and tlot neighborhood cells around a given lat, lon</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="check-results-and-make-plots-on-individual-cells">
+<h1>Check results and make plots on individual cells<a class="headerlink" href="#check-results-and-make-plots-on-individual-cells" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Find cell index based on terrain plots in a map</p></li>
+<li><p>Find all neighborhood cells based on an input lat/lon</p></li>
+<li><p>etc</p></li>
+</ul>
+<section id="get-the-pydamonitor-root-env-variable">
+<h2>get the <code class="docutils literal notranslate"><span class="pre">pyDAmonitor_ROOT</span></code> env variable<a class="headerlink" href="#get-the-pydamonitor-root-env-variable" title="Link to this heading">#</a></h2>
+<p>This step is highly recommended. It is required if one want to use the DAmonitor Python package or use the MPAS/FV3 sample data or local cartopy nature_earth_data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="c1"># autoload external python modules if they changed</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+    
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">pyDAmonitor_ROOT</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;pyDAmonitor_ROOT&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">pyDAmonitor_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pyDAmonitor_ROOT=</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pyDAmonitor_ROOT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/home/Guoqing.Ge/pyDAmonitor
+
+CPU times: user 7.98 ms, sys: 71.1 ms, total: 79.1 ms
+Wall time: 119 ms
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-modules">
+<h2>import modules<a class="headerlink" href="#import-modules" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.feature</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cfeature</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">DAmonitor.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">query_dataset</span><span class="p">,</span> <span class="n">query_obj</span>
+<span class="n">cartopy</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="s2">/data/natural_earth_data&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 397 ms, sys: 248 ms, total: 645 ms
+Wall time: 805 ms
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-in-invariant-nc">
+<h2>read in <code class="docutils literal notranslate"><span class="pre">invariant.nc</span></code><a class="headerlink" href="#read-in-invariant-nc" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds0</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pyDAmonitor_ROOT</span><span class="p">,</span><span class="s1">&#39;data/mpasjedi/invariant.nc&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">query_dataset</span><span class="p">(</span><span class="n">ds0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>xtime, Time, latCell, lonCell, xCell, yCell, zCell, indexToCellID, latEdge, lonEdge, xEdge, yEdge, zEdge, indexToEdgeID, latVertex, lonVertex, xVertex, yVertex, zVertex, indexToVertexID, cellsOnEdge, nEdgesOnCell, nEdgesOnEdge, edgesOnCell, edgesOnEdge, weightsOnEdge, dvEdge, dcEdge, angleEdge, areaCell, areaTriangle, cellsOnCell, verticesOnCell, verticesOnEdge, edgesOnVertex, cellsOnVertex, kiteAreasOnVertex, meshDensity, nominalMinDc, bdyMaskCell, bdyMaskEdge, bdyMaskVertex, edgeNormalVectors, localVerticalUnitVectors, cellTangentPlane, fEdge, fVertex, ter, landmask, mminlu, isice_lu, iswater_lu, ivgtyp, landusef, soilf, isltyp, snoalb, soiltemp, greenfrac, shdmin, shdmax, albedo12m, lai12m, soilcomp, soilcl1, soilcl2, soilcl3, soilcl4, var2d, con, oa1, oa2, oa3, oa4, ol1, ol2, ol3, ol4, deriv_two, defc_a, defc_b, cell_gradient_coef_x, cell_gradient_coef_y, coeffs_reconstruct, cf1, cf2, cf3, zgrid, rdzw, dzu, rdzu, fzm, fzp, zxu, zz, zb, zb3, dss
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="check-indextocellid-attributes-dimensions-etc">
+<h2>check <code class="docutils literal notranslate"><span class="pre">indexToCellID</span></code>, attributes, dimensions, etc<a class="headerlink" href="#check-indextocellid-attributes-dimensions-etc" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;indexToCellID&quot;</span><span class="p">][:])</span>
+<span class="c1"># print(ds0.ncattrs())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s2">&quot;nVertLevels&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s2">&quot;nCells&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">ds0</span><span class="o">.</span><span class="n">dimensions</span>
+<span class="c1"># ds0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[      1       2       3 ... 2341816 2341817 2341818]
+dict_keys([&#39;StrLen&#39;, &#39;Time&#39;, &#39;nCells&#39;, &#39;nEdges&#39;, &#39;nVertices&#39;, &#39;TWO&#39;, &#39;maxEdges&#39;, &#39;maxEdges2&#39;, &#39;vertexDegree&#39;, &#39;R3&#39;, &#39;nlcat&#39;, &#39;nscat&#39;, &#39;nMonths&#39;, &#39;nSoilComps&#39;, &#39;FIFTEEN&#39;, &#39;nVertLevelsP1&#39;, &#39;nVertLevels&#39;])
+59
+2341818
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;StrLen&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;StrLen&#39;, size = 64,
+ &#39;Time&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot; (unlimited): name = &#39;Time&#39;, size = 1,
+ &#39;nCells&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nCells&#39;, size = 2341818,
+ &#39;nEdges&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nEdges&#39;, size = 7031657,
+ &#39;nVertices&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nVertices&#39;, size = 4689840,
+ &#39;TWO&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;TWO&#39;, size = 2,
+ &#39;maxEdges&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;maxEdges&#39;, size = 6,
+ &#39;maxEdges2&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;maxEdges2&#39;, size = 12,
+ &#39;vertexDegree&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;vertexDegree&#39;, size = 3,
+ &#39;R3&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;R3&#39;, size = 3,
+ &#39;nlcat&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nlcat&#39;, size = 20,
+ &#39;nscat&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nscat&#39;, size = 16,
+ &#39;nMonths&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nMonths&#39;, size = 12,
+ &#39;nSoilComps&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nSoilComps&#39;, size = 8,
+ &#39;FIFTEEN&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;FIFTEEN&#39;, size = 15,
+ &#39;nVertLevelsP1&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nVertLevelsP1&#39;, size = 60,
+ &#39;nVertLevels&#39;: &quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot;: name = &#39;nVertLevels&#39;, size = 59}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="check-zgrid-ter">
+<h2>check <code class="docutils literal notranslate"><span class="pre">zgrid</span></code>, <code class="docutils literal notranslate"><span class="pre">ter</span></code><a class="headerlink" href="#check-zgrid-ter" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;zgrid&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;zgrid&quot;</span><span class="p">][</span><span class="mi">2341817</span><span class="p">,:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;zgrid&quot;</span><span class="p">][</span><span class="mi">50</span><span class="p">,:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;ter&quot;</span><span class="p">][</span><span class="mi">2341817</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;ter&quot;</span><span class="p">][</span><span class="mi">50</span><span class="p">])</span>
+<span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;zgrid&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2341818, 60)
+[  167.82333   185.77321   206.06612   229.00009   254.90726   284.15988
+   317.1729    354.40787   396.37677   443.64685   496.84344   556.6553
+   623.838     699.2172    783.6908    878.2324    983.8933   1101.8014
+  1233.1609   1379.2413   1541.3639   1720.8761   1919.1221   2137.4119
+  2376.9902   2639.0088   2924.4958   3234.3262   3569.1953   3929.5994
+  4315.8257   4727.9414   5165.782    5628.9395   6116.748    6628.2944
+  7162.4326   7717.8213   8292.971    8886.258    9495.987   10120.584
+ 10758.49    11410.003   12083.912   12781.494   13502.739   14247.813
+ 15017.097   15811.2295  16631.184   17478.498   18355.48    19265.338
+ 20212.562   21206.213   22256.027   23373.223   24573.371   25878.713  ]
+[ 1019.22375  1037.1692   1057.4492   1080.3549   1106.2078   1135.3682
+  1168.2329   1205.242    1246.8772   1293.6632   1346.1683   1405.0109
+  1470.8481   1544.3793   1626.3389   1717.4945   1818.6484   1930.6416
+  2054.3857   2190.8994   2341.3638   2507.1667   2689.8967   2891.2744
+  3113.0166   3356.6953   3623.6172   3914.7493   4230.679    4571.6016
+  4937.346    5327.4453   5741.2305   6177.9424   6636.809    7117.082
+  7617.9907   8138.6885   8678.219    9235.593    9809.8125  10399.661
+ 11003.978   11623.366   12266.561   12935.18    13629.592   14350.281
+ 15097.869   15873.15    16677.15    17511.363   18377.943   19279.871
+ 20221.344   21211.059   22258.389   23374.19    24573.674   25878.713  ]
+167.82333
+1019.22375
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;netCDF4.Variable&#39;&gt;
+float32 zgrid(nCells, nVertLevelsP1)
+    units: m MSL
+    long_name: Geometric height of layer interfaces
+unlimited dimensions: 
+current shape = (2341818, 60)
+filling on, default _FillValue of 9.969209968386869e+36 used
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="compute-a-new-zgrid-by-removing-the-terrain-height">
+<h2>compute a new zgrid by removing the terrain height<a class="headerlink" href="#compute-a-new-zgrid-by-removing-the-terrain-height" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">agl</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;zgrid&quot;</span><span class="p">][:])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">60</span><span class="p">):</span>
+    <span class="n">agl</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;zgrid&quot;</span><span class="p">][:,</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;ter&quot;</span><span class="p">][:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.12 s, sys: 12.2 s, total: 16.4 s
+Wall time: 16.4 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1"># disables scientific notation</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>     <span class="c1"># optional: 2 decimal places</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">agl</span><span class="p">[</span><span class="mi">2341817</span><span class="p">,:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">agl</span><span class="p">[</span><span class="mi">50</span><span class="p">,:])</span>    <span class="c1"># the AGL zgrid values are different at different locations</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    0.       17.95     38.243    61.177    87.084   116.337   149.35
+   186.585   228.553   275.824   329.02    388.832   456.015   531.394
+   615.867   710.409   816.07    933.978  1065.338  1211.418  1373.541
+  1553.053  1751.299  1969.589  2209.167  2471.186  2756.673  3066.503
+  3401.372  3761.776  4148.002  4560.118  4997.959  5461.116  5948.925
+  6460.471  6994.609  7549.998  8125.147  8718.435  9328.164  9952.761
+ 10590.667 11242.18  11916.089 12613.671 13334.916 14079.99  14849.273
+ 15643.406 16463.36  17310.674 18187.656 19097.514 20044.738 21038.389
+ 22088.203 23205.398 24405.547 25710.889]
+[    0.       17.945    38.225    61.131    86.984   116.144   149.009
+   186.018   227.653   274.439   326.945   385.787   451.624   525.156
+   607.115   698.271   799.425   911.418  1035.162  1171.676  1322.14
+  1487.943  1670.673  1872.051  2093.793  2337.472  2604.394  2895.525
+  3211.456  3552.378  3918.123  4308.222  4722.007  5158.719  5617.585
+  6097.858  6598.767  7119.465  7658.995  8216.369  8790.589  9380.438
+  9984.754 10604.143 11247.337 11915.956 12610.368 13331.058 14078.646
+ 14853.927 15657.927 16492.139 17358.719 18260.646 19202.12  20191.834
+ 21239.164 22354.965 23554.45  24859.488]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="scatter-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">
+<h2>scatter all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)<a class="headerlink" href="#scatter-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index" title="Link to this heading">#</a></h2>
+<p>Write down iCell and then we can print a field profile for that cell</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="c1"># plot the whole map</span>
+<span class="n">factor</span><span class="o">=</span><span class="mi">50</span>  <span class="c1"># plotting all cells take too many memories, so plot every factor cells</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonCell&#39;</span><span class="p">][::</span><span class="n">factor</span><span class="p">])</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latCell&#39;</span><span class="p">][::</span><span class="n">factor</span><span class="p">])</span>
+<span class="n">iCell</span> <span class="o">=</span> <span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;indexToCellID&#39;</span><span class="p">][::</span><span class="n">factor</span><span class="p">]</span>
+<span class="n">ter</span> <span class="o">=</span> <span class="n">ds0</span><span class="p">[</span><span class="s2">&quot;ter&quot;</span><span class="p">][::</span><span class="n">factor</span><span class="p">]</span>
+
+<span class="c1"># plot a subdomain defined by latmin, latmax, lonmin, lonmax</span>
+<span class="c1"># latmin, latmax = 37, 41</span>
+<span class="c1"># lonmin0, lonmax0 = -109, -102</span>
+<span class="c1"># #</span>
+<span class="c1"># lon0 = np.degrees(ds0.variables[&#39;lonCell&#39;][:])</span>
+<span class="c1"># lat0 = np.degrees(ds0.variables[&#39;latCell&#39;][:])</span>
+<span class="c1"># lonmin = lonmin0 + 360</span>
+<span class="c1"># lonmax = lonmax0 + 360</span>
+<span class="c1"># mask = (lat0 &gt;= latmin) &amp; (lat0 &lt;= latmax) &amp; (lon0 &gt;= lonmin) &amp; (lon0 &lt;= lonmax)</span>
+<span class="c1"># lat = lat0[mask]</span>
+<span class="c1"># lon = lon0[mask]</span>
+<span class="c1"># iCell = ds0.variables[&#39;indexToCellID&#39;][:][mask]</span>
+<span class="c1"># ter = ds0.variables[&quot;ter&quot;][:][mask]</span>
+
+<span class="c1"># use projections, but LLC is not natively supported in plotly</span>
+<span class="c1"># fig = px.scatter_geo(</span>
+<span class="c1">#     lat=lat,</span>
+<span class="c1">#     lon=lon,</span>
+<span class="c1">#     color=ter,</span>
+<span class="c1">#     color_continuous_scale=&quot;Viridis&quot;,  # choose any supported colorscale</span>
+<span class="c1">#     projection=&quot;mercator&quot;,</span>
+<span class="c1">#     hover_name=None,                   # optional: show info on hover</span>
+<span class="c1">#     hover_data={&quot;lat&quot;: lat, &quot;lon&quot;: lon, &quot;ter&quot;: ter},</span>
+<span class="c1">#     size_max=10,</span>
+<span class="c1"># )</span>
+
+<span class="c1"># use maps</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_map</span><span class="p">(</span>
+    <span class="n">lat</span><span class="o">=</span><span class="n">lat</span><span class="p">,</span>
+    <span class="n">lon</span><span class="o">=</span><span class="n">lon</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">ter</span><span class="p">,</span>
+    <span class="n">color_continuous_scale</span><span class="o">=</span><span class="s2">&quot;Viridis&quot;</span><span class="p">,</span>  <span class="c1"># choose any supported colorscale</span>
+    <span class="n">hover_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>                   <span class="c1"># optional: show info on hover</span>
+    <span class="n">hover_data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lat&quot;</span><span class="p">:</span> <span class="n">lat</span><span class="p">,</span> <span class="s2">&quot;lon&quot;</span><span class="p">:</span> <span class="n">lon</span><span class="p">,</span> <span class="s2">&quot;ter&quot;</span><span class="p">:</span> <span class="n">ter</span><span class="p">,</span> <span class="s2">&quot;iCell&quot;</span><span class="p">:</span> <span class="n">iCell</span><span class="p">},</span>
+    <span class="n">size_max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># set width and height</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>   <span class="c1"># pixels</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>   <span class="c1"># pixels</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Show interactive map</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+</div>
+</div>
+</section>
+<section id="print-pressure-profile-in-the-atlantic-at-icell-1702401">
+<h2>Print pressure profile in the Atlantic at iCell=1702401<a class="headerlink" href="#print-pressure-profile-in-the-atlantic-at-icell-1702401" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iCell</span> <span class="o">=</span> <span class="mi">1702401</span>
+
+<span class="n">ds1</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pyDAmonitor_ROOT</span><span class="p">,</span><span class="s1">&#39;data/mpasjedi/bkg.nc&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">query_dataset</span><span class="p">(</span><span class="n">ds1</span><span class="p">)</span>
+<span class="n">pfull</span> <span class="o">=</span> <span class="n">ds1</span><span class="p">[</span><span class="s1">&#39;pressure_p&#39;</span><span class="p">][:]</span> <span class="o">+</span> <span class="n">ds1</span><span class="p">[</span><span class="s1">&#39;pressure_base&#39;</span><span class="p">][:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pfull</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pfull</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">iCell</span><span class="p">,:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>qv, qc, qr, qi, qs, qg, ni, nr, ng, nc, nifa, nwfa, volg, initial_time, xtime, u, w, rho, pressure_p, pressure_base, theta, relhum, rho_base, theta_base, uReconstructZonal, uReconstructMeridional, surface_pressure, isltyp, soilf, ivgtyp, landusef, mminlu, isice_lu, iswater_lu, landmask, shdmin, shdmax, snoalb, albedo12m, greenfrac, lai12m, cldfrac, re_cloud, re_ice, re_snow, refl10cm_max, rainnc, lai, sfc_albbck, sfc_albedo, sfc_emibck, mavail, sfc_emiss, thc, ust, xicem, z0, znt, skintemp, snow, snowc, snowh, sst, tmn, vegfra, seaice, xice, xland, u10, v10, q2, t2m, precipw, dzs, zs, ter, sh2o, smois, tslb, h_oml_initial
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 2341818, 59)
+[101050.21  100827.36  100575.7   100291.87   99971.98   99611.586
+  99206.03   98750.02   98237.805  97663.21   97019.45   96299.28
+  95494.914  94598.32   93601.086  92494.75   91270.93   89921.26
+  88437.9    86814.08   85046.22   83133.59   81072.44   78859.78
+  76499.64   74004.44   71381.86   68635.82   65771.73   62792.363
+  59712.547  56557.555  53354.227  50127.465  46902.875  43700.73
+  40543.67   37458.305  34464.246  31579.037  28818.988  26200.248
+  23719.398  21368.52   19168.184  17131.22   15242.44   13492.477
+  11880.851  10394.819   9037.443   7826.539   6744.678   5781.303
+   4931.021   4178.032   3509.6     2917.626   2393.344]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="find-the-top-interface-level-pressure">
+<h1>Find the top interface level pressure<a class="headerlink" href="#find-the-top-interface-level-pressure" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">log</span><span class="p">,</span> <span class="n">exp</span>
+<span class="n">size</span> <span class="o">=</span> <span class="n">pfull</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">iCell</span><span class="p">,:]</span><span class="o">.</span><span class="n">size</span>
+<span class="n">logIm1</span> <span class="o">=</span> <span class="p">(</span> <span class="n">log</span><span class="p">(</span><span class="n">pfull</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">iCell</span><span class="p">,</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="n">log</span><span class="p">(</span><span class="n">pfull</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">iCell</span><span class="p">,</span><span class="n">size</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="p">)</span> <span class="o">/</span><span class="mi">2</span>
+<span class="n">logM</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">pfull</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">iCell</span><span class="p">,</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">logI</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">logM</span> <span class="o">-</span> <span class="n">logIm1</span>
+<span class="n">exp</span><span class="p">(</span><span class="n">logI</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2167.667709920563
+</pre></div>
+</div>
+</div>
+</div>
+<section id="find-and-tlot-neighborhood-cells-around-a-given-lat-lon">
+<h2>Find and tlot neighborhood cells around a given lat, lon<a class="headerlink" href="#find-and-tlot-neighborhood-cells-around-a-given-lat-lon" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+<span class="n">cartopy</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;data_dir&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="s2">/data/natural_earth_data&quot;</span>
+
+<span class="n">mylat</span><span class="p">,</span> <span class="n">mylon0</span> <span class="o">=</span> <span class="mf">40.14</span><span class="p">,</span> <span class="o">-</span><span class="mf">105.18</span>   <span class="c1"># specify a given lot, lon</span>
+
+<span class="n">lat_incr</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># degreee, ~1km?</span>
+<span class="n">lon_incr</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># degree, ~1km?</span>
+
+<span class="n">mylon</span> <span class="o">=</span> <span class="n">mylon0</span> <span class="o">+</span> <span class="mi">360</span>  <span class="c1"># convert to 360-based degree</span>
+<span class="n">lonCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonCell&#39;</span><span class="p">][:])</span>
+<span class="n">latCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latCell&#39;</span><span class="p">][:])</span>
+<span class="n">lonVertex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonVertex&#39;</span><span class="p">][:])</span>
+<span class="n">latVertex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latVertex&#39;</span><span class="p">][:])</span>
+
+<span class="c1"># Connectivity: vertices of each cell</span>
+<span class="n">verticesOnCell</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;verticesOnCell&#39;</span><span class="p">][:]</span>  <span class="c1"># shape (nCells, maxEdges)</span>
+<span class="n">nEdgesOnCell</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;nEdgesOnCell&#39;</span><span class="p">][:]</span>
+
+<span class="c1"># find neighborhood cells (&gt;=7)</span>
+<span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">latmin</span> <span class="o">=</span> <span class="n">mylat</span> <span class="o">-</span> <span class="n">lat_incr</span> <span class="o">*</span> <span class="p">(</span><span class="nb">iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">latmax</span> <span class="o">=</span> <span class="n">mylat</span> <span class="o">+</span> <span class="n">lat_incr</span> <span class="o">*</span> <span class="p">(</span><span class="nb">iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">lonmin</span> <span class="o">=</span> <span class="n">mylon</span> <span class="o">-</span> <span class="n">lon_incr</span> <span class="o">*</span> <span class="p">(</span><span class="nb">iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">lonmax</span> <span class="o">=</span> <span class="n">mylon</span> <span class="o">+</span> <span class="n">lon_incr</span> <span class="o">*</span> <span class="p">(</span><span class="nb">iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">maskC</span> <span class="o">=</span> <span class="p">(</span><span class="n">latCell</span> <span class="o">&gt;=</span> <span class="n">latmin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">latCell</span> <span class="o">&lt;=</span> <span class="n">latmax</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lonCell</span> <span class="o">&gt;=</span> <span class="n">lonmin</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">lonCell</span> <span class="o">&lt;=</span> <span class="n">lonmax</span><span class="p">)</span>
+    <span class="n">latC</span> <span class="o">=</span> <span class="n">latCell</span><span class="p">[</span><span class="n">maskC</span><span class="p">]</span>
+    <span class="n">lonC</span> <span class="o">=</span> <span class="n">lonCell</span><span class="p">[</span><span class="n">maskC</span><span class="p">]</span>
+    <span class="n">vertC</span> <span class="o">=</span> <span class="n">verticesOnCell</span><span class="p">[</span><span class="n">maskC</span><span class="p">]</span>
+    <span class="n">nEdgesC</span> <span class="o">=</span> <span class="n">nEdgesOnCell</span><span class="p">[</span><span class="n">maskC</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">latC</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">latC</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;=</span> <span class="mi">7</span><span class="p">:</span> 
+        <span class="k">break</span>  <span class="c1"># exit the loop if we find 7+ cells</span>
+
+<span class="c1"># find the cell indices </span>
+<span class="n">iCell</span> <span class="o">=</span> <span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;indexToCellID&#39;</span><span class="p">][:][</span><span class="n">maskC</span><span class="p">]</span>
+<span class="c1"># ter = ds0.variables[&quot;ter&quot;][:][mask]</span>
+
+<span class="c1"># --- Plot ---</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># add costlines, country borders, state/province borders</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;50m&#39;</span><span class="p">)</span>  <span class="c1"># &#39;110m&#39;, &#39;50m&#39;, or &#39;10m&#39;</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">STATES</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="s1">&#39;land&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">])</span>
+
+<span class="c1"># relax the plotting extent by the &quot;buffer&quot; degree</span>
+<span class="n">buffer</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="n">lonmin</span> <span class="o">-</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">lonmax</span> <span class="o">+</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">latmin</span> <span class="o">-</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">latmax</span> <span class="o">+</span> <span class="n">buffer</span><span class="p">])</span>
+
+<span class="c1"># plot ploygons</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latC</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
+    <span class="n">nEdges</span> <span class="o">=</span> <span class="n">nEdgesC</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">verts</span> <span class="o">=</span> <span class="n">verC</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">nEdges</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># convert 1-based to 0-based index</span>
+    <span class="n">poly_lon</span> <span class="o">=</span> <span class="n">lonVertex</span><span class="p">[</span><span class="n">verts</span><span class="p">]</span>
+    <span class="n">poly_lat</span> <span class="o">=</span> <span class="n">latVertex</span><span class="p">[</span><span class="n">verts</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">poly_lon</span><span class="p">,</span> <span class="n">poly_lat</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+    <span class="c1"># add the cell index in the center of the cell</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">lonC</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">latC</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">iCell</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> 
+        <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+    
+<span class="c1"># Plot a star at the user specificed (mylon, mylat)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mylon</span><span class="p">,</span> <span class="n">mylat</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># o, ^, s</span>
+        <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">lon_incr</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># degree, ~1km?</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">mylon</span> <span class="o">=</span> <span class="n">mylon0</span> <span class="o">+</span> <span class="mi">360</span>  <span class="c1"># convert to 360-based degree</span>
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="n">lonCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonCell&#39;</span><span class="p">][:])</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">latCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latCell&#39;</span><span class="p">][:])</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">lonVertex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonVertex&#39;</span><span class="p">][:])</span>
+
+<span class="ne">NameError</span>: name &#39;ds&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pydamonitor"
+        },
+        kernelOptions: {
+            name: "pydamonitor",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pydamonitor'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../markdown-notebooks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Notebooks with MyST Markdown</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mpas_domain_shape_terrain.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Plot the domain shape from <code class="docutils literal notranslate"><span class="pre">grid.nc</span></code> or domain terrain from <code class="docutils literal notranslate"><span class="pre">static.nc</span></code></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Check results and make plots on individual cells</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-pydamonitor-root-env-variable">get the <code class="docutils literal notranslate"><span class="pre">pyDAmonitor_ROOT</span></code> env variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#import-modules">import modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-in-invariant-nc">read in <code class="docutils literal notranslate"><span class="pre">invariant.nc</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-indextocellid-attributes-dimensions-etc">check <code class="docutils literal notranslate"><span class="pre">indexToCellID</span></code>, attributes, dimensions, etc</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-zgrid-ter">check <code class="docutils literal notranslate"><span class="pre">zgrid</span></code>, <code class="docutils literal notranslate"><span class="pre">ter</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-a-new-zgrid-by-removing-the-terrain-height">compute a new zgrid by removing the terrain height</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">scatter all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-pressure-profile-in-the-atlantic-at-icell-1702401">Print pressure profile in the Atlantic at iCell=1702401</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-top-interface-level-pressure">Find the top interface level pressure</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-and-tlot-neighborhood-cells-around-a-given-lat-lon">Find and tlot neighborhood cells around a given lat, lon</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The pyDAmonitor group
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
