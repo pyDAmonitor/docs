@@ -399,12 +399,12 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-indextocellid-attributes-dimensions-etc">check <code class="docutils literal notranslate"><span class="pre">indexToCellID</span></code>, attributes, dimensions, etc</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-zgrid-ter">check <code class="docutils literal notranslate"><span class="pre">zgrid</span></code>, <code class="docutils literal notranslate"><span class="pre">ter</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-a-new-zgrid-by-removing-the-terrain-height">compute a new zgrid by removing the terrain height</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">scatter all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">scatter-plot all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-pressure-profile-in-the-atlantic-at-icell-1702401">Print pressure profile in the Atlantic at iCell=1702401</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-top-interface-level-pressure">Find the top interface level pressure</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-and-tlot-neighborhood-cells-around-a-given-lat-lon">Find and tlot neighborhood cells around a given lat, lon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-and-plot-neighborhood-cells-around-a-given-lat-lon">Find and plot neighborhood cells around a given lat, lon</a></li>
 </ul>
 </li>
 </ul>
@@ -449,8 +449,8 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/home/Guoqing.Ge/pyDAmonitor
 
-CPU times: user 7.98 ms, sys: 71.1 ms, total: 79.1 ms
-Wall time: 119 ms
+CPU times: user 10.7 ms, sys: 79.8 ms, total: 90.5 ms
+Wall time: 132 ms
 </pre></div>
 </div>
 </div>
@@ -475,8 +475,8 @@ Wall time: 119 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 397 ms, sys: 248 ms, total: 645 ms
-Wall time: 805 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 412 ms, sys: 268 ms, total: 680 ms
+Wall time: 901 ms
 </pre></div>
 </div>
 </div>
@@ -604,8 +604,8 @@ filling on, default _FillValue of 9.969209968386869e+36 used
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.12 s, sys: 12.2 s, total: 16.4 s
-Wall time: 16.4 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 4.07 s, sys: 14 s, total: 18 s
+Wall time: 18.1 s
 </pre></div>
 </div>
 </div>
@@ -643,9 +643,9 @@ Wall time: 16.4 s
 </div>
 </div>
 </section>
-<section id="scatter-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">
-<h2>scatter all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)<a class="headerlink" href="#scatter-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index" title="Link to this heading">#</a></h2>
-<p>Write down iCell and then we can print a field profile for that cell</p>
+<section id="scatter-plot-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">
+<h2>scatter-plot all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)<a class="headerlink" href="#scatter-plot-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index" title="Link to this heading">#</a></h2>
+<p>Write down the target cell index and then we can print a field profile for that cell</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
@@ -765,8 +765,8 @@ Wall time: 16.4 s
 </div>
 </div>
 </div>
-<section id="find-and-tlot-neighborhood-cells-around-a-given-lat-lon">
-<h2>Find and tlot neighborhood cells around a given lat, lon<a class="headerlink" href="#find-and-tlot-neighborhood-cells-around-a-given-lat-lon" title="Link to this heading">#</a></h2>
+<section id="find-and-plot-neighborhood-cells-around-a-given-lat-lon">
+<h2>Find and plot neighborhood cells around a given lat, lon<a class="headerlink" href="#find-and-plot-neighborhood-cells-around-a-given-lat-lon" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -781,14 +781,14 @@ Wall time: 16.4 s
 <span class="n">lon_incr</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># degree, ~1km?</span>
 
 <span class="n">mylon</span> <span class="o">=</span> <span class="n">mylon0</span> <span class="o">+</span> <span class="mi">360</span>  <span class="c1"># convert to 360-based degree</span>
-<span class="n">lonCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonCell&#39;</span><span class="p">][:])</span>
-<span class="n">latCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latCell&#39;</span><span class="p">][:])</span>
-<span class="n">lonVertex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonVertex&#39;</span><span class="p">][:])</span>
-<span class="n">latVertex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latVertex&#39;</span><span class="p">][:])</span>
+<span class="n">lonCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonCell&#39;</span><span class="p">][:])</span>
+<span class="n">latCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latCell&#39;</span><span class="p">][:])</span>
+<span class="n">lonVertex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonVertex&#39;</span><span class="p">][:])</span>
+<span class="n">latVertex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latVertex&#39;</span><span class="p">][:])</span>
 
 <span class="c1"># Connectivity: vertices of each cell</span>
-<span class="n">verticesOnCell</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;verticesOnCell&#39;</span><span class="p">][:]</span>  <span class="c1"># shape (nCells, maxEdges)</span>
-<span class="n">nEdgesOnCell</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;nEdgesOnCell&#39;</span><span class="p">][:]</span>
+<span class="n">verticesOnCell</span> <span class="o">=</span> <span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;verticesOnCell&#39;</span><span class="p">][:]</span>  <span class="c1"># shape (nCells, maxEdges)</span>
+<span class="n">nEdgesOnCell</span> <span class="o">=</span> <span class="n">ds0</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;nEdgesOnCell&#39;</span><span class="p">][:]</span>
 
 <span class="c1"># find neighborhood cells (&gt;=7)</span>
 <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
@@ -818,8 +818,8 @@ Wall time: 16.4 s
 <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;50m&#39;</span><span class="p">)</span>  <span class="c1"># &#39;110m&#39;, &#39;50m&#39;, or &#39;10m&#39;</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">STATES</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="s1">&#39;land&#39;</span><span class="p">])</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">OCEAN</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COLORS</span><span class="p">[</span><span class="s1">&#39;water&#39;</span><span class="p">])</span>
+<span class="c1">#ax.add_feature(cfeature.LAND, facecolor=cfeature.COLORS[&#39;land&#39;])</span>
+<span class="c1">#ax.add_feature(cfeature.OCEAN, facecolor=cfeature.COLORS[&#39;water&#39;])</span>
 
 <span class="c1"># relax the plotting extent by the &quot;buffer&quot; degree</span>
 <span class="n">buffer</span> <span class="o">=</span> <span class="mf">0.02</span>
@@ -828,7 +828,7 @@ Wall time: 16.4 s
 <span class="c1"># plot ploygons</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">latC</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
     <span class="n">nEdges</span> <span class="o">=</span> <span class="n">nEdgesC</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">verts</span> <span class="o">=</span> <span class="n">verC</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">nEdges</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># convert 1-based to 0-based index</span>
+    <span class="n">verts</span> <span class="o">=</span> <span class="n">vertC</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:</span><span class="n">nEdges</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># convert 1-based to 0-based index</span>
     <span class="n">poly_lon</span> <span class="o">=</span> <span class="n">lonVertex</span><span class="p">[</span><span class="n">verts</span><span class="p">]</span>
     <span class="n">poly_lat</span> <span class="o">=</span> <span class="n">latVertex</span><span class="p">[</span><span class="n">verts</span><span class="p">]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">poly_lon</span><span class="p">,</span> <span class="n">poly_lat</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
@@ -847,18 +847,13 @@ Wall time: 16.4 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">lon_incr</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># degree, ~1km?</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">mylon</span> <span class="o">=</span> <span class="n">mylon0</span> <span class="o">+</span> <span class="mi">360</span>  <span class="c1"># convert to 360-based degree</span>
-<span class="ne">---&gt; </span><span class="mi">13</span> <span class="n">lonCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonCell&#39;</span><span class="p">][:])</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">latCell</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;latCell&#39;</span><span class="p">][:])</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">lonVertex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lonVertex&#39;</span><span class="p">][:])</span>
-
-<span class="ne">NameError</span>: name &#39;ds&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+1
+5
+7
 </pre></div>
 </div>
+<img alt="../_images/be8940bf04e036455657369beeb70e260d1c55467fe2af776a249d8fe000d71d.png" src="../_images/be8940bf04e036455657369beeb70e260d1c55467fe2af776a249d8fe000d71d.png" />
 </div>
 </div>
 </section>
@@ -935,12 +930,12 @@ Wall time: 16.4 s
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-indextocellid-attributes-dimensions-etc">check <code class="docutils literal notranslate"><span class="pre">indexToCellID</span></code>, attributes, dimensions, etc</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#check-zgrid-ter">check <code class="docutils literal notranslate"><span class="pre">zgrid</span></code>, <code class="docutils literal notranslate"><span class="pre">ter</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-a-new-zgrid-by-removing-the-terrain-height">compute a new zgrid by removing the terrain height</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">scatter all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scatter-plot-all-cell-terrain-values-and-when-a-mouse-hovers-on-a-cell-show-its-lat-lon-ter-and-icell-cell-index">scatter-plot all cell terrain values and when a mouse hovers on a cell, show its <code class="docutils literal notranslate"><span class="pre">lat</span></code>,<code class="docutils literal notranslate"><span class="pre">lon</span></code>,<code class="docutils literal notranslate"><span class="pre">ter</span></code> and <code class="docutils literal notranslate"><span class="pre">iCell</span></code> (cell index)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-pressure-profile-in-the-atlantic-at-icell-1702401">Print pressure profile in the Atlantic at iCell=1702401</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#find-the-top-interface-level-pressure">Find the top interface level pressure</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-and-tlot-neighborhood-cells-around-a-given-lat-lon">Find and tlot neighborhood cells around a given lat, lon</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-and-plot-neighborhood-cells-around-a-given-lat-lon">Find and plot neighborhood cells around a given lat, lon</a></li>
 </ul>
 </li>
 </ul>
