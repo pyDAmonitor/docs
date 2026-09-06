@@ -448,42 +448,11 @@ In the MPAS and JEDI based wx-workflow (including rrfs-workflow, rtma-workflow, 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`
-CPU times: user 7.73 ms, sys: 19.8 ms, total: 27.6 ms
-Wall time: 26.8 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/gpfs/f6/arfs-gsl/world-shared/gge/tmp/pyDAmonitor
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"># autoload external python modules if they changed</span><span class="se">\n</span><span class="si">%lo</span><span class="s1">ad_ext autoreload</span><span class="se">\n</span><span class="si">%a</span><span class="s1">utoreload 2</span><span class="se">\n\n</span><span class="s1">import os, sys</span><span class="se">\n</span><span class="s1">pyDAmonitor_ROOT=os.getenv(&quot;pyDAmonitor_ROOT&quot;)</span><span class="se">\n</span><span class="s1">if pyDAmonitor_ROOT is None:</span><span class="se">\n</span><span class="s1">    print(&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;)</span><span class="se">\n</span><span class="s1">else:</span><span class="se">\n</span><span class="s1">    print(f&quot;pyDAmonitor_ROOT=</span><span class="si">{pyDAmonitor_ROOT}</span><span class="se">\\</span><span class="s1">n&quot;)</span><span class="se">\n</span><span class="s1">sys.path.insert(0, pyDAmonitor_ROOT)</span><span class="se">\n\n</span><span class="s1">from DAmonitor.base import query_dataset, query_data, query_obj</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/interactiveshell.py:2565,</span> in <span class="ni">InteractiveShell.run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2563</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2564</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2565</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2567</span> <span class="c1"># The code below prevents the output from being displayed</span>
-<span class="g g-Whitespace">   </span><span class="mi">2568</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
-<span class="g g-Whitespace">   </span><span class="mi">2569</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2570</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1470,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1468</span> <span class="k">if</span> <span class="n">interrupt_occured</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1469</span>     <span class="k">if</span> <span class="n">exit_on_interrupt</span> <span class="ow">and</span> <span class="n">captured_exception</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1470</span>         <span class="k">raise</span> <span class="n">captured_exception</span>
-<span class="g g-Whitespace">   </span><span class="mi">1471</span>     <span class="k">return</span>
-<span class="g g-Whitespace">   </span><span class="mi">1472</span> <span class="k">return</span> <span class="n">out</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1434,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1432</span> <span class="n">st</span> <span class="o">=</span> <span class="n">clock2</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1433</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1434</span>     <span class="n">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">glob</span><span class="p">,</span> <span class="n">local_ns</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1436</span>     <span class="c1"># multi-line %%time case</span>
-
-<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">13</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;DAmonitor&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.24 s, sys: 125 ms, total: 7.36 s
+Wall time: 306 ms
 </pre></div>
 </div>
 </div>
@@ -513,6 +482,92 @@ Wall time: 26.8 ms
 <span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">jdiag_file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
 <span class="n">query_dataset</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-------- obs_file --------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;netCDF4.Dataset&#39;&gt;
+root group (NETCDF4 data model, file format HDF5):
+    _ioda_layout: ObsGroup
+    _ioda_layout_version: 0
+    Orig_obs_file: ioda_aircar.nc
+    Grid_file: /scratch3/BMC/rtwrfruc/RRFSv2X/code/rrfs-workflow.20260611/fix/conus3km/conus3km.static.nc
+    Shrink_factor: 0.005
+    dimensions(sizes): Location(65847)
+    variables(dimensions): int64 Location(Location)
+    groups: MetaData, ObsError, ObsType, ObsValue, QualityMarker
+*MetaData
+    aircraftFlightNumber, aircraftFlightPhase, dateTime, dumpReportType, height, latitude, longitude, prepbufrDataLvlCat, prepbufrReportType, pressure, stationElevation, stationIdentification, timeOffset, longitude_latitude_pressure
+*ObsError
+    airTemperature, pressure, relativeHumidity, specificHumidity, windEastward, windNorthward
+*ObsType
+    airTemperature, specificHumidity, windEastward, windNorthward
+*ObsValue
+    airTemperature, dewpointTemperature, specificHumidity, windEastward, windNorthward
+*QualityMarker
+    airTemperature, height, pressure, specificHumidity, windEastward, windNorthward
+Location
+
+
+-------- jdiag_file --------
+&lt;class &#39;netCDF4.Dataset&#39;&gt;
+root group (NETCDF4 data model, file format HDF5):
+    Grid_file: /scratch3/BMC/rtwrfruc/RRFSv2X/code/rrfs-workflow.20260611/fix/conus3km/conus3km.static.nc
+    Orig_obs_file: ioda_aircar.nc
+    Shrink_factor: 0.005
+    _ioda_layout: ObsGroup
+    _ioda_layout_version: 0
+    dimensions(sizes): Location(27732)
+    variables(dimensions): int64 Location(Location)
+    groups: EffectiveError0, EffectiveError1, EffectiveError2, EffectiveQC0, EffectiveQC1, EffectiveQC2, MetaData, ObsBias0, ObsBias1, ObsBias2, ObsError, ObsType, ObsValue, QualityMarker, TempObsErrorData, hofx0, hofx1, hofx2, innov1, oman, ombg
+*EffectiveError0
+    airTemperature
+*EffectiveError1
+    airTemperature
+*EffectiveError2
+    airTemperature
+*EffectiveQC0
+    airTemperature
+*EffectiveQC1
+    airTemperature
+*EffectiveQC2
+    airTemperature
+*MetaData
+    stationIdentification, aircraftFlightPhase, timeOffset, prepbufrDataLvlCat, longitude, stationElevation, latitude, prepbufrReportType, pressure, longitude_latitude_pressure, dateTime, height, dumpReportType, aircraftFlightNumber
+*ObsBias0
+    airTemperature
+*ObsBias1
+    airTemperature
+*ObsBias2
+    airTemperature
+*ObsError
+    airTemperature, relativeHumidity, specificHumidity, windEastward, pressure, windNorthward
+*ObsType
+    specificHumidity, windEastward, airTemperature, windNorthward
+*ObsValue
+    dewpointTemperature, specificHumidity, airTemperature, windEastward, windNorthward
+*QualityMarker
+    airTemperature, pressure, windEastward, specificHumidity, height, windNorthward
+*TempObsErrorData
+    airTemperature
+*hofx0
+    airTemperature
+*hofx1
+    airTemperature
+*hofx2
+    airTemperature
+*innov1
+    airTemperature
+*oman
+    airTemperature
+*ombg
+    airTemperature
+Location
+CPU times: user 2.58 ms, sys: 16.1 ms, total: 18.6 ms
+Wall time: 289 ms
 </pre></div>
 </div>
 </div>
@@ -556,6 +611,13 @@ whereas a <strong>jdiag file</strong> typically contains DA diagnostics for a si
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;&lt;class &#39;netCDF4.Dimension&#39;&gt;&quot; (unlimited): name = &#39;Location&#39;, size = 27732
+27732
+[    0  8555  8557 ... 30767 37440 41184]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -564,6 +626,23 @@ whereas a <strong>jdiag file</strong> typically contains DA diagnostics for a si
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;----------------&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="s2">&quot;ObsValue&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;airTemperature&quot;</span><span class="p">][:])</span>  <span class="c1"># actual content</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="s2">&quot;ObsValue&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;specificHumidity&quot;</span><span class="p">][:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;netCDF4.Variable&#39;&gt;
+float32 airTemperature(Location)
+    _FillValue: -3.3687953e+38
+    coordinates: longitude latitude
+    long_name: Temperature
+    units: K
+path = /ObsValue
+unlimited dimensions: Location
+current shape = (27732,)
+filling on
+----------------
+[279.25 273.55 279.25 ... 282.05 292.75 304.25]
+[-- -- -- ... -- -- --]
 </pre></div>
 </div>
 </div>
@@ -645,12 +724,36 @@ This reduces the access expression from 52 characters to just a few characters, 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/gpfs/f6/arfs-gsl/world-shared/gge/tmp/pyDAmonitor/data/mpasjedi/jdiag_aircar_t133.nc
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;ds&#39;,
+ &#39;filepath&#39;,
+ &#39;groups&#39;,
+ &#39;locations&#39;,
+ &#39;metadata&#39;,
+ &#39;nlocs&#39;,
+ &#39;q&#39;,
+ &#39;rh&#39;,
+ &#39;t&#39;,
+ &#39;td&#39;,
+ &#39;u&#39;,
+ &#39;v&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># query the data  (note: t is an internal object containing a `data` attribute and query_data is intelligent enough to query the `data` attribute directly)</span>
 
 <span class="n">query_data</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EffectiveError0, EffectiveError1, EffectiveError2, EffectiveQC0, EffectiveQC1, EffectiveQC2, stationIdentification, aircraftFlightPhase, timeOffset, prepbufrDataLvlCat, longitude, stationElevation, latitude, prepbufrReportType, pressure, dateTime, height, dumpReportType, aircraftFlightNumber, ObsBias0, ObsBias1, ObsBias2, ObsError, ObsType, ObsValue, QualityMarker, TempObsErrorData, hofx0, hofx1, hofx2, innov1, oman, ombg, Location
 </pre></div>
 </div>
 </div>
@@ -668,6 +771,20 @@ This reduces the access expression from 52 characters to just a few characters, 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VTTDSIZA
+C4GBTSZA
+[&#39;ISQBOZRA&#39; &#39;0BIDSQRA&#39; &#39;0BIDSQRA&#39; ... &#39;EPGCFGRA&#39; &#39;EPGCFGRA&#39; &#39;EPGCFGRA&#39;]
+[279.25 273.55 279.25 ... 282.05 292.75 304.25]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(data=[279.25, 273.55, 279.25, ..., 282.05, 292.75, 304.25],
+             mask=False,
+       fill_value=np.float64(1e+20),
+            dtype=float32)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -675,6 +792,13 @@ This reduces the access expression from 52 characters to just a few characters, 
 
 <span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveQC0</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveError0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 0 0 ... 0 0 0]
+[0.8210167288780212 0.7708320617675781 0.7883864045143127 ...
+ 0.827965259552002 1.0205713510513306 7.202971935272217]
 </pre></div>
 </div>
 </div>
@@ -693,6 +817,12 @@ This reduces the access expression from 52 characters to just a few characters, 
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+True
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -705,6 +835,12 @@ This reduces the access expression from 52 characters to just a few characters, 
 <span class="n">c</span> <span class="o">=</span> <span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveQC2</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+True
 </pre></div>
 </div>
 </div>

@@ -447,195 +447,1106 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/gpfs/f6/arfs-gsl/world-shared/gge/tmp/pyDAmonitor
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.26 s, sys: 156 ms, total: 7.41 s
-Wall time: 444 ms
-</pre></div>
+<div class="output text_html"><script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
+
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  const force = true;
+  const py_version = '3.7.3'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  const reloading = false;
+  const Bokeh = root.Bokeh;
+
+  // Set a timeout for this load but only if we are not already initializing
+  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, js_modules, js_exports, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
+
+    root._bokeh_onload_callbacks.push(callback);
+
+    if (root._bokeh_is_loading > 0) {
+      // Don't load bokeh if it is still initializing
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      // There is nothing to load
+      run_callbacks();
+      return null;
+    }
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
+
+    function on_error(e) {
+      const src_el = e.srcElement
+      console.error("failed to load " + (src_el.href || src_el.src));
+    }
+
+    const skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
+
+    const existing_stylesheets = []
+    const links = document.getElementsByTagName('link')
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i]
+      if (link.href != null) {
+        existing_stylesheets.push(link.href)
+      }
+    }
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const escaped = encodeURI(url)
+      if (existing_stylesheets.indexOf(escaped) !== -1) {
+        on_load()
+        continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    var existing_scripts = []
+    const scripts = document.getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+        existing_scripts.push(script.src)
+      }
+    }
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (let i = 0; i < js_modules.length; i++) {
+      const url = js_modules[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      const url = js_exports[name];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  const js_urls = ["https://cdn.holoviz.org/panel/1.7.5/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.7.3.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.7.3.min.js", "https://cdn.holoviz.org/panel/1.7.5/dist/panel.min.js"];
+  const js_modules = [];
+  const js_exports = {};
+  const css_urls = [];
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (let i = 0; i < inline_js.length; i++) {
+        try {
+          inline_js[i].call(root, root.Bokeh);
+        } catch(e) {
+          if (!reloading) {
+            throw e;
+          }
+        }
+      }
+      // Cache old bokeh versions
+      if (Bokeh != undefined && !reloading) {
+        var NewBokeh = root.Bokeh;
+        if (Bokeh.versions === undefined) {
+          Bokeh.versions = new Map();
+        }
+        if (NewBokeh.version !== Bokeh.version) {
+          Bokeh.versions.set(NewBokeh.version, NewBokeh)
+        }
+        root.Bokeh = Bokeh;
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false
+  }
+
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      // If the timeout and bokeh was not successfully loaded we reset
+      // everything and try loading again
+      root._bokeh_timeout = Date.now() + 5000;
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      root._bokeh_is_loading = 0
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      root._bokeh_is_initializing = true
+      root._bokeh_onload_callbacks = []
+      const bokeh_loaded = root.Bokeh != null && (root.Bokeh.version === py_version || (root.Bokeh.versions !== undefined && root.Bokeh.versions.has(py_version)));
+      if (!reloading && !bokeh_loaded) {
+        if (root.Bokeh) {
+          root.Bokeh = undefined;
+        }
+        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, function() {
+        console.debug("Bokeh: BokehJS plotting callback run at", now());
+        run_inline_js();
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        let retries = 0;
+        const open = () => {
+          if (comm.active) {
+            comm.open();
+          } else if (retries > 3) {
+            console.warn('Comm target never activated')
+          } else {
+            retries += 1
+            setTimeout(open, 500)
+          }
+        }
+        if (comm.active) {
+          comm.open();
+        } else {
+          setTimeout(open, 500)
+        }
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        })
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output text_html"><div id='e2bf9ba8-abfd-4a22-948c-e22a533981d3'>
+  <div id="f01c93ef-cc52-4af4-ab52-e2ebc6f2fc23" data-root-id="e2bf9ba8-abfd-4a22-948c-e22a533981d3" style="display: contents;"></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"># autoload external python modules if they changed</span><span class="se">\n</span><span class="si">%lo</span><span class="s1">ad_ext autoreload</span><span class="se">\n</span><span class="si">%a</span><span class="s1">utoreload 2</span><span class="se">\n\n</span><span class="s1">import os, sys</span><span class="se">\n</span><span class="s1">pyDAmonitor_ROOT=os.getenv(&quot;pyDAmonitor_ROOT&quot;)</span><span class="se">\n</span><span class="s1">if pyDAmonitor_ROOT is None:</span><span class="se">\n</span><span class="s1">    print(&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;)</span><span class="se">\n</span><span class="s1">else:</span><span class="se">\n</span><span class="s1">    print(f&quot;pyDAmonitor_ROOT=</span><span class="si">{pyDAmonitor_ROOT}</span><span class="se">\\</span><span class="s1">n&quot;)</span><span class="se">\n</span><span class="s1">sys.path.insert(0, pyDAmonitor_ROOT)</span><span class="se">\n\n</span><span class="s1"># import modules</span><span class="se">\n</span><span class="s1">import warnings</span><span class="se">\n</span><span class="s1">import math</span><span class="se">\n</span><span class="s1">import numpy as np</span><span class="se">\n</span><span class="s1">import uxarray as ux</span><span class="se">\n</span><span class="s1">import xarray as xr</span><span class="se">\n</span><span class="s1">import pandas as pd</span><span class="se">\n</span><span class="s1">import seaborn as sns  # seaborn handles NaN values automatically</span><span class="se">\n</span><span class="s1">import matplotlib.pyplot as plt</span><span class="se">\n</span><span class="s1">from netCDF4 import Dataset</span><span class="se">\n</span><span class="s1">from DAmonitor.base import query_dataset, query_data, query_obj, to_dataframe</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<script type="application/javascript">(function(root) {
+  var docs_json = {"e78df295-fa23-41bc-8ab4-535bff919294":{"version":"3.7.3","title":"Bokeh Application","roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"e2bf9ba8-abfd-4a22-948c-e22a533981d3"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"e6949fcd-1ae6-4dd6-a84e-c36ace18e0d2","attributes":{"plot_id":"e2bf9ba8-abfd-4a22-948c-e22a533981d3","comm_id":"b7e26b45d9c04d97a6bedc6a83f41efe","client_comm_id":"22869d828576481c812ecf65edf30239"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]},{"type":"model","name":"holoviews.plotting.bokeh.raster.HoverModel","properties":[{"name":"xy","kind":"Any","default":null},{"name":"data","kind":"Any","default":null}]}]}};
+  var render_items = [{"docid":"e78df295-fa23-41bc-8ab4-535bff919294","roots":{"e2bf9ba8-abfd-4a22-948c-e22a533981d3":"f01c93ef-cc52-4af4-ab52-e2ebc6f2fc23"},"root_ids":["e2bf9ba8-abfd-4a22-948c-e22a533981d3"]}];
+  var docs = Object.values(docs_json)
+  if (!docs) {
+    return
+  }
+  const py_version = docs[0].version.replace('rc', '-rc.').replace('.dev', '-dev.')
+  async function embed_document(root) {
+    var Bokeh = get_bokeh(root)
+    await Bokeh.embed.embed_items_notebook(docs_json, render_items);
+    for (const render_item of render_items) {
+      for (const root_id of render_item.root_ids) {
+	const id_el = document.getElementById(root_id)
+	if (id_el.children.length && id_el.children[0].hasAttribute('data-root-id')) {
+	  const root_el = id_el.children[0]
+	  root_el.id = root_el.id + '-rendered'
+	  for (const child of root_el.children) {
+            // Ensure JupyterLab does not capture keyboard shortcuts
+            // see: https://jupyterlab.readthedocs.io/en/4.1.x/extension/notebook.html#keyboard-interaction-model
+	    child.setAttribute('data-lm-suppress-shortcuts', 'true')
+	  }
+	}
+      }
+    }
+  }
+  function get_bokeh(root) {
+    if (root.Bokeh === undefined) {
+      return null
+    } else if (root.Bokeh.version !== py_version) {
+      if (root.Bokeh.versions === undefined || !root.Bokeh.versions.has(py_version)) {
+	return null
+      }
+      return root.Bokeh.versions.get(py_version);
+    } else if (root.Bokeh.version === py_version) {
+      return root.Bokeh
+    }
+    return null
+  }
+  function is_loaded(root) {
+    var Bokeh = get_bokeh(root)
+    return (Bokeh != null && Bokeh.Panel !== undefined)
+  }
+  if (is_loaded(root)) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (is_loaded(root)) {
+        clearInterval(timer);
+        embed_document(root);
+      } else if (document.readyState == "complete") {
+        attempts++;
+        if (attempts > 200) {
+          clearInterval(timer);
+	  var Bokeh = get_bokeh(root)
+	  if (Bokeh == null || Bokeh.Panel == null) {
+            console.warn("Panel: ERROR: Unable to run Panel code because Bokeh or Panel library is missing");
+	  } else {
+	    console.warn("Panel: WARNING: Attempting to render but not all required libraries could be resolved.")
+	    embed_document(root)
+	  }
+        }
+      }
+    }, 25, root)
+  }
+})(window);</script></div><div class="output text_html"><script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
+*[data-root-id] > * {
+  box-sizing: border-box;
+  font-family: var(--jp-ui-font-family);
+  font-size: var(--jp-ui-font-size1);
+  color: var(--vscode-editor-foreground, var(--jp-ui-font-color1));
+}
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/interactiveshell.py:2565,</span> in <span class="ni">InteractiveShell.run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2563</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2564</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2565</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2567</span> <span class="c1"># The code below prevents the output from being displayed</span>
-<span class="g g-Whitespace">   </span><span class="mi">2568</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
-<span class="g g-Whitespace">   </span><span class="mi">2569</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2570</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+/* Override VSCode background color */
+.cell-output-ipywidget-background:has(
+  > .cell-output-ipywidget-background > .lm-Widget > *[data-root-id]
+),
+.cell-output-ipywidget-background:has(> .lm-Widget > *[data-root-id]) {
+  background-color: transparent !important;
+}
+</style></div><script type="application/javascript">(function(root) {
+  function now() {
+    return new Date();
+  }
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1470,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1468</span> <span class="k">if</span> <span class="n">interrupt_occured</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1469</span>     <span class="k">if</span> <span class="n">exit_on_interrupt</span> <span class="ow">and</span> <span class="n">captured_exception</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1470</span>         <span class="k">raise</span> <span class="n">captured_exception</span>
-<span class="g g-Whitespace">   </span><span class="mi">1471</span>     <span class="k">return</span>
-<span class="g g-Whitespace">   </span><span class="mi">1472</span> <span class="k">return</span> <span class="n">out</span>
+  const force = false;
+  const py_version = '3.7.3'.replace('rc', '-rc.').replace('.dev', '-dev.');
+  const reloading = true;
+  const Bokeh = root.Bokeh;
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1434,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1432</span> <span class="n">st</span> <span class="o">=</span> <span class="n">clock2</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1433</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1434</span>     <span class="n">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">glob</span><span class="p">,</span> <span class="n">local_ns</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1436</span>     <span class="c1"># multi-line %%time case</span>
+  // Set a timeout for this load but only if we are not already initializing
+  if (typeof (root._bokeh_timeout) === "undefined" || (force || !root._bokeh_is_initializing)) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
 
-<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">17</span>
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks;
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">uxarray</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">INT_DTYPE</span><span class="p">,</span> <span class="n">INT_FILL_VALUE</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.core.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">concat</span><span class="p">,</span> <span class="n">open_dataset</span><span class="p">,</span> <span class="n">open_grid</span><span class="p">,</span> <span class="n">open_mfdataset</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.core.dataarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataArray</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.core.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataset</span>
+  function load_libs(css_urls, js_urls, js_modules, js_exports, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+    if (js_exports == null) js_exports = {};
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">uxarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_dataset</span><span class="p">,</span> <span class="n">open_grid</span><span class="p">,</span> <span class="n">open_mfdataset</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.dataarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataArray</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataset</span>
+    root._bokeh_onload_callbacks.push(callback);
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">uxarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">uxarray.core.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataset</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">uxarray.core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_map_dims_to_ugrid</span><span class="p">,</span> <span class="n">match_chunks_to_ugrid</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">uxarray.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">Grid</span>
+    if (root._bokeh_is_loading > 0) {
+      // Don't load bokeh if it is still initializing
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    } else if (js_urls.length === 0 && js_modules.length === 0 && Object.keys(js_exports).length === 0) {
+      // There is nothing to load
+      run_callbacks();
+      return null;
+    }
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">uxarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">dataset</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">dtypes</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core.options</span><span class="w"> </span><span class="kn">import</span> <span class="n">OPTIONS</span>
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+    window._bokeh_on_load = on_load
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span> <span class="k">as</span> <span class="n">_version</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">coders</span><span class="p">,</span> <span class="n">groupers</span><span class="p">,</span> <span class="n">indexes</span><span class="p">,</span> <span class="n">testing</span><span class="p">,</span> <span class="n">tutorial</span><span class="p">,</span> <span class="n">ufuncs</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.backends.api</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">load_dataarray</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">load_dataset</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">12</span>     <span class="n">save_mfdataset</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.backends.zarr</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_zarr</span>
+    function on_error(e) {
+      const src_el = e.srcElement
+      console.error("failed to load " + (src_el.href || src_el.src));
+    }
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">coders</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> This module provides coder objects that encapsulate the</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> &quot;encoding/decoding&quot; process.</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.coding.times</span><span class="w"> </span><span class="kn">import</span> <span class="n">CFDatetimeCoder</span><span class="p">,</span> <span class="n">CFTimedeltaCoder</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CFDatetimeCoder&quot;</span><span class="p">,</span> <span class="s2">&quot;CFTimedeltaCoder&quot;</span><span class="p">]</span>
+    const skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length + Object.keys(js_exports).length;
+    }
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">coding</span><span class="o">/</span><span class="n">times</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">15</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">OutOfBoundsDatetime</span><span class="p">,</span> <span class="n">OutOfBoundsTimedelta</span>
-<span class="ne">---&gt; </span><span class="mi">15</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.coding.common</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">SerializationWarning</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">VariableCoder</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">lazy_elemwise_func</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">pop_to</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">safe_setitem</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">unpack_for_decoding</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">unpack_for_encoding</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.compat.pdcompat</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_precision_timestamp</span><span class="p">,</span> <span class="n">timestamp_as_unit</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">indexing</span>
+    const existing_stylesheets = []
+    const links = document.getElementsByTagName('link')
+    for (let i = 0; i < links.length; i++) {
+      const link = links[i]
+      if (link.href != null) {
+        existing_stylesheets.push(link.href)
+      }
+    }
+    for (let i = 0; i < css_urls.length; i++) {
+      const url = css_urls[i];
+      const escaped = encodeURI(url)
+      if (existing_stylesheets.indexOf(escaped) !== -1) {
+        on_load()
+        continue;
+      }
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }    var existing_scripts = []
+    const scripts = document.getElementsByTagName('script')
+    for (let i = 0; i < scripts.length; i++) {
+      var script = scripts[i]
+      if (script.src != null) {
+        existing_scripts.push(script.src)
+      }
+    }
+    for (let i = 0; i < js_urls.length; i++) {
+      const url = js_urls[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      const element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (let i = 0; i < js_modules.length; i++) {
+      const url = js_modules[i];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) !== -1 || existing_scripts.indexOf(escaped) !== -1) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (const name in js_exports) {
+      const url = js_exports[name];
+      const escaped = encodeURI(url)
+      if (skip.indexOf(escaped) >= 0 || root[name] != null) {
+        if (!window.requirejs) {
+          on_load();
+        }
+        continue;
+      }
+      var element = document.createElement('script');
+      element.onerror = on_error;
+      element.async = false;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      element.textContent = `
+      import ${name} from "${url}"
+      window.${name} = ${name}
+      window._bokeh_on_load()
+      `
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">coding</span><span class="o">/</span><span class="n">common</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">8</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">indexing</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core.variable</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.namedarray.parallelcompat</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_chunked_array_type</span>
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">indexing</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">19</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTypeLike</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">packaging.version</span><span class="w"> </span><span class="kn">import</span> <span class="n">Version</span>
-<span class="ne">---&gt; </span><span class="mi">19</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">duck_array_ops</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core.coordinate_transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoordinateTransform</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core.nputils</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumpyVIndexAdapter</span>
+  const js_urls = ["https://cdn.holoviz.org/panel/1.7.5/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js"];
+  const js_modules = [];
+  const js_exports = {};
+  const css_urls = [];
+  const inline_js = [    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+function(Bokeh) {} // ensure no trailing comma for IE
+  ];
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">duck_array_ops</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">28</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">isclose</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">isnat</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">take</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">unravel_index</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.api.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_extension_array_dtype</span>
-<span class="ne">---&gt; </span><span class="mi">28</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">dask_array_compat</span><span class="p">,</span> <span class="n">dask_array_ops</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.compat.array_api_compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_array_namespace</span>
-<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">nputils</span>
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (let i = 0; i < inline_js.length; i++) {
+        try {
+          inline_js[i].call(root, root.Bokeh);
+        } catch(e) {
+          if (!reloading) {
+            throw e;
+          }
+        }
+      }
+      // Cache old bokeh versions
+      if (Bokeh != undefined && !reloading) {
+        var NewBokeh = root.Bokeh;
+        if (Bokeh.versions === undefined) {
+          Bokeh.versions = new Map();
+        }
+        if (NewBokeh.version !== Bokeh.version) {
+          Bokeh.versions.set(NewBokeh.version, NewBokeh)
+        }
+        root.Bokeh = Bokeh;
+      }
+    } else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+    root._bokeh_is_initializing = false
+  }
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">compat</span><span class="o">/</span><span class="n">dask_array_ops</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.compat.dask_array_compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">reshape_blockwise</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">nputils</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">def</span><span class="w"> </span><span class="nf">dask_rolling_wrapper</span><span class="p">(</span><span class="n">moving_func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Wrapper to apply bottleneck moving window funcs on dask arrays&quot;&quot;&quot;</span>
+  function load_or_wait() {
+    // Implement a backoff loop that tries to ensure we do not load multiple
+    // versions of Bokeh and its dependencies at the same time.
+    // In recent versions we use the root._bokeh_is_initializing flag
+    // to determine whether there is an ongoing attempt to initialize
+    // bokeh, however for backward compatibility we also try to ensure
+    // that we do not start loading a newer (Panel>=1.0 and Bokeh>3) version
+    // before older versions are fully initialized.
+    if (root._bokeh_is_initializing && Date.now() > root._bokeh_timeout) {
+      // If the timeout and bokeh was not successfully loaded we reset
+      // everything and try loading again
+      root._bokeh_timeout = Date.now() + 5000;
+      root._bokeh_is_initializing = false;
+      root._bokeh_onload_callbacks = undefined;
+      root._bokeh_is_loading = 0
+      console.log("Bokeh: BokehJS was loaded multiple times but one version failed to initialize.");
+      load_or_wait();
+    } else if (root._bokeh_is_initializing || (typeof root._bokeh_is_initializing === "undefined" && root._bokeh_onload_callbacks !== undefined)) {
+      setTimeout(load_or_wait, 100);
+    } else {
+      root._bokeh_is_initializing = true
+      root._bokeh_onload_callbacks = []
+      const bokeh_loaded = root.Bokeh != null && (root.Bokeh.version === py_version || (root.Bokeh.versions !== undefined && root.Bokeh.versions.has(py_version)));
+      if (!reloading && !bokeh_loaded) {
+        if (root.Bokeh) {
+          root.Bokeh = undefined;
+        }
+        console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+      }
+      load_libs(css_urls, js_urls, js_modules, js_exports, function() {
+        console.debug("Bokeh: BokehJS plotting callback run at", now());
+        run_inline_js();
+      });
+    }
+  }
+  // Give older versions of the autoload script a head-start to ensure
+  // they initialize before we start loading newer version.
+  setTimeout(load_or_wait, 100)
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
 
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">nputils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">15</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.namedarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">pycompat</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="c1"># remove once numpy 2.0 is the oldest supported version</span>
-<span class="ne">---&gt; </span><span class="mi">15</span> <span class="k">if</span> <span class="n">module_available</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="n">minversion</span><span class="o">=</span><span class="s2">&quot;2.0.0.dev0&quot;</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.lib.array_utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>  <span class="c1"># type: ignore[import-not-found,unused-ignore]</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="n">normalize_axis_index</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="k">else</span><span class="p">:</span>
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/xarray/namedarray/utils.py:56,</span> in <span class="ni">module_available</span><span class="nt">(module, minversion)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span>     <span class="k">return</span> <span class="kc">False</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="k">if</span> <span class="n">minversion</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">56</span>     <span class="n">version</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span>     <span class="k">return</span> <span class="n">Version</span><span class="p">(</span><span class="n">version</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">Version</span><span class="p">(</span><span class="n">minversion</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span> <span class="k">return</span> <span class="kc">True</span>
+    function JupyterCommManager() {
+    }
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:1009,</span> in <span class="ni">version</span><span class="nt">(distribution_name)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1002</span> <span class="k">def</span><span class="w"> </span><span class="nf">version</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1003</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Get the version string for the named package.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1004</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1005</span><span class="sd">     :param distribution_name: The name of the distribution package to query.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1006</span><span class="sd">     :return: The version string for the package as defined in the package&#39;s</span>
-<span class="g g-Whitespace">   </span><span class="mi">1007</span><span class="sd">         &quot;Version&quot; metadata key.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1008</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1009</span>     <span class="k">return</span> <span class="n">distribution</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">)</span><span class="o">.</span><span class="n">version</span>
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:982,</span> in <span class="ni">distribution</span><span class="nt">(distribution_name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">976</span> <span class="k">def</span><span class="w"> </span><span class="nf">distribution</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">977</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Get the ``Distribution`` instance for the named package.</span>
-<span class="g g-Whitespace">    </span><span class="mi">978</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">979</span><span class="sd">     :param distribution_name: The name of the distribution package as a string.</span>
-<span class="g g-Whitespace">    </span><span class="mi">980</span><span class="sd">     :return: A ``Distribution`` instance (or subclass thereof).</span>
-<span class="g g-Whitespace">    </span><span class="mi">981</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">982</span>     <span class="k">return</span> <span class="n">Distribution</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">)</span>
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        let retries = 0;
+        const open = () => {
+          if (comm.active) {
+            comm.open();
+          } else if (retries > 3) {
+            console.warn('Comm target never activated')
+          } else {
+            retries += 1
+            setTimeout(open, 500)
+          }
+        }
+        if (comm.active) {
+          comm.open();
+        } else {
+          setTimeout(open, 500)
+        }
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        })
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:563,</span> in <span class="ni">Distribution.from_name</span><span class="nt">(cls, name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">561</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A distribution name is required.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">562</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">563</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">discover</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">564</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">565</span>     <span class="k">raise</span> <span class="n">PackageNotFoundError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:915,</span> in <span class="ni">&lt;genexpr&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">    </span><span class="mi">912</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Find metadata directories in paths heuristically.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">913</span> <span class="n">prepared</span> <span class="o">=</span> <span class="n">Prepared</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">914</span> <span class="k">return</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span>
-<span class="nn">--&gt; 915     path.search(prepared) for path</span> in <span class="ni">map</span><span class="nt">(FastPath, paths)</span>
-<span class="g g-Whitespace">    </span><span class="mi">916</span> <span class="p">)</span>
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:813,</span> in <span class="ni">FastPath.search</span><span class="nt">(self, name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">812</span> <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">813</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mtime</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
 
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:818,</span> in <span class="ni">FastPath.mtime</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">815</span> <span class="nd">@property</span>
-<span class="g g-Whitespace">    </span><span class="mi">816</span> <span class="k">def</span><span class="w"> </span><span class="nf">mtime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">817</span>     <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">OSError</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">818</span>         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">st_mtime</span>
-<span class="g g-Whitespace">    </span><span class="mi">819</span>     <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
 
-<span class="ne">TypeError</span>: stat: path should be string, bytes, os.PathLike or integer, not NoneType
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 24.8 s, sys: 643 ms, total: 25.4 s
+Wall time: 9.67 s
 </pre></div>
 </div>
 </div>
@@ -667,10 +1578,20 @@ Wall time: 444 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;data&#39;, &#39;ds&#39;, &#39;filepath&#39;]
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tana</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Observation_Class</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;      t&#39; &#39;      t&#39; &#39;      t&#39; ... &#39;      t&#39; &#39;      t&#39; &#39;      t&#39;]
 </pre></div>
 </div>
 </div>
@@ -688,6 +1609,377 @@ Wall time: 444 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Station_ID</th>
+      <th>Observation_Class</th>
+      <th>Observation_Type</th>
+      <th>Observation_Subtype</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Station_Elevation</th>
+      <th>Pressure</th>
+      <th>Height</th>
+      <th>Time</th>
+      <th>Prep_QC_Mark</th>
+      <th>Setup_QC_Mark</th>
+      <th>Prep_Use_Flag</th>
+      <th>Analysis_Use_Flag</th>
+      <th>Nonlinear_QC_Rel_Wgt</th>
+      <th>Errinv_Input</th>
+      <th>Errinv_Adjust</th>
+      <th>Errinv_Final</th>
+      <th>Observation</th>
+      <th>Obs_Minus_Forecast_adjusted</th>
+      <th>Obs_Minus_Forecast_unadjusted</th>
+      <th>Data_Pof</th>
+      <th>Data_Vertical_Velocity</th>
+      <th>Bias_Correction_1</th>
+      <th>Bias_Correction_2</th>
+      <th>Bias_Correction_3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AU0330</td>
+      <td>t</td>
+      <td>131</td>
+      <td>0</td>
+      <td>30.026100</td>
+      <td>236.154800</td>
+      <td>12400.0</td>
+      <td>181.500000</td>
+      <td>12400.0</td>
+      <td>-0.91944</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>101.0</td>
+      <td>-1.0</td>
+      <td>4.0</td>
+      <td>1.029786</td>
+      <td>1.029786</td>
+      <td>1.029786e+00</td>
+      <td>207.149994</td>
+      <td>-1.627310</td>
+      <td>-1.627310</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AU0330</td>
+      <td>t</td>
+      <td>131</td>
+      <td>0</td>
+      <td>30.130800</td>
+      <td>236.333405</td>
+      <td>12400.0</td>
+      <td>181.500000</td>
+      <td>12400.0</td>
+      <td>-0.89500</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>101.0</td>
+      <td>-1.0</td>
+      <td>4.0</td>
+      <td>1.029786</td>
+      <td>1.029786</td>
+      <td>1.029786e+00</td>
+      <td>206.949997</td>
+      <td>-1.646028</td>
+      <td>-1.646028</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AU0330</td>
+      <td>t</td>
+      <td>131</td>
+      <td>0</td>
+      <td>30.636900</td>
+      <td>237.190308</td>
+      <td>12400.0</td>
+      <td>181.500000</td>
+      <td>12400.0</td>
+      <td>-0.77833</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>101.0</td>
+      <td>-1.0</td>
+      <td>4.0</td>
+      <td>1.029786</td>
+      <td>1.029786</td>
+      <td>1.029786e+00</td>
+      <td>207.149994</td>
+      <td>-0.819473</td>
+      <td>-0.819473</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>XZRFGAZA</td>
+      <td>t</td>
+      <td>133</td>
+      <td>0</td>
+      <td>34.238998</td>
+      <td>236.003998</td>
+      <td>10669.0</td>
+      <td>238.399994</td>
+      <td>10669.0</td>
+      <td>-0.70000</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>1.130850</td>
+      <td>1.130850</td>
+      <td>1.130850e+00</td>
+      <td>221.649994</td>
+      <td>-0.078072</td>
+      <td>-0.078072</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>XZRFGAZA</td>
+      <td>t</td>
+      <td>133</td>
+      <td>0</td>
+      <td>34.234001</td>
+      <td>235.731003</td>
+      <td>10669.0</td>
+      <td>238.399994</td>
+      <td>10669.0</td>
+      <td>-0.66667</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>1.130850</td>
+      <td>1.130850</td>
+      <td>1.130850e+00</td>
+      <td>221.449997</td>
+      <td>-0.189546</td>
+      <td>-0.189546</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>63560</th>
+      <td>F4586</td>
+      <td>t</td>
+      <td>188</td>
+      <td>0</td>
+      <td>46.589169</td>
+      <td>298.989838</td>
+      <td>47.0</td>
+      <td>1018.400024</td>
+      <td>47.0</td>
+      <td>0.00000</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>101.0</td>
+      <td>-1.0</td>
+      <td>4.0</td>
+      <td>0.250000</td>
+      <td>0.250000</td>
+      <td>1.000000e-10</td>
+      <td>282.049988</td>
+      <td>2.429230</td>
+      <td>2.446748</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>63561</th>
+      <td>F9448</td>
+      <td>t</td>
+      <td>188</td>
+      <td>0</td>
+      <td>46.615002</td>
+      <td>298.967621</td>
+      <td>19.0</td>
+      <td>1021.500000</td>
+      <td>19.0</td>
+      <td>0.00000</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>101.0</td>
+      <td>-1.0</td>
+      <td>4.0</td>
+      <td>0.250000</td>
+      <td>0.250000</td>
+      <td>1.000000e-10</td>
+      <td>278.750000</td>
+      <td>0.310210</td>
+      <td>-1.171543</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>63562</th>
+      <td>F3942</td>
+      <td>t</td>
+      <td>188</td>
+      <td>0</td>
+      <td>46.642830</td>
+      <td>298.998322</td>
+      <td>11.0</td>
+      <td>1022.700012</td>
+      <td>11.0</td>
+      <td>0.00000</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>101.0</td>
+      <td>-1.0</td>
+      <td>4.0</td>
+      <td>0.250000</td>
+      <td>0.250000</td>
+      <td>1.000000e-10</td>
+      <td>280.950012</td>
+      <td>1.367755</td>
+      <td>0.994733</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>63563</th>
+      <td>G0274</td>
+      <td>t</td>
+      <td>188</td>
+      <td>0</td>
+      <td>46.645828</td>
+      <td>299.047485</td>
+      <td>10.0</td>
+      <td>1022.700012</td>
+      <td>10.0</td>
+      <td>0.00000</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>101.0</td>
+      <td>-1.0</td>
+      <td>4.0</td>
+      <td>0.250000</td>
+      <td>0.250000</td>
+      <td>1.000000e-10</td>
+      <td>282.049988</td>
+      <td>2.479401</td>
+      <td>2.336636</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+    <tr>
+      <th>63564</th>
+      <td>F2780</td>
+      <td>t</td>
+      <td>188</td>
+      <td>0</td>
+      <td>46.824669</td>
+      <td>299.187317</td>
+      <td>42.0</td>
+      <td>1019.000000</td>
+      <td>42.0</td>
+      <td>0.00000</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>101.0</td>
+      <td>-1.0</td>
+      <td>4.0</td>
+      <td>0.250000</td>
+      <td>0.250000</td>
+      <td>1.000000e-10</td>
+      <td>280.950012</td>
+      <td>2.195708</td>
+      <td>0.297975</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+      <td>-9.990000e+09</td>
+    </tr>
+  </tbody>
+</table>
+<p>63565 rows × 26 columns</p>
+</div></div></div>
 </div>
 </section>
 <section id="plot-histrogram">
@@ -704,6 +1996,9 @@ Wall time: 444 ms
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/54069f1afdaa12b486c4680da8941caf221c2733a7bfb242bafb0e37a8f7a2ac.png" src="../_images/54069f1afdaa12b486c4680da8941caf221c2733a7bfb242bafb0e37a8f7a2ac.png" />
 </div>
 </div>
 </section>
@@ -755,6 +2050,28 @@ Wall time: 444 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OMA: bias=0.0242 rms=1.2549
+OMB: bias=0.2107 rms=1.4361
+Overall fit_rate: 12.6145%
+0, -1000, 1.2516, 1.7449, 28.2731%
+1, 0, 1.6060, 1.8412, 12.7736%
+2, 1000, 0.8703, 1.1811, 26.3083%
+3, 2000, 0.7375, 1.0638, 30.6658%
+4, 3000, 0.7399, 0.9380, 21.1196%
+5, 4000, 0.7347, 0.9778, 24.8696%
+6, 5000, 1.2334, 1.5148, 18.5773%
+7, 6000, 1.4749, 1.6529, 10.7703%
+8, 7000, 1.7494, 1.8635, 6.1250%
+9, 8000, 1.5833, 1.6431, 3.6373%
+10, 9000, 0.6370, 0.7869, 19.0587%
+11, 10000, 1.7016, 1.7773, 4.2578%
+12, 11000, 0.7794, 0.9396, 17.0520%
+13, 12000, 1.0761, 1.5041, 28.4568%
+</pre></div>
+</div>
+<img alt="../_images/7d5f8b172859bf7a5c606a117b0a1ad1e93738d97c02d66aa9987ad29666bfb6.png" src="../_images/7d5f8b172859bf7a5c606a117b0a1ad1e93738d97c02d66aa9987ad29666bfb6.png" />
+</div>
 </div>
 </section>
 <section id="for-reference-check-diag-file-contents-using-netcdf4-directly">
@@ -763,6 +2080,11 @@ Wall time: 444 ms
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">=</span><span class="n">Dataset</span><span class="p">(</span><span class="n">diag_ana</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="n">query_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Station_ID, Observation_Class, Observation_Type, Observation_Subtype, Latitude, Longitude, Station_Elevation, Pressure, Height, Time, Prep_QC_Mark, Setup_QC_Mark, Prep_Use_Flag, Analysis_Use_Flag, Nonlinear_QC_Rel_Wgt, Errinv_Input, Errinv_Adjust, Errinv_Final, Observation, Obs_Minus_Forecast_adjusted, Obs_Minus_Forecast_unadjusted, Data_Pof, Data_Vertical_Velocity, Bias_Correction_Terms
 </pre></div>
 </div>
 </div>
@@ -776,10 +2098,49 @@ Wall time: 444 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Station_ID (63565, 8)
+Observation_Class (63565, 7)
+Observation_Type (63565,)
+Observation_Subtype (63565,)
+Latitude (63565,)
+Longitude (63565,)
+Station_Elevation (63565,)
+Pressure (63565,)
+Height (63565,)
+Time (63565,)
+Prep_QC_Mark (63565,)
+Setup_QC_Mark (63565,)
+Prep_Use_Flag (63565,)
+Analysis_Use_Flag (63565,)
+Nonlinear_QC_Rel_Wgt (63565,)
+Errinv_Input (63565,)
+Errinv_Adjust (63565,)
+Errinv_Final (63565,)
+Observation (63565,)
+Obs_Minus_Forecast_adjusted (63565,)
+Obs_Minus_Forecast_unadjusted (63565,)
+Data_Pof (63565,)
+Data_Vertical_Velocity (63565,)
+Bias_Correction_Terms (63565, 3)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;Bias_Correction_Terms&quot;</span><span class="p">][:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-9.99e+09 -9.99e+09 -9.99e+09]
+ [-9.99e+09 -9.99e+09 -9.99e+09]
+ [-9.99e+09 -9.99e+09 -9.99e+09]
+ ...
+ [-9.99e+09 -9.99e+09 -9.99e+09]
+ [-9.99e+09 -9.99e+09 -9.99e+09]
+ [-9.99e+09 -9.99e+09 -9.99e+09]]
 </pre></div>
 </div>
 </div>
@@ -798,6 +2159,11 @@ Wall time: 444 ms
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;Data_Pof&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
 </pre></div>
 </div>
 </div>

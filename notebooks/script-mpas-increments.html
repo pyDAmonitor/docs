@@ -434,42 +434,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`
-CPU times: user 7.96 ms, sys: 20.3 ms, total: 28.2 ms
-Wall time: 27.5 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/gpfs/f6/arfs-gsl/world-shared/gge/tmp/pyDAmonitor
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"># autoload external python modules if they changed</span><span class="se">\n</span><span class="si">%lo</span><span class="s1">ad_ext autoreload</span><span class="se">\n</span><span class="si">%a</span><span class="s1">utoreload 2</span><span class="se">\n\n</span><span class="s1">import sys, os</span><span class="se">\n</span><span class="s1">pyDAmonitor_ROOT=os.getenv(&quot;pyDAmonitor_ROOT&quot;)</span><span class="se">\n</span><span class="s1">if pyDAmonitor_ROOT is None:</span><span class="se">\n</span><span class="s1">    print(&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;)</span><span class="se">\n</span><span class="s1">else:</span><span class="se">\n</span><span class="s1">    print(f&quot;pyDAmonitor_ROOT=</span><span class="si">{pyDAmonitor_ROOT}</span><span class="se">\\</span><span class="s1">n&quot;)</span><span class="se">\n</span><span class="s1">sys.path.insert(0, pyDAmonitor_ROOT)</span><span class="se">\n\n</span><span class="s1">from DAmonitor.base import load_figs</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/interactiveshell.py:2565,</span> in <span class="ni">InteractiveShell.run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2563</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2564</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2565</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2567</span> <span class="c1"># The code below prevents the output from being displayed</span>
-<span class="g g-Whitespace">   </span><span class="mi">2568</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
-<span class="g g-Whitespace">   </span><span class="mi">2569</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2570</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1470,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1468</span> <span class="k">if</span> <span class="n">interrupt_occured</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1469</span>     <span class="k">if</span> <span class="n">exit_on_interrupt</span> <span class="ow">and</span> <span class="n">captured_exception</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1470</span>         <span class="k">raise</span> <span class="n">captured_exception</span>
-<span class="g g-Whitespace">   </span><span class="mi">1471</span>     <span class="k">return</span>
-<span class="g g-Whitespace">   </span><span class="mi">1472</span> <span class="k">return</span> <span class="n">out</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1434,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1432</span> <span class="n">st</span> <span class="o">=</span> <span class="n">clock2</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1433</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1434</span>     <span class="n">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">glob</span><span class="p">,</span> <span class="n">local_ns</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1436</span>     <span class="c1"># multi-line %%time case</span>
-
-<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">13</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;DAmonitor&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.25 s, sys: 111 ms, total: 7.36 s
+Wall time: 301 ms
 </pre></div>
 </div>
 </div>
@@ -484,6 +453,12 @@ Wall time: 27.5 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3.82 s, sys: 1.61 s, total: 5.43 s
+Wall time: 5.79 s
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="load-the-generate-figures-vertical-profiles-and-vertical-cross-sections">
@@ -494,6 +469,10 @@ Wall time: 27.5 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/1a3fc638f09b57274796c4ae2006ca87452be8a71d6751c73cc47911bf92349e.png" src="../_images/1a3fc638f09b57274796c4ae2006ca87452be8a71d6751c73cc47911bf92349e.png" />
+<img alt="../_images/60e2c8d2ac64d54b9db08de318408268cf9c5849dd152fc440f3b1fdf2aa2894.png" src="../_images/60e2c8d2ac64d54b9db08de318408268cf9c5849dd152fc440f3b1fdf2aa2894.png" />
+</div>
 </div>
 </section>
 <section id="cat-the-content-of-scripts-vertical-profile-mpasjedi-py">
@@ -501,6 +480,221 @@ Wall time: 27.5 ms
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span><span class="nv">$pyDAmonitor_ROOT</span>/scripts/vertical_profile_mpasjedi.py
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>#!/usr/bin/env python
+import warnings
+import os
+from netCDF4 import Dataset
+import numpy as np
+import matplotlib.pyplot as plt
+# import xarray as xr
+import colormap
+import matplotlib
+matplotlib.use(&#39;agg&#39;)
+warnings.filterwarnings(&#39;ignore&#39;)
+pyDAmonitor_ROOT = os.getenv(&quot;pyDAmonitor_ROOT&quot;)
+
+
+def plot_inc(var_inc, decimal=3):
+    max_inc = np.around(np.max(var_inc), decimal)
+    min_inc = np.around(np.min(var_inc), decimal)
+    # decide the color contours based on the increment values
+    clevmax = max((abs(max_inc), abs(min_inc)))
+    inc = 0.05 * clevmax
+    clevs = np.arange(-1.0 * clevmax, 1.0 * clevmax + inc, inc)
+    cm = colormap.diff_colormap(clevs)
+    return clevs, cm
+
+# plot cross section
+
+
+def cross_section(latlon, levs, var, clevs, cm, title, xlab, ylab, cblab, invert_y=0):
+    fig = plt.figure(figsize=(8, 8))
+    ct = plt.contourf(latlon, levs, var, clevs, cmap=cm, extend=&#39;both&#39;)
+    plt.xlabel(xlab, size=14)
+    plt.ylabel(ylab, size=14)
+    plt.title(title)
+    if (invert_y == 1):
+        plt.gca().invert_yaxis()  # optional, depending on your z direction
+
+    # Add colorbar
+    cbar = fig.colorbar(ct, orientation=&quot;horizontal&quot;, fraction=0.046, pad=0.1)
+    cbar.set_label(cblab, size=14)
+    cbar.ax.tick_params(labelsize=10, rotation=30)
+    plt.grid(True)
+    plt.tight_layout()
+    # plt.show()
+
+
+def get_Index(axis, target, lats, lons, tolerance=0.2):
+    if (axis == &#39;latitude&#39;):
+        value = target  # the constant lat value
+        mask = np.abs(lats - value) &lt; tolerance
+        sort_idx = np.argsort(lons[mask])
+        # coord = lons[mask][sort_idx]
+    else:
+        value = target  # the constant lon value
+        mask = np.abs(lons - value) &lt; tolerance
+        sort_idx = np.argsort(lats[mask])
+        # coord = lats[mask][sort_idx]
+
+    return mask, sort_idx
+
+
+def main():
+    # janalysis = &quot;/scratch1/BMC/wrfruc/jjhu/rundir/wrkflow-test/Btuning/2024050601_lbc/uv233/singleob_rh4rv0_avgheight_std14/mpasin.nc&quot;
+    # jbackgrnd = &quot;/scratch1/BMC/wrfruc/jjhu/rundir/wrkflow-test/Btuning/2024050601_tuneB/bkg/mpasout.2024-05-06_01.00.00.nc&quot;
+    # jstatic = &quot;/scratch1/BMC/wrfruc/jjhu/rundir/wrkflow-test/Btuning/2024050601_tuneB/invariant.nc&quot;
+
+    janalysis = f&quot;{pyDAmonitor_ROOT}/data/mpasjedi/ana.nc&quot;
+    jbackgrnd = f&quot;{pyDAmonitor_ROOT}/data/mpasjedi/bkg.nc&quot;
+    jstatic = f&quot;{pyDAmonitor_ROOT}/data/mpasjedi/invariant.nc&quot;
+
+    figdir = &quot;./&quot;
+
+    # varible to plot
+    variable = &quot;U&quot;
+
+    target_lat, target_lon = 36.265, -95.145
+
+    # Open NETCDF4 dataset for reading
+    nc_a = Dataset(janalysis, mode=&#39;r&#39;)
+    nc_b = Dataset(jbackgrnd, mode=&#39;r&#39;)
+    f_latlon = Dataset(jstatic, &quot;r&quot;)
+
+    # read lat,lon information
+    lats = np.array(f_latlon.variables[&#39;latCell&#39;][:]) * 180.0 / np.pi  # Latitude of cells, rad
+    lons0 = np.array(f_latlon.variables[&#39;lonCell&#39;][:]) * 180.0 / np.pi  # Longitude of cells, rad
+    lons = np.where(lons0 &gt; 180.0, lons0 - 360.0, lons0)
+    # z = f_latlon.variables[&#39;zgrid&#39;][:]  # Geometric height of layer interfaces, m MSL
+
+    # Grab variables
+    if variable == &quot;T&quot;:  # Convert to temperature
+        unit = &quot;K&quot;
+        jedi_a = nc_a.variables[&quot;theta&quot;][0, :, :].astype(np.float64)  # (Time, nCells, nVertLevels)
+        jedi_b = nc_b.variables[&quot;theta&quot;][0, :, :].astype(np.float64)
+        pres_a = (nc_a.variables[&#39;pressure_p&#39;][0, :, :] + nc_b[&#39;pressure_base&#39;][0, :, :])/100.0
+        pres_b = (nc_b.variables[&#39;pressure_p&#39;][0, :, :] + nc_b[&#39;pressure_base&#39;][0, :, :])/100.0
+        dividend_a = (1000.0/pres_a)**(0.286)
+        dividend_b = (1000.0/pres_b)**(0.286)
+        jedi_a = jedi_a / dividend_a
+        jedi_b = jedi_b / dividend_b
+
+    if variable == &quot;Q&quot;:
+        unit = &quot;mg/kg&quot;
+        jedi_a = nc_a.variables[&#39;qv&#39;][0, :, :] * 1000000.0
+        jedi_b = nc_b.variables[&#39;qv&#39;][0, :, :] * 1000000.0
+
+    if variable == &quot;U&quot;:
+        unit = &quot;m/s&quot;
+        jedi_a = nc_a.variables[&#39;uReconstructZonal&#39;][0, :, :]
+        jedi_b = nc_b.variables[&#39;uReconstructZonal&#39;][0, :, :]
+    if variable == &quot;V&quot;:
+        unit = &quot;m/s&quot;
+        jedi_a = nc_a.variables[&#39;uReconstructMeridional&#39;][0, :, :]
+        jedi_b = nc_b.variables[&#39;uReconstructMeridional&#39;][0, :, :]
+
+    pres_b = (nc_b.variables[&#39;pressure_p&#39;][0, :, :] + nc_b[&#39;pressure_base&#39;][0, :, :])/100.0  # pressure profile
+    vlevs = np.arange(1, jedi_a.shape[1]+1)  # model vertical levels
+    jedi_inc = jedi_a - jedi_b  # the increment
+
+    # ------------------- the vertical profile begin -----------------
+    # The nearest grid cell to the desired lat/lon
+    dist = np.sqrt((lats - target_lat)**2 + (lons - target_lon)**2)
+    idx = np.argmin(dist)
+
+    # get 1-d vertical profile at the target lat/lon
+    jedi_inc_z = jedi_inc[idx, :]
+    pres_z = pres_b[idx, :]
+
+    # plot against pressures
+    plt.plot(jedi_inc_z, pres_z)
+    xlab = f&quot;{variable}_inc [{unit}]&quot;
+    plt.xlabel(xlab)
+    plt.ylabel(&quot;Pressure (hPa)&quot;)
+    plt.title(f&quot;Vertical distribution at lat={target_lat}, lon={target_lon}&quot;)
+    plt.gca().invert_yaxis()  # optional, depending on your z direction
+    plt.grid()
+    plt.tight_layout()
+    plt.savefig(f&#39;{figdir}/{variable}_inc_p.png&#39;)
+    plt.close()
+
+    # plot against model leves
+    plt.plot(jedi_inc_z, vlevs)
+    plt.xlabel(xlab)
+    plt.ylabel(&quot;Vertical Level&quot;)
+    plt.title(f&quot;Vertical distribution at lat={target_lat}, lon={target_lon}&quot;)
+    plt.grid()
+    plt.tight_layout()
+    plt.savefig(f&#39;{figdir}/{variable}_inc_z.png&#39;)
+    plt.close()
+    # ------------------- the vertical profile end -----------------
+
+    # ------------------ longitude-pressure(/levels) cross section begin -----------------
+    # transpose
+    jedi_inc_T = jedi_inc.T
+    pres_T = pres_b.T  # pressure levels
+
+    clevs, cm = plot_inc(jedi_inc)
+
+    axis = &#39;latitude&#39;
+    mask1, sort_idx1 = get_Index(axis, target_lat, lats, lons)
+    latlon = lons[mask1][sort_idx1]
+
+    jedi_inc_xz = jedi_inc_T[:, mask1][:, sort_idx1]  # shape: (nLevels, nCrossPoints)
+    pres_xz = pres_T[:, mask1][:, sort_idx1]          # height (same shape)
+
+    title = f&quot;X-Z Cross section of {variable}_inc [{unit}]  at lat={target_lat}&quot;
+    xlab = &quot;Longitudes&quot;
+    cblab = f&quot;{variable}_inc [{unit}]&quot;
+    vaxis = vlevs  # against vertical levels
+    ylab = &quot;Vertical Level&quot;
+    cross_section(latlon, vaxis, jedi_inc_xz, clevs, cm, title, xlab, ylab, cblab, 0)
+    plt.tight_layout()
+    plt.savefig(f&#39;{figdir}/{variable}_inc_xz.png&#39;)
+    plt.close()
+
+    ylab = &quot;Pressure (hPa)&quot;
+    vaxis = pres_xz.mean(axis=1)
+    cross_section(latlon, vaxis, jedi_inc_xz, clevs, cm, title, xlab, ylab, cblab, 1)
+    plt.tight_layout()
+    plt.savefig(f&#39;{figdir}/{variable}_inc_xp.png&#39;)
+    plt.close()
+    # ------------------ longitude-pressure(/levels) cross section end -----------------
+
+    # ------------------ latitude-pressure(/levels) cross section begin -----------------
+    # make latitude-pressure(/levels) cross section
+    axis = &#39;longitude&#39;
+    mask2, sort_idx2 = get_Index(axis, target_lon, lats, lons)
+
+    jedi_inc_yz = jedi_inc_T[:, mask2][:, sort_idx2]      # shape: (nLevels, nCrossPoints)
+    pres_yz = pres_T[:, mask2][:, sort_idx2]          # height (same shape)
+    latlon = lats[mask2][sort_idx2]
+
+    title = f&quot;Y-Z Cross section of {variable}_inc [{unit}]  at lat={target_lat}&quot;
+    xlab = &quot;Latitudes&quot;
+    cblab = f&quot;{variable}_inc [{unit}]&quot;
+    vaxis = vlevs  # against vertical levels
+    ylab = &quot;Vertical Level&quot;
+    cross_section(latlon, vaxis, jedi_inc_yz, clevs, cm, title, xlab, ylab, cblab, 0)
+    plt.tight_layout()
+    plt.savefig(f&#39;{figdir}/{variable}_inc_yz.png&#39;)
+    plt.close()
+
+    ylab = &quot;Pressure (hPa)&quot;
+    vaxis = pres_yz.mean(axis=1)
+    cross_section(latlon, vaxis, jedi_inc_yz, clevs, cm, title, xlab, ylab, cblab, 1)
+    plt.tight_layout()
+    plt.savefig(f&#39;{figdir}/{variable}_inc_yp.png&#39;)
+    plt.close()
+    # ------------------ latitude-pressure(/levels) cross section end -----------------
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
 </pre></div>
 </div>
 </div>

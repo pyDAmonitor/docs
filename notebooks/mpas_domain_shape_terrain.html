@@ -440,9 +440,10 @@ Adapted from Sijie Pan’s <code class="docutils literal notranslate"><span clas
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`
-CPU times: user 1.2 ms, sys: 27.1 ms, total: 28.4 ms
-Wall time: 27.6 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDAmonitor_ROOT=/gpfs/f6/arfs-gsl/world-shared/gge/tmp/pyDAmonitor
+
+CPU times: user 10.6 ms, sys: 17.4 ms, total: 28.1 ms
+Wall time: 27.2 ms
 </pre></div>
 </div>
 </div>
@@ -465,150 +466,8 @@ Wall time: 27.6 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 6.68 s, sys: 27.6 ms, total: 6.71 s
-Wall time: 115 ms
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;import numpy as np</span><span class="se">\n</span><span class="s1">from netCDF4 import Dataset</span><span class="se">\n\n</span><span class="s1">import matplotlib.pyplot as plt</span><span class="se">\n</span><span class="s1">import matplotlib as mpl</span><span class="se">\n</span><span class="s1">import cartopy</span><span class="se">\n</span><span class="s1">import cartopy.crs as ccrs</span><span class="se">\n</span><span class="s1">import cartopy.feature as cfeature</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/interactiveshell.py:2565,</span> in <span class="ni">InteractiveShell.run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2563</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2564</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2565</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2567</span> <span class="c1"># The code below prevents the output from being displayed</span>
-<span class="g g-Whitespace">   </span><span class="mi">2568</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
-<span class="g g-Whitespace">   </span><span class="mi">2569</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
-<span class="g g-Whitespace">   </span><span class="mi">2570</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1470,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1468</span> <span class="k">if</span> <span class="n">interrupt_occured</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1469</span>     <span class="k">if</span> <span class="n">exit_on_interrupt</span> <span class="ow">and</span> <span class="n">captured_exception</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1470</span>         <span class="k">raise</span> <span class="n">captured_exception</span>
-<span class="g g-Whitespace">   </span><span class="mi">1471</span>     <span class="k">return</span>
-<span class="g g-Whitespace">   </span><span class="mi">1472</span> <span class="k">return</span> <span class="n">out</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1434,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1432</span> <span class="n">st</span> <span class="o">=</span> <span class="n">clock2</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1433</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1434</span>     <span class="n">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">glob</span><span class="p">,</span> <span class="n">local_ns</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1436</span>     <span class="c1"># multi-line %%time case</span>
-
-<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">4</span>
-
-<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1299</span>
-<span class="g g-Whitespace">   </span><span class="mi">1295</span>     <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;backend_fallback&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="g g-Whitespace">   </span><span class="mi">1298</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MPLBACKEND&#39;</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1299</span>     <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;backend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;MPLBACKEND&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1302</span> <span class="k">def</span><span class="w"> </span><span class="nf">get_backend</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">auto_select</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1303</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1304</span><span class="sd">     Return the name of the current backend.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1305</span><span class="sd"> </span>
-<span class="sd">   (...)   1323     matplotlib.use</span>
-<span class="g g-Whitespace">   </span><span class="mi">1324</span><span class="sd">     &quot;&quot;&quot;</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/matplotlib/__init__.py:772,</span> in <span class="ni">RcParams.__setitem__</span><span class="nt">(self, key, val)</span>
-<span class="g g-Whitespace">    </span><span class="mi">770</span>             <span class="k">return</span>
-<span class="g g-Whitespace">    </span><span class="mi">771</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">772</span>     <span class="n">cval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">[</span><span class="n">key</span><span class="p">](</span><span class="n">val</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">773</span> <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">ve</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">774</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">ve</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/matplotlib/rcsetup.py:273,</span> in <span class="ni">validate_backend</span><span class="nt">(s)</span>
-<span class="g g-Whitespace">    </span><span class="mi">272</span> <span class="k">def</span><span class="w"> </span><span class="nf">validate_backend</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">273</span>     <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="n">_auto_backend_sentinel</span> <span class="ow">or</span> <span class="n">backend_registry</span><span class="o">.</span><span class="n">is_valid_backend</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">274</span>         <span class="k">return</span> <span class="n">s</span>
-<span class="g g-Whitespace">    </span><span class="mi">275</span>     <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/matplotlib/backends/registry.py:244,</span> in <span class="ni">BackendRegistry.is_valid_backend</span><span class="nt">(self, backend)</span>
-<span class="g g-Whitespace">    </span><span class="mi">241</span>     <span class="k">return</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">243</span> <span class="c1"># Only load entry points if really need to and not already done so.</span>
-<span class="ne">--&gt; </span><span class="mi">244</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_entry_points_loaded</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">245</span> <span class="k">if</span> <span class="n">backend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_backend_to_gui_framework</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="k">return</span> <span class="kc">True</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/matplotlib/backends/registry.py:116,</span> in <span class="ni">BackendRegistry._ensure_entry_points_loaded</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span> <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_entry_points_loaded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">114</span>     <span class="c1"># Load entry points, if they have not already been loaded.</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span>     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_entry_points</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">116</span>         <span class="n">entries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_entry_points</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">117</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_validate_and_store_entry_points</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_loaded_entry_points</span> <span class="o">=</span> <span class="kc">True</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/matplotlib/backends/registry.py:136,</span> in <span class="ni">BackendRegistry._read_entry_points</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="k">def</span><span class="w"> </span><span class="nf">_read_entry_points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">129</span>     <span class="c1"># Read entry points of modules that self-advertise as Matplotlib backends.</span>
-<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="c1"># Expects entry points like this one from matplotlib-inline (in pyproject.toml</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span>     <span class="c1"># format):</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span>     <span class="c1">#   [project.entry-points.&quot;matplotlib.backend&quot;]</span>
-<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="c1">#   inline = &quot;matplotlib_inline.backend_inline&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="kn">import</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">im</span>
-<span class="ne">--&gt; </span><span class="mi">136</span>     <span class="n">entry_points</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">entry_points</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s2">&quot;matplotlib.backend&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="n">entries</span> <span class="o">=</span> <span class="p">[(</span><span class="n">entry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entry_points</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>     <span class="c1"># For backward compatibility, if matplotlib-inline and/or ipympl are installed</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span>     <span class="c1"># but too old to include entry points, create them. Do not import ipympl</span>
-<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="c1"># directly as this calls matplotlib.use() whilst in this function.</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:1041,</span> in <span class="ni">entry_points</span><span class="nt">(**params)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1022</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Return EntryPoint objects for all installed packages.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1023</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1024</span><span class="sd"> Pass selection parameters (group or name) to filter the</span>
-<span class="sd">   (...)   1036 :return: EntryPoints or SelectableGroups for all installed packages.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1037</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1038</span> <span class="n">eps</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span>
-<span class="nn">   1039     dist.entry_points for dist</span> in <span class="ni">_unique(distributions</span><span class="nt">())</span>
-<span class="g g-Whitespace">   </span><span class="mi">1040</span> <span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">1041</span> <span class="k">return</span> <span class="n">SelectableGroups</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:476,</span> in <span class="ni">SelectableGroups.load</span><span class="nt">(cls, eps)</span>
-<span class="g g-Whitespace">    </span><span class="mi">473</span> <span class="nd">@classmethod</span>
-<span class="g g-Whitespace">    </span><span class="mi">474</span> <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">eps</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">475</span>     <span class="n">by_group</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">attrgetter</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">476</span>     <span class="n">ordered</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">by_group</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="n">grouped</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">ordered</span><span class="p">,</span> <span class="n">by_group</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="k">return</span> <span class="bp">cls</span><span class="p">((</span><span class="n">group</span><span class="p">,</span> <span class="n">EntryPoints</span><span class="p">(</span><span class="n">eps</span><span class="p">))</span> <span class="k">for</span> <span class="n">group</span><span class="p">,</span> <span class="n">eps</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">)</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:1038,</span> in <span class="ni">&lt;genexpr&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1021</span> <span class="k">def</span><span class="w"> </span><span class="nf">entry_points</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">EntryPoints</span><span class="p">,</span> <span class="n">SelectableGroups</span><span class="p">]:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1022</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Return EntryPoint objects for all installed packages.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1023</span><span class="sd"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1024</span><span class="sd">     Pass selection parameters (group or name) to filter the</span>
-<span class="sd">   (...)   1036     :return: EntryPoints or SelectableGroups for all installed packages.</span>
-<span class="g g-Whitespace">   </span><span class="mi">1037</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1038</span>     <span class="n">eps</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span>
-<span class="nn">   1039         dist.entry_points for dist</span> in <span class="ni">_unique(distributions</span><span class="nt">())</span>
-<span class="g g-Whitespace">   </span><span class="mi">1040</span>     <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1041</span>     <span class="k">return</span> <span class="n">SelectableGroups</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/_itertools.py:15,</span> in <span class="ni">unique_everseen</span><span class="nt">(iterable, key)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>         <span class="k">yield</span> <span class="n">element</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">15</span>     <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="n">k</span> <span class="o">=</span> <span class="n">key</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:915,</span> in <span class="ni">&lt;genexpr&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">    </span><span class="mi">912</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Find metadata directories in paths heuristically.&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">913</span> <span class="n">prepared</span> <span class="o">=</span> <span class="n">Prepared</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">914</span> <span class="k">return</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span>
-<span class="nn">--&gt; 915     path.search(prepared) for path</span> in <span class="ni">map</span><span class="nt">(FastPath, paths)</span>
-<span class="g g-Whitespace">    </span><span class="mi">916</span> <span class="p">)</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:813,</span> in <span class="ni">FastPath.search</span><span class="nt">(self, name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">812</span> <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">813</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mtime</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-
-<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:818,</span> in <span class="ni">FastPath.mtime</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">815</span> <span class="nd">@property</span>
-<span class="g g-Whitespace">    </span><span class="mi">816</span> <span class="k">def</span><span class="w"> </span><span class="nf">mtime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">817</span>     <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">OSError</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">818</span>         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">st_mtime</span>
-<span class="g g-Whitespace">    </span><span class="mi">819</span>     <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
-
-<span class="ne">TypeError</span>: stat: path should be string, bytes, os.PathLike or integer, not NoneType
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.3 s, sys: 53.9 ms, total: 7.36 s
+Wall time: 297 ms
 </pre></div>
 </div>
 </div>
@@ -692,6 +551,13 @@ Wall time: 115 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/8705a543b7fd4a48920193030e7d708ffedbd8fb5bd799bad85616801f8c55dc.png" src="../_images/8705a543b7fd4a48920193030e7d708ffedbd8fb5bd799bad85616801f8c55dc.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 21.3 s, sys: 132 ms, total: 21.4 s
+Wall time: 21.5 s
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="plot-the-ar3-5km-domain-shape">
@@ -719,6 +585,9 @@ Wall time: 115 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/f10e0021743264d1f73c3d13791d6acffd8d55052bc34d02be9949e526752a28.png" src="../_images/f10e0021743264d1f73c3d13791d6acffd8d55052bc34d02be9949e526752a28.png" />
+</div>
 </div>
 </section>
 <section id="plot-the-ar3-5km-domain-terrain">
@@ -745,6 +614,9 @@ Wall time: 115 ms
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">mpas_llc_scatter</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">ref_lat</span><span class="p">,</span> <span class="n">ref_lon</span><span class="p">,</span> <span class="n">trulat1</span><span class="p">,</span> <span class="n">trulat2</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/55b2ec517eeac5a3eb4cfeb0d4c6f96a67cad5fc720bfb0d5802a1b18e4bc5e4.png" src="../_images/55b2ec517eeac5a3eb4cfeb0d4c6f96a67cad5fc720bfb0d5802a1b18e4bc5e4.png" />
 </div>
 </div>
 </section>
@@ -821,6 +693,13 @@ Wall time: 115 ms
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/1d80f05b038da09491e27eb77c4e57e11f03e8452095479a042fa8e8074a8c88.png" src="../_images/1d80f05b038da09491e27eb77c4e57e11f03e8452095479a042fa8e8074a8c88.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 38 s, sys: 152 ms, total: 38.1 s
+Wall time: 38.1 s
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="plot-the-south3-5km-terrrain">
@@ -843,6 +722,9 @@ Wall time: 115 ms
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">mpas_llc_scatter</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">ref_lat</span><span class="p">,</span> <span class="n">ref_lon</span><span class="p">,</span> <span class="n">trulat1</span><span class="p">,</span> <span class="n">trulat2</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5973618bf1a851f0fdf8f8c97b9e156b3bfc30fbef74e1711f44c8e4d18fa63e.png" src="../_images/5973618bf1a851f0fdf8f8c97b9e156b3bfc30fbef74e1711f44c8e4d18fa63e.png" />
 </div>
 </div>
 </section>
@@ -868,6 +750,9 @@ Wall time: 115 ms
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">mpas_llc_scatter</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">area</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">ref_lat</span><span class="p">,</span> <span class="n">ref_lon</span><span class="p">,</span> <span class="n">trulat1</span><span class="p">,</span> <span class="n">trulat2</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/32e17243ac31822326da95c46b3fec1c5e10b8b4893c89a4b94598cce643d5b5.png" src="../_images/32e17243ac31822326da95c46b3fec1c5e10b8b4893c89a4b94598cce643d5b5.png" />
 </div>
 </div>
 </section>
@@ -958,6 +843,13 @@ Wall time: 115 ms
 <span class="n">variable_scatter</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">terrain</span><span class="p">,</span> <span class="n">plotvar</span><span class="o">=</span><span class="s2">&quot;figure&quot;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">regional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">area</span><span class="o">=</span><span class="p">[</span><span class="n">minlon</span><span class="p">,</span> <span class="n">maxlon</span><span class="p">,</span> <span class="n">minlat</span><span class="p">,</span> <span class="n">maxlat</span><span class="p">],</span> <span class="n">clon</span><span class="o">=-</span><span class="mi">113</span><span class="p">,</span> <span class="n">clat</span><span class="o">=</span><span class="mi">39</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 105 ms, sys: 8 μs, total: 105 ms
+Wall time: 105 ms
+</pre></div>
+</div>
+<img alt="../_images/2fe7b4d478d28dbb0a0e37888ab3e97436266316503ae8b942db3d580b6e5765.png" src="../_images/2fe7b4d478d28dbb0a0e37888ab3e97436266316503ae8b942db3d580b6e5765.png" />
 </div>
 </div>
 </section>
