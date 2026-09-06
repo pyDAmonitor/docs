@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Work with JEDI IODA files &#8212; pyDAmonitor Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/jedi_ioda';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Process and plot JEDI diag (jdiag) results" href="jedi_diag_plots.html" />
+    <link rel="prev" title="plot MPAS model results on the unstructed grid" href="mpas_plotting.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="pyDAmonitor Documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="pyDAmonitor Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to pyDAmonitor!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">notebook example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DA Monitor</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cells.html">1. Find and plot individual MPAS cells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpas_domain_shape_terrain.html">2. Plot MPAS domain shape and terrain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpas_plotting.html">3. Plot MPAS model results on the unstructured grid</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Work with JEDI IODA files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jedi_diag_plots.html">5. Process and plot JEDI diag (jdiag) results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sat-qcfilters.html">6. Work with satellite observations and filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gsi.html">7. Work with GSI diag files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="script-mpas-increments.html">8. Script-MPAS analysis increment profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gsibec_rotated_lonlat_MPAS.html">9. GSIBEC-calculate rotated lon/lat parameters for an MPAS grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polygon_boundary_mpas.html">10. Find MPAS boundary cells and simplify the domain polygon</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pyDAmonitor/pyDAmonitor" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pyDAmonitor/pyDAmonitor/issues/new?title=Issue%20on%20page%20%2Fnotebooks/jedi_ioda.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/jedi_ioda.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Work with JEDI IODA files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">0. Environment Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-raw-netcdf4-interface-to-process-ioda-files">1. Use the raw netCDF4 interface to process ioda files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-structure-of-ioda-files">1.1 Inspecting the Structure of IODA Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-ioda-file-structure">Understanding the IODA File Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-the-metadata-and-acutal-observation-data">1.2 Access the metadata and acutal observation data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note">Note</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-damonitor-class-to-process-ioda-files">2. Use the <strong>DAmonitor</strong> class to process ioda files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damonitor-overview">2.1 DAmonitor Overview</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-method-to-use-damonitor-or-the-raw-method">3. What method to use? DAmonitor or the raw method?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="work-with-jedi-ioda-files">
+<h1>Work with JEDI IODA files<a class="headerlink" href="#work-with-jedi-ioda-files" title="Link to this heading">#</a></h1>
+<br>
+<p>IODA stands for <strong>Interface for Observational Data Access</strong>.</p>
+<p>JEDI can only ingest observatios stored in the IODA format. Therefore, observations from other formats (such as text, PrepBUFR, BUFR, etc.) must first be converted into IODA files before they can be used by JEDI. These observation files are usually referred to as <strong>input IODA files</strong>.</p>
+<p>After data assimilation (DA), JEDI writes both the original observation information and DA-related quantities (e.g., innovations, H(x), quality control flags, and bias corrections) into <strong>output IODA files</strong>.<br />
+In the MPAS and JEDI based wx-workflow (including rrfs-workflow, rtma-workflow, ar-worklfow, etc), these output IODA files are referred to as <strong>jdiag files</strong>.</p>
+<p>This notebook demonstrates how to process both input and output IODA files using the <strong>netCDF4</strong> Python package as well as the <strong>DAmonitor</strong> <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code> class, which provides a more convenient and concise interface than working directly with the raw netCDF4 API.</p>
+<section id="environment-setup">
+<h2>0. Environment Setup<a class="headerlink" href="#environment-setup" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span> 
+
+<span class="c1"># autoload external python modules if they changed</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">pyDAmonitor_ROOT</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;pyDAmonitor_ROOT&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">pyDAmonitor_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pyDAmonitor_ROOT=</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pyDAmonitor_ROOT</span><span class="p">)</span>
+    
+<span class="kn">from</span><span class="w"> </span><span class="nn">DAmonitor.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">query_dataset</span><span class="p">,</span> <span class="n">query_data</span><span class="p">,</span> <span class="n">query_obj</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`
+CPU times: user 7.73 ms, sys: 19.8 ms, total: 27.6 ms
+Wall time: 26.8 ms
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"># autoload external python modules if they changed</span><span class="se">\n</span><span class="si">%lo</span><span class="s1">ad_ext autoreload</span><span class="se">\n</span><span class="si">%a</span><span class="s1">utoreload 2</span><span class="se">\n\n</span><span class="s1">import os, sys</span><span class="se">\n</span><span class="s1">pyDAmonitor_ROOT=os.getenv(&quot;pyDAmonitor_ROOT&quot;)</span><span class="se">\n</span><span class="s1">if pyDAmonitor_ROOT is None:</span><span class="se">\n</span><span class="s1">    print(&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;)</span><span class="se">\n</span><span class="s1">else:</span><span class="se">\n</span><span class="s1">    print(f&quot;pyDAmonitor_ROOT=</span><span class="si">{pyDAmonitor_ROOT}</span><span class="se">\\</span><span class="s1">n&quot;)</span><span class="se">\n</span><span class="s1">sys.path.insert(0, pyDAmonitor_ROOT)</span><span class="se">\n\n</span><span class="s1">from DAmonitor.base import query_dataset, query_data, query_obj</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/interactiveshell.py:2565,</span> in <span class="ni">InteractiveShell.run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2563</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2564</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2565</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2567</span> <span class="c1"># The code below prevents the output from being displayed</span>
+<span class="g g-Whitespace">   </span><span class="mi">2568</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
+<span class="g g-Whitespace">   </span><span class="mi">2569</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2570</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1470,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1468</span> <span class="k">if</span> <span class="n">interrupt_occured</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1469</span>     <span class="k">if</span> <span class="n">exit_on_interrupt</span> <span class="ow">and</span> <span class="n">captured_exception</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1470</span>         <span class="k">raise</span> <span class="n">captured_exception</span>
+<span class="g g-Whitespace">   </span><span class="mi">1471</span>     <span class="k">return</span>
+<span class="g g-Whitespace">   </span><span class="mi">1472</span> <span class="k">return</span> <span class="n">out</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1434,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1432</span> <span class="n">st</span> <span class="o">=</span> <span class="n">clock2</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1433</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1434</span>     <span class="n">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">glob</span><span class="p">,</span> <span class="n">local_ns</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1436</span>     <span class="c1"># multi-line %%time case</span>
+
+<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">13</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;DAmonitor&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="use-the-raw-netcdf4-interface-to-process-ioda-files">
+<h2>1. Use the raw netCDF4 interface to process ioda files<a class="headerlink" href="#use-the-raw-netcdf4-interface-to-process-ioda-files" title="Link to this heading">#</a></h2>
+<section id="inspecting-the-structure-of-ioda-files">
+<h3>1.1 Inspecting the Structure of IODA Files<a class="headerlink" href="#inspecting-the-structure-of-ioda-files" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+
+<span class="n">dcObs</span><span class="o">=</span><span class="p">{</span>
+    <span class="s2">&quot;obs&quot;</span><span class="p">:</span> <span class="s2">&quot;aircar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jdiag&quot;</span><span class="p">:</span> <span class="s2">&quot;t133&quot;</span><span class="p">,</span>
+      <span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------- obs_file --------&quot;</span><span class="p">)</span>
+<span class="n">obs_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="s2">/data/ioda/ioda_</span><span class="si">{</span><span class="n">dcObs</span><span class="p">[</span><span class="s1">&#39;obs&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">obs_file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="n">query_dataset</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>     <span class="c1"># query_dataset is a function provided by DAmonitor to loop through and print all groups/variables information of a NetCDF4 dataset</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">-------- jdiag_file --------&quot;</span><span class="p">)</span>
+<span class="n">jdiag_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="s2">/data/mpasjedi/jdiag_</span><span class="si">{</span><span class="n">dcObs</span><span class="p">[</span><span class="s1">&#39;obs&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">dcObs</span><span class="p">[</span><span class="s1">&#39;jdiag&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">.nc&quot;</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">jdiag_file</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+<span class="n">query_dataset</span><span class="p">(</span><span class="n">ds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="understanding-the-ioda-file-structure">
+<h3>Understanding the IODA File Structure<a class="headerlink" href="#understanding-the-ioda-file-structure" title="Link to this heading">#</a></h3>
+<p>An IODA file is a standard NetCDF4 file and can be opened directly with <code class="docutils literal notranslate"><span class="pre">ds</span> <span class="pre">=</span> <span class="pre">Dataset(obs_file,</span> <span class="pre">mode=&quot;r&quot;)</span></code>.</p>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">print(ds)</span></code> provides a high-level summary of the file, including its dimensions (e.g., 65,847 locations in the input observation file, and 28,039 locations in the jdiag file), groups, and variables.</p>
+<p>From the output above, we can see that an <code class="docutils literal notranslate"><span class="pre">input</span> <span class="pre">IODA</span> <span class="pre">file</span></code> (observation file) contains groups such as <code class="docutils literal notranslate"><span class="pre">MetaData,</span> <span class="pre">ObsError,</span> <span class="pre">ObsType,</span> <span class="pre">ObsValue,</span> <span class="pre">QualityMarker</span></code> along with dimensions such as <code class="docutils literal notranslate"><span class="pre">Location</span></code> (and <code class="docutils literal notranslate"><span class="pre">Channel</span></code> for satellite observations).</p>
+<p>After data assimilation, JEDI writes an <code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">IODA</span> <span class="pre">file</span></code> (commonly called a jdiag file in wx-workflow), which contains the original observation information plus several additional groups that store DA diagnostics, including <code class="docutils literal notranslate"><span class="pre">EffectiveErrorX,</span> <span class="pre">EffectiveQCX,</span> <span class="pre">ObsBiasX,</span> <span class="pre">hofxX,</span> <span class="pre">innov1,</span> <span class="pre">oman,</span> <span class="pre">ombg</span></code> etc.</p>
+<p>These groups have the following meanings:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ombg</span><span class="p">:</span>  <span class="n">observation</span> <span class="o">-</span> <span class="n">background</span>
+<span class="n">oman</span><span class="p">:</span>  <span class="n">observation</span> <span class="o">-</span> <span class="n">analysis</span>
+<span class="n">innova1</span><span class="p">:</span>  <span class="n">observation</span> <span class="o">-</span> <span class="n">first_guess</span> <span class="n">after</span> <span class="n">the</span> <span class="n">first</span> <span class="n">outer</span> <span class="n">loop</span>
+
+<span class="c1"># X = 0, 1, 2, ... indicates the DA outer loops: </span>
+<span class="c1"># 0: before any outer loop </span>
+<span class="c1"># 1: after the first outer loop </span>
+<span class="c1"># 2: after the second outer loop </span>
+<span class="c1"># ...</span>
+
+<span class="n">EffectiveErrorX</span><span class="p">:</span>  <span class="n">effective</span> <span class="n">obs</span> <span class="n">error</span> <span class="n">used</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">inner</span> <span class="n">minimization</span> <span class="n">process</span><span class="p">,</span> <span class="n">see</span> <span class="n">the</span> <span class="n">above</span> <span class="k">for</span> <span class="n">the</span> <span class="n">meaning</span> <span class="n">of</span> <span class="n">X</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">EffectiveQCX</span><span class="p">:</span>  <span class="n">effective</span> <span class="n">QC</span> <span class="n">flag</span>
+<span class="n">ObsBiasX</span><span class="p">:</span>  <span class="n">observation</span> <span class="n">bias</span>
+<span class="n">hofxX</span><span class="p">:</span>  <span class="n">H</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">the</span> <span class="n">non</span><span class="o">-</span><span class="n">linear</span> <span class="n">forward</span> <span class="n">operatior</span> <span class="n">result</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="n">the</span> <span class="n">model</span> <span class="n">counterpart</span> <span class="n">to</span> <span class="n">the</span> <span class="n">observation</span>
+</pre></div>
+</div>
+<p>An <strong>input IODA file</strong> often contains observations for multiple variables (e.g., t, q, uv, etc.),<br />
+whereas a <strong>jdiag file</strong> typically contains DA diagnostics for a single variable. For example, <code class="docutils literal notranslate"><span class="pre">jdiag_aircar_t133.nc</span></code> contains diagnostics only for temperature observations.</p>
+<p>A <strong>jdiag</strong> file may also contains diagnostics for multiple variables if they are assimilated within the same <code class="docutils literal notranslate"><span class="pre">ObsSpace</span></code>. However, in wx-workflow (including rrfs-workflow, rtma-workflow, ar-workflow, etc), the current convention is to configure one <code class="docutils literal notranslate"><span class="pre">ObsSpace</span></code> for each PrepBUFR observation type (i.e., one entry in the <code class="docutils literal notranslate"><span class="pre">convinfo</span></code> file) or for each satellite sensor. As a result, most jdiag files produced by these workflows contain diagnostics for only one single observation variable.</p>
+</section>
+<section id="access-the-metadata-and-acutal-observation-data">
+<h3>1.2 Access the metadata and acutal observation data<a class="headerlink" href="#access-the-metadata-and-acutal-observation-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print the &quot;Location&quot; dimension and its actual content</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;Location&#39;</span><span class="p">][:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print the ObsValue of t (airTemperature) and other variables</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="s2">&quot;ObsValue&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;airTemperature&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;----------------&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="s2">&quot;ObsValue&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;airTemperature&quot;</span><span class="p">][:])</span>  <span class="c1"># actual content</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">groups</span><span class="p">[</span><span class="s2">&quot;ObsValue&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;specificHumidity&quot;</span><span class="p">][:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="note">
+<h3>Note<a class="headerlink" href="#note" title="Link to this heading">#</a></h3>
+<p>The file <code class="docutils literal notranslate"><span class="pre">jdiag_aircar_t133.nc</span></code> contains data assimilation (DA) results only for the <code class="docutils literal notranslate"><span class="pre">aircar_t133</span></code> ObsSpace. Consequently, only <code class="docutils literal notranslate"><span class="pre">ObsValue/airTemperature</span></code> contains valid observation values. All other variables under the <code class="docutils literal notranslate"><span class="pre">ObsValue</span></code> group contain only missing values (i.e., <code class="docutils literal notranslate"><span class="pre">[--</span> <span class="pre">--</span> <span class="pre">--</span> <span class="pre">...</span> <span class="pre">--</span> <span class="pre">--</span> <span class="pre">--]</span></code>).</p>
+</section>
+</section>
+<section id="use-the-damonitor-class-to-process-ioda-files">
+<h2>2. Use the <strong>DAmonitor</strong> class to process ioda files<a class="headerlink" href="#use-the-damonitor-class-to-process-ioda-files" title="Link to this heading">#</a></h2>
+<p>As shown above, accessing metadata and variables in an IODA file using the netCDF4 interface requires navigating through the group/variable hierarchy.<br />
+For example, to read the air temperature observations, you would write: <code class="docutils literal notranslate"><span class="pre">ds.groups[&quot;ObsValue&quot;].variables[&quot;airTemperature&quot;][:]</span></code><br />
+This expression contains 52 characters and can become cumbersome when we access data repeatedly.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">DAmonitor</span></code> class simplifies this process by flattening the IODA group/variable structure and providing direct access to commonly used metadata and variables.<br />
+For example, instead of writing <code class="docutils literal notranslate"><span class="pre">print(ds.groups[&quot;ObsValue&quot;].variables[&quot;specificHumidity&quot;][:])</span></code>, we may simply write <code class="docutils literal notranslate"><span class="pre">print(t133.q.ObsValue)</span></code><br />
+This reduces the access expression from 52 characters to just a few characters, making the code <strong>more concise, readable, and easier to maintain</strong>.</p>
+<section id="damonitor-overview">
+<h3>2.1 DAmonitor Overview<a class="headerlink" href="#damonitor-overview" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">DAmonitor</span></code> consists of several modules, including <code class="docutils literal notranslate"><span class="pre">obs,</span> <span class="pre">mpas,</span> <span class="pre">base,</span> <span class="pre">and</span> <span class="pre">shapes</span></code>, each serving a different purpose:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obs</span></code>: Provides classes and functions for observation-space processing, such as <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code> and <code class="docutils literal notranslate"><span class="pre">fit_rate</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mpas</span></code>: Provides classes and functions for model-space processing, including visualization utilities such as <code class="docutils literal notranslate"><span class="pre">hcross_contour</span></code> and <code class="docutils literal notranslate"><span class="pre">vcross_contour</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">base</span></code>: Provides common utilities, including <code class="docutils literal notranslate"><span class="pre">source,</span> <span class="pre">get_run_directory,</span> <span class="pre">get_inv_bkg_ana_files,</span> <span class="pre">load_inv_bkg_ana,</span> <span class="pre">query_dataset,</span> <span class="pre">query_data,</span> <span class="pre">query_obj,</span> <span class="pre">to_dataframe,</span> <span class="pre">load_figs,</span> <span class="pre">and</span> <span class="pre">aircraft_reject_list_to_df</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shapes</span></code>: Provides geographic features to facilitate plotting, including <code class="docutils literal notranslate"><span class="pre">coast_lines,</span> <span class="pre">state_lines,</span> <span class="pre">counties_gdf,</span> <span class="pre">and</span> <span class="pre">county_lines</span></code>.</p></li>
+</ul>
+<p>In this notebook, we focus on the <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code> class from the <code class="docutils literal notranslate"><span class="pre">obs</span></code> module.</p>
+<p>We can easily load an IODA file into an obsSpace object using <code class="docutils literal notranslate"><span class="pre">obs</span> <span class="pre">=</span> <span class="pre">obsSpace(filename)</span></code> and then inspect the contents (attributes, data, etc) of the object using <code class="docutils literal notranslate"><span class="pre">query_obj(obs)</span></code></p>
+<p>As shown below, an <code class="docutils literal notranslate"><span class="pre">obsSpace</span></code> object may contain the following attributes (the exact set depends on the type of observations in the IODA file):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">filepath</span></code></p></td>
+<td><p>The input file path.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ds</span></code></p></td>
+<td><p>The original <code class="docutils literal notranslate"><span class="pre">netCDF4.Dataset</span></code> object (<code class="docutils literal notranslate"><span class="pre">self.ds</span> <span class="pre">=</span> <span class="pre">Dataset(filepath,</span> <span class="pre">mode='r')</span></code>). You can access the dataset directly just as in Step 1 if needed.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nlocs</span></code></p></td>
+<td><p>The number of locations (records) in the IODA file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">locations</span></code></p></td>
+<td><p>The indices of all locations.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nchannels</span></code></p></td>
+<td><p>The number of channels for a satellite sensor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">channels</span></code></p></td>
+<td><p>The channel numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">groups</span></code></p></td>
+<td><p>The group names contained in the IODA file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">metadata</span></code></p></td>
+<td><p>Stores all variables from the original <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> group for convenient access, in addition to direct dataset access.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t</span></code>, <code class="docutils literal notranslate"><span class="pre">td</span></code>, <code class="docutils literal notranslate"><span class="pre">tv</span></code>, <code class="docutils literal notranslate"><span class="pre">ts</span></code>, <code class="docutils literal notranslate"><span class="pre">u</span></code>, <code class="docutils literal notranslate"><span class="pre">v</span></code>, <code class="docutils literal notranslate"><span class="pre">q</span></code>, <code class="docutils literal notranslate"><span class="pre">rh</span></code>, <code class="docutils literal notranslate"><span class="pre">ps</span></code>, <code class="docutils literal notranslate"><span class="pre">bt</span></code>, <code class="docutils literal notranslate"><span class="pre">rad</span></code>, etc.</p></td>
+<td><p>Observation data for the corresponding variable. These attributes are available only if the variable exists in the IODA file (e.g., <code class="docutils literal notranslate"><span class="pre">rad</span></code> (radiance) is present only in satellite IODA files).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Observation data attributes</p></td>
+<td><p>Each observation data in the above may contain the following attributes: all variables from the <code class="docutils literal notranslate"><span class="pre">Metadata</span></code> group, along with <code class="docutils literal notranslate"><span class="pre">ObsError</span></code>, <code class="docutils literal notranslate"><span class="pre">ObsType</span></code>, <code class="docutils literal notranslate"><span class="pre">ObsValue</span></code>, <code class="docutils literal notranslate"><span class="pre">QualityMarker</span></code>, <code class="docutils literal notranslate"><span class="pre">EffectiveErrorX</span></code>, <code class="docutils literal notranslate"><span class="pre">EffectiveQCX</span></code>, <code class="docutils literal notranslate"><span class="pre">ObsBiasX</span></code>, <code class="docutils literal notranslate"><span class="pre">hofxX</span></code>, <code class="docutils literal notranslate"><span class="pre">innov1</span></code>, <code class="docutils literal notranslate"><span class="pre">oman</span></code>, <code class="docutils literal notranslate"><span class="pre">ombg</span></code>, and others, depending on the contents of the IODA file.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use obsSpace to access an ioda file</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">DAmonitor.obs</span><span class="w"> </span><span class="kn">import</span> <span class="n">obsSpace</span>
+<span class="n">t133</span><span class="o">=</span><span class="n">obsSpace</span><span class="p">(</span><span class="n">jdiag_file</span><span class="p">)</span>   <span class="c1"># t133 is an obsSpace object</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">filepath</span><span class="p">)</span>
+<span class="n">query_obj</span><span class="p">(</span><span class="n">t133</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># query the data  (note: t is an internal object containing a `data` attribute and query_data is intelligent enough to query the `data` attribute directly)</span>
+
+<span class="n">query_data</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># access the actual data</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">stationIdentification</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">aircraftFlightNumber</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">aircraftFlightNumber</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ObsValue</span><span class="p">)</span>
+
+<span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">ObsValue</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check what&#39;s inside EffectiveQc and EffectiveError</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveQC0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveError0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check whether EffectiveError0, EffectiveError1 and EffectiveError2 are the same</span>
+<span class="c1"># Note: They are same for this ioda file and this DA configuration. They may be different in other situations.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveError0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveError1</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveError2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check whether EffectiveQC0, EffectiveQC1 and EffectiveQC2 are the same</span>
+<span class="c1"># Note: They are same for this ioda file and this DA configuration. They may be different in other situations.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveQC0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveQC1</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">t133</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">EffectiveQC2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="what-method-to-use-damonitor-or-the-raw-method">
+<h2>3. What method to use? DAmonitor or the raw method?<a class="headerlink" href="#what-method-to-use-damonitor-or-the-raw-method" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">DAmonitor</span></code> is recommended for working with IODA files, as it provides a higher-level interface that simplifies common tasks and improves code readability. However, the raw method introduced in Section 1 is also accepted.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pydamonitor"
+        },
+        kernelOptions: {
+            name: "pydamonitor",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pydamonitor'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mpas_plotting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">plot MPAS model results on the unstructed grid</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="jedi_diag_plots.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Process and plot JEDI diag (jdiag) results</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-setup">0. Environment Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-raw-netcdf4-interface-to-process-ioda-files">1. Use the raw netCDF4 interface to process ioda files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-structure-of-ioda-files">1.1 Inspecting the Structure of IODA Files</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-ioda-file-structure">Understanding the IODA File Structure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#access-the-metadata-and-acutal-observation-data">1.2 Access the metadata and acutal observation data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note">Note</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-the-damonitor-class-to-process-ioda-files">2. Use the <strong>DAmonitor</strong> class to process ioda files</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#damonitor-overview">2.1 DAmonitor Overview</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-method-to-use-damonitor-or-the-raw-method">3. What method to use? DAmonitor or the raw method?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the pyDAmonitor group
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

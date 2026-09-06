@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>work with GSI diag files &#8212; pyDAmonitor Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/gsi';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="run a script in a notebook to plot analysis increment profile and vertical cross section" href="script-mpas-increments.html" />
+    <link rel="prev" title="plot the QC filter results for satellite DA (cris-fsr)" href="sat-qcfilters.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="pyDAmonitor Documentation - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="pyDAmonitor Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to pyDAmonitor!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preamble</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../markdown.html">Markdown Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../example.html">notebook example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../markdown-notebooks.html">Notebooks with MyST Markdown</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">DA Monitor</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="cells.html">1. Find and plot individual MPAS cells</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpas_domain_shape_terrain.html">2. Plot MPAS domain shape and terrain</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpas_plotting.html">3. Plot MPAS model results on the unstructured grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jedi_ioda.html">4. Work with JEDI IODA files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jedi_diag_plots.html">5. Process and plot JEDI diag (jdiag) results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sat-qcfilters.html">6. Work with satellite observations and filters</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Work with GSI diag files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="script-mpas-increments.html">8. Script-MPAS analysis increment profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gsibec_rotated_lonlat_MPAS.html">9. GSIBEC-calculate rotated lon/lat parameters for an MPAS grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="polygon_boundary_mpas.html">10. Find MPAS boundary cells and simplify the domain polygon</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/pyDAmonitor/pyDAmonitor" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/pyDAmonitor/pyDAmonitor/issues/new?title=Issue%20on%20page%20%2Fnotebooks/gsi.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/gsi.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>work with GSI diag files</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-obsspacegsi-to-read-gsi-diag-files">Use <code class="docutils literal notranslate"><span class="pre">obsSpaceGSI</span></code> to read GSI diag files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-to-pandas-dataframe">convert to Pandas DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histrogram">Plot histrogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-fitting-rate">Plot fitting rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-reference-check-diag-file-contents-using-netcdf4-directly">For reference, check diag file contents using netCDF4 directly</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-shape-ndim-of-each-variable-in-the-netcdf4-dataset">check the shape/ndim of each variable in the netCDF4 dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-attributes">check attributes</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="work-with-gsi-diag-files">
+<h1>work with GSI diag files<a class="headerlink" href="#work-with-gsi-diag-files" title="Link to this heading">#</a></h1>
+<p>This notebook illustreate how to work with GSI diag files using a similar <code class="docutils literal notranslate"><span class="pre">obsSpaceGSI</span></code> class</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span> 
+
+<span class="c1"># autoload external python modules if they changed</span>
+<span class="o">%</span><span class="n">load_ext</span> <span class="n">autoreload</span>
+<span class="o">%</span><span class="n">autoreload</span> <span class="mi">2</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">pyDAmonitor_ROOT</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;pyDAmonitor_ROOT&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">pyDAmonitor_ROOT</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pyDAmonitor_ROOT=</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pyDAmonitor_ROOT</span><span class="p">)</span>
+    
+<span class="c1"># import modules</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">uxarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ux</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>  <span class="c1"># seaborn handles NaN values automatically</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">netCDF4</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">DAmonitor.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">query_dataset</span><span class="p">,</span> <span class="n">query_data</span><span class="p">,</span> <span class="n">query_obj</span><span class="p">,</span> <span class="n">to_dataframe</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 7.26 s, sys: 156 ms, total: 7.41 s
+Wall time: 444 ms
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_cell_magic</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"># autoload external python modules if they changed</span><span class="se">\n</span><span class="si">%lo</span><span class="s1">ad_ext autoreload</span><span class="se">\n</span><span class="si">%a</span><span class="s1">utoreload 2</span><span class="se">\n\n</span><span class="s1">import os, sys</span><span class="se">\n</span><span class="s1">pyDAmonitor_ROOT=os.getenv(&quot;pyDAmonitor_ROOT&quot;)</span><span class="se">\n</span><span class="s1">if pyDAmonitor_ROOT is None:</span><span class="se">\n</span><span class="s1">    print(&quot;!!! pyDAmonitor_ROOT is NOT set. Run `source ush/load_pyDAmonitor.sh`&quot;)</span><span class="se">\n</span><span class="s1">else:</span><span class="se">\n</span><span class="s1">    print(f&quot;pyDAmonitor_ROOT=</span><span class="si">{pyDAmonitor_ROOT}</span><span class="se">\\</span><span class="s1">n&quot;)</span><span class="se">\n</span><span class="s1">sys.path.insert(0, pyDAmonitor_ROOT)</span><span class="se">\n\n</span><span class="s1"># import modules</span><span class="se">\n</span><span class="s1">import warnings</span><span class="se">\n</span><span class="s1">import math</span><span class="se">\n</span><span class="s1">import numpy as np</span><span class="se">\n</span><span class="s1">import uxarray as ux</span><span class="se">\n</span><span class="s1">import xarray as xr</span><span class="se">\n</span><span class="s1">import pandas as pd</span><span class="se">\n</span><span class="s1">import seaborn as sns  # seaborn handles NaN values automatically</span><span class="se">\n</span><span class="s1">import matplotlib.pyplot as plt</span><span class="se">\n</span><span class="s1">from netCDF4 import Dataset</span><span class="se">\n</span><span class="s1">from DAmonitor.base import query_dataset, query_data, query_obj, to_dataframe</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/interactiveshell.py:2565,</span> in <span class="ni">InteractiveShell.run_cell_magic</span><span class="nt">(self, magic_name, line, cell)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2563</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">builtin_trap</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">2564</span>     <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">magic_arg_s</span><span class="p">,</span> <span class="n">cell</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">2565</span>     <span class="n">result</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2567</span> <span class="c1"># The code below prevents the output from being displayed</span>
+<span class="g g-Whitespace">   </span><span class="mi">2568</span> <span class="c1"># when using magics with decorator @output_can_be_silenced</span>
+<span class="g g-Whitespace">   </span><span class="mi">2569</span> <span class="c1"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2570</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">magic</span><span class="o">.</span><span class="n">MAGIC_OUTPUT_CAN_BE_SILENCED</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1470,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1468</span> <span class="k">if</span> <span class="n">interrupt_occured</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1469</span>     <span class="k">if</span> <span class="n">exit_on_interrupt</span> <span class="ow">and</span> <span class="n">captured_exception</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1470</span>         <span class="k">raise</span> <span class="n">captured_exception</span>
+<span class="g g-Whitespace">   </span><span class="mi">1471</span>     <span class="k">return</span>
+<span class="g g-Whitespace">   </span><span class="mi">1472</span> <span class="k">return</span> <span class="n">out</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/IPython/core/magics/execution.py:1434,</span> in <span class="ni">ExecutionMagics.time</span><span class="nt">(self, line, cell, local_ns)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1432</span> <span class="n">st</span> <span class="o">=</span> <span class="n">clock2</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1433</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1434</span>     <span class="n">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">glob</span><span class="p">,</span> <span class="n">local_ns</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1435</span>     <span class="n">out</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1436</span>     <span class="c1"># multi-line %%time case</span>
+
+<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">17</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">uxarray</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">INT_DTYPE</span><span class="p">,</span> <span class="n">INT_FILL_VALUE</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.core.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">concat</span><span class="p">,</span> <span class="n">open_dataset</span><span class="p">,</span> <span class="n">open_grid</span><span class="p">,</span> <span class="n">open_mfdataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.core.dataarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataArray</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.core.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataset</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">uxarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_dataset</span><span class="p">,</span> <span class="n">open_grid</span><span class="p">,</span> <span class="n">open_mfdataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.dataarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataArray</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataset</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">uxarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">uxarray.core.dataset</span><span class="w"> </span><span class="kn">import</span> <span class="n">UxDataset</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">uxarray.core.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_map_dims_to_ugrid</span><span class="p">,</span> <span class="n">match_chunks_to_ugrid</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">uxarray.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">Grid</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">uxarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">dataset</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">dtypes</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core.options</span><span class="w"> </span><span class="kn">import</span> <span class="n">OPTIONS</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">importlib.metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">version</span> <span class="k">as</span> <span class="n">_version</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">coders</span><span class="p">,</span> <span class="n">groupers</span><span class="p">,</span> <span class="n">indexes</span><span class="p">,</span> <span class="n">testing</span><span class="p">,</span> <span class="n">tutorial</span><span class="p">,</span> <span class="n">ufuncs</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.backends.api</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">load_dataarray</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">load_dataset</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>     <span class="mi">12</span>     <span class="n">save_mfdataset</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.backends.zarr</span><span class="w"> </span><span class="kn">import</span> <span class="n">open_zarr</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">coders</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> This module provides coder objects that encapsulate the</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> &quot;encoding/decoding&quot; process.</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.coding.times</span><span class="w"> </span><span class="kn">import</span> <span class="n">CFDatetimeCoder</span><span class="p">,</span> <span class="n">CFTimedeltaCoder</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CFDatetimeCoder&quot;</span><span class="p">,</span> <span class="s2">&quot;CFTimedeltaCoder&quot;</span><span class="p">]</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">coding</span><span class="o">/</span><span class="n">times</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.errors</span><span class="w"> </span><span class="kn">import</span> <span class="n">OutOfBoundsDatetime</span><span class="p">,</span> <span class="n">OutOfBoundsTimedelta</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.coding.common</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">SerializationWarning</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="n">VariableCoder</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">lazy_elemwise_func</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">pop_to</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="n">safe_setitem</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">unpack_for_decoding</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">unpack_for_encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.compat.pdcompat</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_precision_timestamp</span><span class="p">,</span> <span class="n">timestamp_as_unit</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">indexing</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">coding</span><span class="o">/</span><span class="n">common</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">indexing</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core.variable</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.namedarray.parallelcompat</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_chunked_array_type</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">indexing</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">19</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTypeLike</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">packaging.version</span><span class="w"> </span><span class="kn">import</span> <span class="n">Version</span>
+<span class="ne">---&gt; </span><span class="mi">19</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">duck_array_ops</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core.coordinate_transform</span><span class="w"> </span><span class="kn">import</span> <span class="n">CoordinateTransform</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core.nputils</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumpyVIndexAdapter</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">duck_array_ops</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">28</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> <span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="n">isclose</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">isnat</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span>     <span class="n">take</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">unravel_index</span><span class="p">,</span>  <span class="c1"># noqa: F401</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="kn">from</span><span class="w"> </span><span class="nn">pandas.api.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">is_extension_array_dtype</span>
+<span class="ne">---&gt; </span><span class="mi">28</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">dask_array_compat</span><span class="p">,</span> <span class="n">dask_array_ops</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.compat.array_api_compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_array_namespace</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">nputils</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">compat</span><span class="o">/</span><span class="n">dask_array_ops</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.compat.dask_array_compat</span><span class="w"> </span><span class="kn">import</span> <span class="n">reshape_blockwise</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">nputils</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">def</span><span class="w"> </span><span class="nf">dask_rolling_wrapper</span><span class="p">(</span><span class="n">moving_func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Wrapper to apply bottleneck moving window funcs on dask arrays&quot;&quot;&quot;</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">gpfs</span><span class="o">/</span><span class="n">f6</span><span class="o">/</span><span class="n">bil</span><span class="o">-</span><span class="n">fire10</span><span class="o">-</span><span class="n">oar</span><span class="o">/</span><span class="n">world</span><span class="o">-</span><span class="n">shared</span><span class="o">/</span><span class="n">gge</span><span class="o">/</span><span class="n">Miniforge3</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">pyDAmonitor</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.11</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">xarray</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">nputils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">15</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">xarray.namedarray</span><span class="w"> </span><span class="kn">import</span> <span class="n">pycompat</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="c1"># remove once numpy 2.0 is the oldest supported version</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="k">if</span> <span class="n">module_available</span><span class="p">(</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="n">minversion</span><span class="o">=</span><span class="s2">&quot;2.0.0.dev0&quot;</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">numpy.lib.array_utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>  <span class="c1"># type: ignore[import-not-found,unused-ignore]</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="n">normalize_axis_index</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/site-packages/xarray/namedarray/utils.py:56,</span> in <span class="ni">module_available</span><span class="nt">(module, minversion)</span>
+<span class="g g-Whitespace">     </span><span class="mi">53</span>     <span class="k">return</span> <span class="kc">False</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="k">if</span> <span class="n">minversion</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">56</span>     <span class="n">version</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">version</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>     <span class="k">return</span> <span class="n">Version</span><span class="p">(</span><span class="n">version</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">Version</span><span class="p">(</span><span class="n">minversion</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span> <span class="k">return</span> <span class="kc">True</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:1009,</span> in <span class="ni">version</span><span class="nt">(distribution_name)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1002</span> <span class="k">def</span><span class="w"> </span><span class="nf">version</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1003</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Get the version string for the named package.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1004</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1005</span><span class="sd">     :param distribution_name: The name of the distribution package to query.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1006</span><span class="sd">     :return: The version string for the package as defined in the package&#39;s</span>
+<span class="g g-Whitespace">   </span><span class="mi">1007</span><span class="sd">         &quot;Version&quot; metadata key.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1008</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1009</span>     <span class="k">return</span> <span class="n">distribution</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">)</span><span class="o">.</span><span class="n">version</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:982,</span> in <span class="ni">distribution</span><span class="nt">(distribution_name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">976</span> <span class="k">def</span><span class="w"> </span><span class="nf">distribution</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">977</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Get the ``Distribution`` instance for the named package.</span>
+<span class="g g-Whitespace">    </span><span class="mi">978</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">979</span><span class="sd">     :param distribution_name: The name of the distribution package as a string.</span>
+<span class="g g-Whitespace">    </span><span class="mi">980</span><span class="sd">     :return: A ``Distribution`` instance (or subclass thereof).</span>
+<span class="g g-Whitespace">    </span><span class="mi">981</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">982</span>     <span class="k">return</span> <span class="n">Distribution</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">)</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:563,</span> in <span class="ni">Distribution.from_name</span><span class="nt">(cls, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A distribution name is required.&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">563</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">discover</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span>     <span class="k">raise</span> <span class="n">PackageNotFoundError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:915,</span> in <span class="ni">&lt;genexpr&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">912</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Find metadata directories in paths heuristically.&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">913</span> <span class="n">prepared</span> <span class="o">=</span> <span class="n">Prepared</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">914</span> <span class="k">return</span> <span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span>
+<span class="nn">--&gt; 915     path.search(prepared) for path</span> in <span class="ni">map</span><span class="nt">(FastPath, paths)</span>
+<span class="g g-Whitespace">    </span><span class="mi">916</span> <span class="p">)</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:813,</span> in <span class="ni">FastPath.search</span><span class="nt">(self, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">812</span> <span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">813</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mtime</span><span class="p">)</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="nn">File /gpfs/f6/bil-fire10-oar/world-shared/gge/Miniforge3/envs/pyDAmonitor/lib/python3.11/importlib/metadata/__init__.py:818,</span> in <span class="ni">FastPath.mtime</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">815</span> <span class="nd">@property</span>
+<span class="g g-Whitespace">    </span><span class="mi">816</span> <span class="k">def</span><span class="w"> </span><span class="nf">mtime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">817</span>     <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="ne">OSError</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">818</span>         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">st_mtime</span>
+<span class="g g-Whitespace">    </span><span class="mi">819</span>     <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+
+<span class="ne">TypeError</span>: stat: path should be string, bytes, os.PathLike or integer, not NoneType
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">diag_ana</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="s2">/data/gsi/diag_conv_t_anl.2024050601.nc4&quot;</span>
+<span class="n">diag_bkg</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pyDAmonitor_ROOT</span><span class="si">}</span><span class="s2">/data/gsi/diag_conv_t_ges.2024050601.nc4&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="use-obsspacegsi-to-read-gsi-diag-files">
+<h2>Use <code class="docutils literal notranslate"><span class="pre">obsSpaceGSI</span></code> to read GSI diag files<a class="headerlink" href="#use-obsspacegsi-to-read-gsi-diag-files" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">DAmonitor.obs</span><span class="w"> </span><span class="kn">import</span> <span class="n">obsSpaceGSI</span><span class="p">,</span> <span class="n">fit_rate</span>
+<span class="n">tana</span><span class="o">=</span><span class="n">obsSpaceGSI</span><span class="p">(</span><span class="n">diag_ana</span><span class="p">)</span>
+<span class="n">tbkg</span><span class="o">=</span><span class="n">obsSpaceGSI</span><span class="p">(</span><span class="n">diag_bkg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">query_obj</span><span class="p">(</span><span class="n">tana</span><span class="p">)</span>
+<span class="c1"># one can access diag data using `tana.data`</span>
+<span class="c1"># query_data(tana.data)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">tana</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Observation_Class</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convert-to-pandas-dataframe">
+<h2>convert to Pandas DataFrame<a class="headerlink" href="#convert-to-pandas-dataframe" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># show all dataframe columns</span>
+<span class="n">dfana</span><span class="o">=</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">tana</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">dfbkg</span><span class="o">=</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">tbkg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_columns&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">dfana</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-histrogram">
+<h2>Plot histrogram<a class="headerlink" href="#plot-histrogram" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="c1">#sns.histplot(df[&quot;oman&quot;], bins=50, kde=True, color=&quot;steelblue&quot;)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">tana</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Obs_Minus_Forecast_adjusted</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram of oman&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;oman values&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-fitting-rate">
+<h2>Plot fitting rate<a class="headerlink" href="#plot-fitting-rate" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## assemble 133 OMB and OMA into a dictionary</span>
+<span class="n">df_133_a</span> <span class="o">=</span> <span class="n">dfana</span><span class="p">[</span><span class="n">dfana</span><span class="p">[</span><span class="s2">&quot;Observation_Type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">133</span><span class="p">]</span>
+<span class="n">df_133_b</span> <span class="o">=</span> <span class="n">dfbkg</span><span class="p">[</span><span class="n">dfbkg</span><span class="p">[</span><span class="s2">&quot;Observation_Type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">133</span><span class="p">]</span>
+
+<span class="n">t133</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;oman&#39;</span><span class="p">:</span> <span class="n">df_133_a</span><span class="p">[</span><span class="s2">&quot;Obs_Minus_Forecast_adjusted&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+    <span class="s1">&#39;ombg&#39;</span><span class="p">:</span> <span class="n">df_133_b</span><span class="p">[</span><span class="s2">&quot;Obs_Minus_Forecast_adjusted&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+    <span class="s1">&#39;height&#39;</span><span class="p">:</span> <span class="n">df_133_a</span><span class="p">[</span><span class="s2">&quot;Station_Elevation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dz</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">fit_rate</span><span class="p">(</span><span class="n">t133</span><span class="p">,</span> <span class="n">dz</span><span class="o">=</span><span class="n">dz</span><span class="p">)</span>
+
+<span class="c1"># 5. Plot vertical profile of fit_rate vs height</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grouped</span><span class="p">[</span><span class="s2">&quot;fit_rate&quot;</span><span class="p">],</span> <span class="n">grouped</span><span class="p">[</span><span class="s2">&quot;height_bin&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="c1"># plt.axvline(x=0, color=&quot;gray&quot;, linestyle=&quot;--&quot;)  # ax vertical line</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fit Rate (%)&quot;</span><span class="p">)</span>  <span class="c1"># label change</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">))</span>  <span class="c1"># format as %</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Height Bin (m)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Vertical Profile of Fit Rate&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fine-tune ticks</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">))</span>  <span class="c1">#, fontsize=12)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13000</span><span class="p">,</span> <span class="n">dz</span><span class="p">))</span>  <span class="c1">#, , fontsize=12)</span>
+<span class="c1"># Add minor ticks</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMinorLocator</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_minor_locator</span><span class="p">(</span><span class="n">AutoMinorLocator</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_minor_locator</span><span class="p">(</span><span class="n">AutoMinorLocator</span><span class="p">())</span>
+<span class="c1"># plt.grid(which=&#39;both&#39;, linestyle=&#39;--&#39;, linewidth=0.5)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">13000</span><span class="p">)</span>  <span class="c1"># set y-axis from 0 (bottom) to 13,000 (top)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="for-reference-check-diag-file-contents-using-netcdf4-directly">
+<h2>For reference, check diag file contents using netCDF4 directly<a class="headerlink" href="#for-reference-check-diag-file-contents-using-netcdf4-directly" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="o">=</span><span class="n">Dataset</span><span class="p">(</span><span class="n">diag_ana</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">query_dataset</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="check-the-shape-ndim-of-each-variable-in-the-netcdf4-dataset">
+<h3>check the shape/ndim of each variable in the netCDF4 dataset<a class="headerlink" href="#check-the-shape-ndim-of-each-variable-in-the-netcdf4-dataset" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="p">][:]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="c1">#ndim</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;Bias_Correction_Terms&quot;</span><span class="p">][:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="check-attributes">
+<h3>check attributes<a class="headerlink" href="#check-attributes" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">stmp</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;Data_Pof&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">stmp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;Data_Pof&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "pydamonitor"
+        },
+        kernelOptions: {
+            name: "pydamonitor",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'pydamonitor'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="sat-qcfilters.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">plot the QC filter results for satellite DA (cris-fsr)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="script-mpas-increments.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">run a script in a notebook to plot analysis increment profile and vertical cross section</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-obsspacegsi-to-read-gsi-diag-files">Use <code class="docutils literal notranslate"><span class="pre">obsSpaceGSI</span></code> to read GSI diag files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-to-pandas-dataframe">convert to Pandas DataFrame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-histrogram">Plot histrogram</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-fitting-rate">Plot fitting rate</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-reference-check-diag-file-contents-using-netcdf4-directly">For reference, check diag file contents using netCDF4 directly</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-the-shape-ndim-of-each-variable-in-the-netcdf4-dataset">check the shape/ndim of each variable in the netCDF4 dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#check-attributes">check attributes</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By the pyDAmonitor group
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
